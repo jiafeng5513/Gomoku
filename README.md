@@ -4,8 +4,8 @@
 ===========================
 
 ### 开发环境
-Visual Studio 2015 or higher
-Unity 3D 2017.2.0f3
+<br>Visual Studio 2015 or higher
+<br>Unity 3D 2017.2.0f3
 
 ### AI算法
-α-β剪枝
+<br>α-β剪枝
