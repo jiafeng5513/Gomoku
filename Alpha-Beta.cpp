@@ -10,6 +10,7 @@
 #define NOSTONE     '+'  //没有棋子
 
 /*棋型*/
+#define TOBEANALSIS 0  //尚未分析,正待分析的
 #define STWO        1  //眠二
 #define STHREE      2  //眠三
 #define SFOUR       3  //冲四
@@ -19,7 +20,7 @@
 #define FIVE        7  //五连
 #define NOTYPE      11 //未定义
 #define ANALSISED   255//已分析过的
-#define TOBEANALSIS 0  //已分析过的
+
 
 /*检查某一坐标是否是棋盘上的有效落子点*/
 #define IsValidPos(x,y) ((x>=0 && x<GRID_NUM) && (y>=0 && y<GRID_NUM)
@@ -141,21 +142,29 @@ int PosValue[GRID_NUM][GRID_NUM] =
 
 //全局变量,用以统计估值函数的执行遍数
 int count = 0;
-
+/*
+ * 估值函数
+ * 参数1:位置
+ * 参数2:true=白棋,false=黑棋
+ */
 int Eveluate(unsigned char position[][GRID_NUM], bool bIsWhiteTurn)
 {
 	int i, j, k;
 	unsigned char nStoneType;
 	count++;//计数器累加
-
-			//清空棋型分析结果
+	/*
+	 * void *memset(void *s, int ch, size_t n)
+	 * 函数解释：将s中当前位置后面的n个字节 （typedef unsigned int size_t ）用 ch 替换并返回 s 。
+	 * memset：作用是在一段内存块中填充某个给定的值，它是对较大的结构体或数组进行清零操作的一种最快方法
+	 */
+	//清空棋型分析结果
 	memset(TypeRecord, TOBEANALSIS, GRID_COUNT * 4 * 4);
 	memset(TypeCount, 0, 40 * 4);
 
 	for (i = 0; i<GRID_NUM; i++)
 		for (j = 0; j<GRID_NUM; j++)
 		{
-			if (position[i][j] != NOSTONE)
+			if (position[i][j] != NOSTONE)//当前分析的位置有棋子
 			{
 				//如果水平方向上没有分析过
 				if (TypeRecord[i][j][0] == TOBEANALSIS)
@@ -217,16 +226,10 @@ int Eveluate(unsigned char position[][GRID_NUM], bool bIsWhiteTurn)
 	{
 		if (TypeCount[BLACK][FIVE])
 		{
-
-
-
 			return -9999;
 		}
 		if (TypeCount[WHITE][FIVE])
 		{
-
-
-
 			return 9999;
 		}
 	}
@@ -234,16 +237,10 @@ int Eveluate(unsigned char position[][GRID_NUM], bool bIsWhiteTurn)
 	{
 		if (TypeCount[BLACK][FIVE])
 		{
-
-
-
 			return 9999;
 		}
 		if (TypeCount[WHITE][FIVE])
 		{
-
-
-
 			return -9999;
 		}
 	}

@@ -1,0 +1,28 @@
+C:\Documents and Settings\Administrator\桌面\GoBangfivechess\codesc.net\GoBangProject\GoBangProject\bin\Release\五子棋.exe
+C:\Documents and Settings\Administrator\桌面\GoBangfivechess\codesc.net\GoBangProject\GoBangProject\bin\Release\五子棋.pdb
+C:\Documents and Settings\Administrator\桌面\GoBangfivechess\codesc.net\GoBangProject\GoBangProject\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\桌面\GoBangfivechess\codesc.net\GoBangProject\GoBangProject\obj\Release\GoBangProject.Form1.resources
+C:\Documents and Settings\Administrator\桌面\GoBangfivechess\codesc.net\GoBangProject\GoBangProject\obj\Release\GoBangProject.Properties.Resources.resources
+C:\Documents and Settings\Administrator\桌面\GoBangfivechess\codesc.net\GoBangProject\GoBangProject\obj\Release\GenerateResource-ResGen.read.1.tlog
+C:\Documents and Settings\Administrator\桌面\GoBangfivechess\codesc.net\GoBangProject\GoBangProject\obj\Release\GenerateResource-ResGen.read.4.tlog
+C:\Documents and Settings\Administrator\桌面\GoBangfivechess\codesc.net\GoBangProject\GoBangProject\obj\Release\GenerateResource-ResGen.write.1.tlog
+C:\Documents and Settings\Administrator\桌面\GoBangfivechess\codesc.net\GoBangProject\GoBangProject\obj\Release\五子棋.exe
+C:\Documents and Settings\Administrator\桌面\GoBangfivechess\codesc.net\GoBangProject\GoBangProject\obj\Release\五子棋.pdb
+C:\Documents and Settings\Administrator\桌面\GoBangProject\GoBangProject\obj\Release\五子棋.exe
+C:\Documents and Settings\Administrator\桌面\GoBangProject\GoBangProject\obj\Release\五子棋.pdb
+F:\2016\6月\五子棋小游戏\GoBangProject\GoBangProject\obj\Release\五子棋.exe
+F:\2016\6月\五子棋小游戏\GoBangProject\GoBangProject\obj\Release\五子棋.pdb
+F:\2016\6月\五子棋小游戏\GoBangProject\GoBangProject\bin\Release\五子棋.exe
+F:\2016\6月\五子棋小游戏\GoBangProject\GoBangProject\bin\Release\五子棋.pdb
+F:\2016\6月\五子棋小游戏\GoBangProject\GoBangProject\obj\Release\GoBangProject.Form1.resources
+F:\2016\6月\五子棋小游戏\GoBangProject\GoBangProject\obj\Release\GoBangProject.Properties.Resources.resources
+F:\2016\6月\五子棋小游戏\GoBangProject\GoBangProject\obj\Release\GoBangProject.csproj.GenerateResource.Cache
+F:\GobangGameSourceCode_1.0\bin\Release\五子棋.exe
+F:\GobangGameSourceCode_1.0\bin\Release\五子棋.pdb
+F:\GobangGameSourceCode_1.0\obj\Release\GoBangProject.csprojResolveAssemblyReference.cache
+F:\GobangGameSourceCode_1.0\obj\Release\GoBangProject.Form1.resources
+F:\GobangGameSourceCode_1.0\obj\Release\GoBangProject.Properties.Resources.resources
+F:\GobangGameSourceCode_1.0\obj\Release\GoBangProject.csproj.GenerateResource.Cache
+F:\GobangGameSourceCode_1.0\obj\Release\GoBangProject.csproj.CoreCompileInputs.cache
+F:\GobangGameSourceCode_1.0\obj\Release\五子棋.exe
+F:\GobangGameSourceCode_1.0\obj\Release\五子棋.pdb

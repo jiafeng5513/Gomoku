@@ -1,0 +1,8 @@
+F:\GobangGameSourceCode_1.0\bin\Debug\五子棋.exe
+F:\GobangGameSourceCode_1.0\bin\Debug\五子棋.pdb
+F:\GobangGameSourceCode_1.0\obj\Debug\GoBangProject.Form1.resources
+F:\GobangGameSourceCode_1.0\obj\Debug\GoBangProject.Properties.Resources.resources
+F:\GobangGameSourceCode_1.0\obj\Debug\GoBangProject.csproj.GenerateResource.Cache
+F:\GobangGameSourceCode_1.0\obj\Debug\GoBangProject.csproj.CoreCompileInputs.cache
+F:\GobangGameSourceCode_1.0\obj\Debug\五子棋.exe
+F:\GobangGameSourceCode_1.0\obj\Debug\五子棋.pdb
