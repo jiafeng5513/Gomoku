@@ -136,24 +136,34 @@ namespace FiveStone
         {
             if (x < 680 && y < 680)
             {
-                int m = (int)(x / 42);
-                int n = (int)(y / 42);
+                int m = (int) (x / 42);
+                int n = (int) (y / 42);
                 if (m < 0)
-                { m = 0; }
+                {
+                    m = 0;
+                }
                 if (n < 0)
-                { n = 0; }
+                {
+                    n = 0;
+                }
                 if (m > 14)
-                { m = 14; }
+                {
+                    m = 14;
+                }
                 if (n > 14)
-                { n = 14; }
+                {
+                    n = 14;
+                }
+                persion_X = m;
+                persion_Y = n;
                 if (!Rules.Exit(m, n, board))
                 {
                     PutDown(m, n);
                     PCPut();
                 }
+
             }
-            persion_X = x;
-            persion_Y = y;
+
         }
 
         public void PCPut()
@@ -178,8 +188,27 @@ namespace FiveStone
 
             //α-β剪枝AI
             int m = 0, n = 0;
-            ai.getComputerAction(persion_X, persion_Y,out m,out n);
+            
             PutDown(m, n);
+
+            int err = 0;
+            do
+            {
+                //pc.Down(board);
+                ai.getComputerAction(persion_X, persion_Y,out m,out n);
+                //m = pc.X;
+                //n = pc.Y;
+                //err++;
+                //if (err > 100)
+                //{
+                //    System.Windows.Forms.MessageBox.Show("发生了一些错误，棋局将重新开始");
+                //    Start(true);
+                //}
+            }
+            while (Rules.Exit(m, n, board));
+            PutDown(m, n);
+
+
         }
     }
 }

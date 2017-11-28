@@ -1,5 +1,8 @@
-﻿using System;
-using System.Collections;
+/*
+这里用来保存转换出来的C#代码
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
@@ -38,7 +41,7 @@ namespace FiveStone
     struct MOVESTONE
     {
         public int nRenjuID;
-        public POINT ptMovePoint; 
+        public POINT ptMovePoint;
     }
 
     struct STONEMOVE
@@ -61,9 +64,8 @@ namespace FiveStone
         int m_nMoveCount; //此变量用以记录走法的总数
         STONEMOVE[] m_TargetBuff = new STONEMOVE[225]; //排序用的缓冲队列
 
-        HashItem[,] m_pTT = new HashItem[2,1048576]; //置换表
+        List<HashItem>[] m_pTT = new List<HashItem>[10]; //置换表
 
-        Hashtable[] m_swapTable=new Hashtable[2];//交换表数组,数组下标是棋子颜色,元素是哈希表,key为位置,value为HashItem
         //存放全部分析结果的数组,有三个维度,用于存放水平、垂直、左斜、右斜 4 个方向上所有棋型分析结果
         private int[,,] TypeRecord = new int[GRID_NUM, GRID_NUM, 4];
 
@@ -132,7 +134,7 @@ namespace FiveStone
         {
             Black = 0, //黑棋
             White = 1, //白棋
-            Space = 2 //没有棋子
+            NULL = 2 //没有棋子
         }
 
         int colour; //AI棋子颜色
@@ -162,25 +164,24 @@ namespace FiveStone
             //则需要修改这一句为m_HashKey32% TableSize
             //下一个函数中这一句也一样
             x = (int) m_HashKey32 & 0xFFFFF;
-            //pht = m_pTT[TableNo][x]; //取到具体的表项指针
-            m_pTT[TableNo,x]=new HashItem();;
-            //pht= m_swapTable[TableNo][]
-            if (m_pTT[TableNo,x].depth >= depth && m_pTT[TableNo,x].checksum == m_HashKey64)
+            pht = m_pTT[TableNo][x]; //取到具体的表项指针
+
+            if (pht.depth >= depth && pht.checksum == m_HashKey64)
             {
-                switch (m_pTT[TableNo,x].entry_type) //判断数据类型
+                switch (pht.entry_type) //判断数据类型
                 {
                     case ENTRY_TYPE.exact: //确切值
-                        return m_pTT[TableNo,x].eval;
+                        return pht.eval;
 
                     case ENTRY_TYPE.lower_bound: //下边界
-                        if (m_pTT[TableNo,x].eval >= beta)
-                            return m_pTT[TableNo,x].eval;
+                        if (pht.eval >= beta)
+                            return pht.eval;
                         else
                             break;
 
                     case ENTRY_TYPE.upper_bound: //上边界
-                        if (m_pTT[TableNo,x].eval <= alpha)
-                            return m_pTT[TableNo,x].eval;
+                        if (pht.eval <= alpha)
+                            return pht.eval;
                         else
                             break;
                 }
@@ -271,12 +272,12 @@ namespace FiveStone
                 //如待分析棋子棋型为四连
                 bool Leftfour = false;
                 if (LeftEdge > 0)
-                    if (AnalyLine[LeftEdge - 1] == (int) Piece.Space)
+                    if (AnalyLine[LeftEdge - 1] == (int) Piece.NULL)
                         Leftfour = true; //左边有气
 
                 if (RightEdge < GridNum)
                     //右边未到边界
-                    if (AnalyLine[RightEdge + 1] == (int) Piece.Space)
+                    if (AnalyLine[RightEdge + 1] == (int) Piece.NULL)
                         //右边有气
                         if (Leftfour == true) //如左边有气
                             m_LineRecord[nAnalyPos] = (int) Pattern.Alive4; //活四
@@ -296,7 +297,7 @@ namespace FiveStone
                 bool LeftThree = false;
 
                 if (LeftEdge > 1)
-                    if (AnalyLine[LeftEdge - 1] == (int) Piece.Space)
+                    if (AnalyLine[LeftEdge - 1] == (int) Piece.NULL)
                         //左边有气
                         if (LeftEdge > 1 && AnalyLine[LeftEdge - 2] == AnalyLine[LeftEdge])
                         {
@@ -308,7 +309,7 @@ namespace FiveStone
                             LeftThree = true;
 
                 if (RightEdge < GridNum)
-                    if (AnalyLine[RightEdge + 1] == (int) Piece.Space)
+                    if (AnalyLine[RightEdge + 1] == (int) Piece.NULL)
                         //右边有气
                         if (RightEdge < GridNum - 1 && AnalyLine[RightEdge + 2] == AnalyLine[RightEdge])
                         {
@@ -346,7 +347,7 @@ namespace FiveStone
                 bool Leftthree = false;
 
                 if (LeftEdge > 2)
-                    if (AnalyLine[LeftEdge - 1] == (int) Piece.Space)
+                    if (AnalyLine[LeftEdge - 1] == (int) Piece.NULL)
                         //左边有气
                         if (LeftEdge - 1 > 1 && AnalyLine[LeftEdge - 2] == AnalyLine[LeftEdge])
                             if (AnalyLine[LeftEdge - 3] == AnalyLine[LeftEdge])
@@ -356,7 +357,7 @@ namespace FiveStone
                                 m_LineRecord[LeftEdge - 2] = (int) Pattern.ANALSISED;
                                 m_LineRecord[LeftEdge] = (int) Pattern.Sleep4; //冲四
                             }
-                            else if (AnalyLine[LeftEdge - 3] == (int) Piece.Space)
+                            else if (AnalyLine[LeftEdge - 3] == (int) Piece.NULL)
                             {
                                 //左边隔1个己方棋子
                                 m_LineRecord[LeftEdge - 2] = (int) Pattern.ANALSISED;
@@ -366,7 +367,7 @@ namespace FiveStone
                                 Lefttwo = true;
 
                 if (RightEdge < GridNum - 2)
-                    if (AnalyLine[RightEdge + 1] == (int) Piece.Space)
+                    if (AnalyLine[RightEdge + 1] == (int) Piece.NULL)
                         //右边有气
                         if (RightEdge + 1 < GridNum - 1 && AnalyLine[RightEdge + 2] == AnalyLine[RightEdge])
                             if (AnalyLine[RightEdge + 3] == AnalyLine[RightEdge])
@@ -376,7 +377,7 @@ namespace FiveStone
                                 m_LineRecord[RightEdge + 2] = (int) Pattern.ANALSISED;
                                 m_LineRecord[RightEdge] = (int) Pattern.Sleep4; //冲四
                             }
-                            else if (AnalyLine[RightEdge + 3] == (int) Piece.Space)
+                            else if (AnalyLine[RightEdge + 3] == (int) Piece.NULL)
                             {
                                 //右边隔 1 个己方棋子
                                 m_LineRecord[RightEdge + 2] = (int) Pattern.ANALSISED;
@@ -564,7 +565,7 @@ namespace FiveStone
             for (i = 0; i < GRID_NUM; i++)
             for (j = 0; j < GRID_NUM; j++)
             {
-                if (position[i, j] != (int) (Piece.Space))
+                if (position[i, j] != (int) (Piece.NULL))
                 {
                     //如果水平方向上没有分析过
                     if (TypeRecord[i, j, 0] == (int) Pattern.TOBEANALSIS)
@@ -590,7 +591,7 @@ namespace FiveStone
             for (k = 0; k < 4; k++)
             {
                 nStoneType = position[i, j];
-                if (nStoneType != (int) Piece.Space)
+                if (nStoneType != (int) Piece.NULL)
                 {
                     switch (TypeRecord[i, j, k])
                     {
@@ -795,7 +796,7 @@ namespace FiveStone
             for (j = 0; j < GRID_NUM; j++)
             {
                 nStoneType = position[i, j];
-                if (nStoneType != (int) Piece.Space)
+                if (nStoneType != (int) Piece.NULL)
                     if (nStoneType == (int) Piece.Black)
                         BValue += PosValue[i, j];
                     else
@@ -819,16 +820,16 @@ namespace FiveStone
         void EnterHashTable(ENTRY_TYPE entry_type, short eval, short depth, int TableNo)
         {
             int x;
-           // HashItem pht;
+            HashItem pht;
 
             x = (int) (m_HashKey32 & 0xFFFFF); //计算二十位哈希地址
-            //pht = m_pTT[TableNo,x]; //取到具体的表项指针
+            pht = m_pTT[TableNo][x]; //取到具体的表项指针
 
             //将数据写入哈希表
-            m_pTT[TableNo, x].checksum = m_HashKey64; //64位校验码
-            m_pTT[TableNo, x].entry_type = entry_type; //表项类型
-            m_pTT[TableNo, x].eval = eval; //要保存的值
-            m_pTT[TableNo, x].depth = depth; //层次
+            pht.checksum = m_HashKey64; //64位校验码
+            pht.entry_type = entry_type; //表项类型
+            pht.eval = eval; //要保存的值
+            pht.depth = depth; //层次
         }
 
         /// <summary>
@@ -973,7 +974,7 @@ namespace FiveStone
             for (i = 0; i < GRID_NUM; i++)
             for (j = 0; j < GRID_NUM; j++)
             {
-                if (position[i, j] == (int) Piece.Space)
+                if (position[i, j] == (int) Piece.NULL)
                     AddMove(j, i, nPly);
             }
             //二维数组提取一行
@@ -1039,7 +1040,7 @@ namespace FiveStone
         /// <param name="move"></param>
         void UnMakeMove(STONEMOVE move)
         {
-            CurPosition[move.StonePos.y, move.StonePos.x] = (int) Piece.Space;
+            CurPosition[move.StonePos.y, move.StonePos.x] = (int) Piece.NULL;
         }
 
         /// <summary>
@@ -1106,10 +1107,8 @@ namespace FiveStone
             }
 
             //申请置换表所用空间。1M "2 个条目，读者也可指定其他大小
-            //m_pTT[0] = new List<HashItem>(); //用于存放取极大值的节点数据
-            //m_pTT[0].Capacity = 1024 * 1024;
-            //m_pTT[1] = new List<HashItem>(); //用于存放取极小值的节点数据
-            //m_pTT[1].Capacity = 1024 * 1024;
+            m_pTT[0] = new List<HashItem>(1024 * 1024); //用于存放取极大值的节点数据
+            m_pTT[1] = new List<HashItem>(1024 * 1024); //用于存放取极小值的节点数据
         }
 
         /// <summary>
@@ -1141,9 +1140,8 @@ namespace FiveStone
         /// </summary>
         void _CTranspositionTable()
         {
-            //m_pTT[0].Clear();
-            //m_pTT[1].Clear();
-            Array.Clear(m_pTT,0,1048576);
+            m_pTT[0].Clear();
+            m_pTT[1].Clear();
         }
 
         /// <summary>
@@ -1194,7 +1192,6 @@ namespace FiveStone
             if (depth <= 0) //叶子节点取估值
             {
                 score = Eveluate(CurPosition, (side != 0));
-                //进置换表,key是CurPosition里面的坐标
                 EnterHashTable(ENTRY_TYPE.exact, (short) score, (short) depth, (short) side); //将估值存入置换表
 
                 return score;
@@ -1264,8 +1261,8 @@ namespace FiveStone
         public void AlphaBetaInit()
         {
             for (int i = 0; i < GRID_NUM; i++)
-                for (int j = 0; j < GRID_NUM; j++)
-                    m_RenjuBoard[i, j] = (int) Piece.Space; //棋盘初始化 
+            for (int j = 0; j < GRID_NUM; j++)
+                m_RenjuBoard[i, j] = (int) Piece.NULL; //棋盘初始化 
             colour = (int) Piece.White;
             m_nUserStoneColor = (int) Piece.Black; //人类执黑先行
 
