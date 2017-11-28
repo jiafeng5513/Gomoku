@@ -24,10 +24,15 @@ namespace FiveStone
             wStream.Close();
             mg = g;
         }
-
-        public void DrawStone(int x, int y, bool flag)
+        /// <summary>
+        /// 画棋子,true==黑棋
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="flag"></param>
+        public void DrawStone(int x, int y, Color color)
         {
-            if (flag)
+            if (color==Color.Black)
             {
                 mg.DrawImage(bs, x * 40 + 20, y * 40 + 23, bs.Width, bs.Height);
             }

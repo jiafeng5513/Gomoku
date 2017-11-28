@@ -1101,8 +1101,8 @@ namespace FiveStone
             for (j = 0; j < 10; j++)
             for (k = 0; k < 9; k++)
             {
-                m_nHashKey32[i, j, k] = (int) rand32();
-                m_ulHashKey64[i, j, k] = rand64();
+                m_nHashKey32[i, j, k] = Math.Abs((int) rand32());
+                m_ulHashKey64[i, j, k] = Math.Abs(rand64());
             }
 
             //申请置换表所用空间。1M "2 个条目，读者也可指定其他大小

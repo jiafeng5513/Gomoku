@@ -7,19 +7,34 @@ using System.IO;
 
 namespace FiveStone
 {
+    public enum Color
+    {
+        Black,
+        White
+    }
+
+    public enum Player
+    {
+        Human,
+        Ai
+    }
     public class Boards
     {
-        public int[,] board = new int[15, 15];
+        public int[,] board = new int[15, 15];//棋盘中Ai的棋是1,人的棋是0,空位置是-1
         private Graphics mg;
         private Stones stone;
         private PC pc=new PC(false);
         private AI ai=new AI();
-        private bool flag = true;
+
         private bool first = false;
         private bool winflag = false;
 
         private int persion_X = 0;//人类玩家上一次的落子点X
         private int persion_Y = 0;//人类玩家上一次的落子点Y
+
+        public Color AiColor = Color.White;        //Ai执棋子的颜色
+        public Color HumanColor = Color.Black;     //人类执棋子的颜色
+        public Player CurrentTurn = Player.Human;  //现在轮到谁下棋
 
         public MyStack.MyStack st = new FiveStone.MyStack.MyStack();
 
@@ -35,14 +50,20 @@ namespace FiveStone
         {
             ClearBoards();
             winflag = false;
-            if (!mflag)
+            if (!mflag)//AI执黑先行
             {
-                flag = true;
+                AiColor = Color.Black;
+                HumanColor = Color.White;
+                CurrentTurn = Player.Ai;//轮到AI落子
+
                 PCPut();
             }
-            else
+            else//人类执黑先行
             {
-                flag = true;
+                AiColor = Color.White;
+                HumanColor = Color.Black;
+                CurrentTurn = Player.Human;//轮到人类落子
+
             }
             DrawBoard();
         }
@@ -72,51 +93,58 @@ namespace FiveStone
                 {
                     if (board[i, j] == 0)
                     {
-                        stone.DrawStone(i, j, true);
+                        stone.DrawStone(i, j, HumanColor);
                     }
                     if (board[i, j] == 1)
                     {
-                        stone.DrawStone(i, j, false);
+                        stone.DrawStone(i, j, AiColor);
                     }
                 }
             }
         }
-
+        /// <summary>
+        /// 执行落子
+        /// </summary>
+        /// <param name="x">棋盘坐标</param>
+        /// <param name="y">棋盘坐标</param>
         public void PutDown(int x, int y)
         {
             if (!winflag)
             {
-                if (board[x, y] == -1)
+                if (board[x, y] == -1)//待落子点是空位
                 {
-                    stone.DrawStone(x, y, flag);
-
-                    if (flag)
+                    if (CurrentTurn == Player.Human)
                     {
+                        //当前是人类玩家落子
+                        stone.DrawStone(x, y, HumanColor);
                         board[x, y] = 0;
                     }
                     else
                     {
+                        //当前是Ai落子回合
+                        stone.DrawStone(x, y, AiColor);
                         board[x, y] = 1;
                     }
 
-                    st.Insert("X：" + x + " Y：" + y);
+
+                    st.Insert((CurrentTurn == Player.Human?(HumanColor==Color.Black?"黑棋":"白棋"): (AiColor == Color.Black ? "黑棋" : "白棋")) +"X：" + x + " Y：" + y);
 
                     if (Rules.Winer(x, y, board) > 0)
                     {
                         switch (Rules.Winer(x, y, board))
                         {
                             case 1:
-                                if (flag)
+                                if (CurrentTurn==Player.Human)
                                 {
                                     first = !first;
                                     winflag = true;
-                                    System.Windows.Forms.MessageBox.Show("黑子胜利");
+                                    System.Windows.Forms.MessageBox.Show("人类胜利");
                                 }
                                 else
                                 {
                                     first = !first;
                                     winflag = true;
-                                    System.Windows.Forms.MessageBox.Show("白子胜利");
+                                    System.Windows.Forms.MessageBox.Show("AI胜利");
                                 }
                                 break;
                             case 2:
@@ -126,88 +154,84 @@ namespace FiveStone
                                 break;
                         }
                     }
-
-                    flag = !flag;
                 }
             }
         }
-
+        /// <summary>
+        /// 人类玩家落子
+        /// </summary>
+        /// <param name="x">屏幕坐标X</param>
+        /// <param name="y">屏幕坐标Y</param>
         public void PersonPut(int x, int y)
         {
-            if (x < 680 && y < 680)
+            if (CurrentTurn == Player.Human) //现在是人类玩家落子回合
             {
-                int m = (int) (x / 42);
-                int n = (int) (y / 42);
-                if (m < 0)
+                if (x < 680 && y < 680)
                 {
-                    m = 0;
+                    int m = (int) (x / 42);
+                    int n = (int) (y / 42);
+                    if (m < 0)
+                    {
+                        m = 0;
+                    }
+                    if (n < 0)
+                    {
+                        n = 0;
+                    }
+                    if (m > 14)
+                    {
+                        m = 14;
+                    }
+                    if (n > 14)
+                    {
+                        n = 14;
+                    }
+                    persion_X = m;
+                    persion_Y = n;
+                    //if (!Rules.Exit(m, n, board))
+                    {
+                        PutDown(m, n);
+                        CurrentTurn = Player.Ai;
+                        PCPut();
+                    }
                 }
-                if (n < 0)
-                {
-                    n = 0;
-                }
-                if (m > 14)
-                {
-                    m = 14;
-                }
-                if (n > 14)
-                {
-                    n = 14;
-                }
-                persion_X = m;
-                persion_Y = n;
-                if (!Rules.Exit(m, n, board))
-                {
-                    PutDown(m, n);
-                    PCPut();
-                }
-
             }
-
         }
-
+        /// <summary>
+        /// Ai落子
+        /// </summary>
         public void PCPut()
         {
-            //源程序的AI
-            //int m = 0, n = 0;
-            //int err = 0;
-            //do
-            //{
-            //    pc.Down(board);
-            //    m = pc.X;
-            //    n = pc.Y;
-            //    err++;
-            //    if (err > 100)
-            //    {
-            //        System.Windows.Forms.MessageBox.Show("发生了一些错误，棋局将重新开始");
-            //        Start(true);
-            //    }
-            //}
-            //while (Rules.Exit(m, n, board));
-            //PutDown(m, n);
-
-            //α-β剪枝AI
-            int m = 0, n = 0;
-            
-            PutDown(m, n);
-
-            int err = 0;
-            do
+            if (CurrentTurn == Player.Ai) //现在是Ai玩家落子回合
             {
-                //pc.Down(board);
-                ai.getComputerAction(persion_X, persion_Y,out m,out n);
-                //m = pc.X;
-                //n = pc.Y;
-                //err++;
-                //if (err > 100)
+                //源程序的AI
+                //int m = 0, n = 0;
+                //int err = 0;
+                //do
                 //{
-                //    System.Windows.Forms.MessageBox.Show("发生了一些错误，棋局将重新开始");
-                //    Start(true);
+                //    pc.Down(board);
+                //    m = pc.X;
+                //    n = pc.Y;
+                //    err++;
+                //    if (err > 100)
+                //    {
+                //        System.Windows.Forms.MessageBox.Show("发生了一些错误，棋局将重新开始");
+                //        Start(true);
+                //    }
                 //}
-            }
-            while (Rules.Exit(m, n, board));
-            PutDown(m, n);
+                //while (Rules.Exit(m, n, board));
+                //PutDown(m, n);
 
+                //α-β剪枝AI
+                ai.getComputerAction(persion_X, persion_Y, out int m, out int n);
+
+                //if (!Rules.Exit(m, n, board))
+                {
+                    st.Insert("Ai计算结果:"+m+","+n);
+                    PutDown(m, n);
+                }
+                CurrentTurn = Player.Human;
+            }
 
         }
     }

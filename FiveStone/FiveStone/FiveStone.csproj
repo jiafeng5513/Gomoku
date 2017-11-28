@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AI.cs" />
+    <Compile Include="AlphaBeta.cs" />
     <Compile Include="Boards.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

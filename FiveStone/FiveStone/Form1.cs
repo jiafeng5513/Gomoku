@@ -30,7 +30,11 @@ namespace FiveStone
         {
             bd.DrawBoard();
         }
-
+        /// <summary>
+        /// 鼠标移动时实时刷新坐标显示
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.X < 680 && e.Y < 680)
@@ -49,24 +53,36 @@ namespace FiveStone
                 toolStripStatusLabel1.Text = "落子点：X " + m.ToString() + " Y " + n.ToString() + "";
             }
         }
-
+        /// <summary>
+        /// 左键按下
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            bd.PersonPut(e.X, e.Y);
-
-            if (historylist.Items.Count == 0)
+            if (bd.CurrentTurn != Player.Human) //当前不是人类落子回合
             {
-                historylist.Items.Add(bd.st.GetPerson());
-                historylist.Items.Add(bd.st.GetPC());
+                return;
             }
             else
             {
-                if (historylist.Items[historylist.Items.Count-1].ToString() != bd.st.GetPC() && historylist.Items[historylist.Items.Count - 2].ToString() != bd.st.GetPerson())
+                bd.PersonPut(e.X, e.Y);
+                if (historylist.Items.Count == 0)
                 {
                     historylist.Items.Add(bd.st.GetPerson());
                     historylist.Items.Add(bd.st.GetPC());
                 }
+                else
+                {
+                    if (historylist.Items[historylist.Items.Count - 1].ToString() != bd.st.GetPC() &&
+                        historylist.Items[historylist.Items.Count - 2].ToString() != bd.st.GetPerson())
+                    {
+                        historylist.Items.Add(bd.st.GetPerson());
+                        historylist.Items.Add(bd.st.GetPC());
+                    }
+                }
             }
+
         }
 
         private void 新游戏ToolStripMenuItem_Click_1(object sender, EventArgs e)
