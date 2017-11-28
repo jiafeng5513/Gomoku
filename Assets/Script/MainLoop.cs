@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
-
+/*
+ * 默认电脑后手,没有禁手
+ */
 public class MainLoop : MonoBehaviour
 {
 
@@ -43,7 +45,7 @@ public class MainLoop : MonoBehaviour
 
         // 创建棋子
         var newChess = GameObject.Instantiate<GameObject>(isblack ? BlackPrefab : WhitePrefab);
-        newChess.transform.SetParent(cross.gameObject.transform, false);
+        newChess.transform.SetParent(cross.gameObject.transform, false);//把棋子防止被点的按钮上
         // 设置数据
         _model.Set(cross.GridX, cross.GridY, isblack ? ChessType.Black : ChessType.White);
 
@@ -59,6 +61,7 @@ public class MainLoop : MonoBehaviour
         _state = State.BlackGo;
         _model = new BoardModel();
         _ai = new AI();
+        //_ai.AlphaBetaInit();
         _board.Reset();
     }
 
@@ -114,7 +117,7 @@ public class MainLoop : MonoBehaviour
                     // 计算电脑下的位置
                     int gridX, gridY;
                     _ai.ComputerDo(_lastPlayerX, _lastPlayerY, out gridX, out gridY);
-
+                    //_ai.getComputerAction(_lastPlayerX, _lastPlayerY, out gridX, out gridY);
                     if (PlaceChess(_board.GetCross(gridX, gridY), false))
                     {
                         // 电脑胜利

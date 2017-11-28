@@ -12,7 +12,7 @@ public class BoardModel
     // 连5个子可以赢
     public const int WinChessCount = 5;
 
-    ChessType[,] _data = new ChessType[Board.CrossCount, Board.CrossCount];
+    ChessType[,] _data = new ChessType[Board.CrossCount, Board.CrossCount];//_data存储棋局
 
     // 获取棋盘数据 
     public ChessType Get(int x, int y)

@@ -190,19 +190,19 @@ namespace GoBangProject
             return;
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("谁让你乱点的....后果自负袄~","好奇害死猫~");
-            this.Visible = false;
-            Funny.StartFunny();
-        }
-
         private void 开始游戏人机对战ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AIOperator.AIType = ChessType.WHITE;
             this.tableLayoutPanel7.Visible = false;
             initChess();
             this.tableLayoutPanel7.Visible = true;
+        }
+
+        private void BoomButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("谁让你乱点的....后果自负喵~", "好奇害死猫~");
+            this.Visible = false;
+            Funny.StartFunny();
         }
     }
 }

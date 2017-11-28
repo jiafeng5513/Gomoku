@@ -4,7 +4,9 @@ using System.Media;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
-//Download by http://www.codesc.net
+/*
+ * 这是个很棒的程序(手动滑稽)
+ */
 namespace GoBangProject
 {
     class Funny

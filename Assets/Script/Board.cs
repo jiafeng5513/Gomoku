@@ -6,6 +6,11 @@ using System.Collections.Generic;
 public class Board : MonoBehaviour {
 
     public GameObject CrossPrefab;
+    public GameObject black;
+
+    Vector3 mousePosition, targetPosition;
+    float distance = 10f;
+    //public GameObject camera;
 
     // 交叉点大小
     const float CrossSize = 40;
@@ -77,6 +82,18 @@ public class Board : MonoBehaviour {
         Reset();
     }
 
+
+    //void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.A))
+    //    {
+    //        mousePosition = Input.mousePosition;
+    //        GameObject root = GameObject.Find("Main Camera");
+    //        targetPosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, root.transform.position.z));
+    //        black.transform.position = targetPosition;
+    //        Instantiate(black, black.transform.position, black.transform.rotation);
+    //    }
+    //}
     public Cross GetCross(int gridX, int gridY)
     {
         Cross cross;

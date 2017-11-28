@@ -33,7 +33,7 @@ namespace GoBangProject.GeneticAlgorithm
             GeneticAlgorithm ga = new GeneticAlgorithm();
             //运算
             ga.Start();
-            //下棋
+            //通过触发鼠标事件来落子
             if (ga.BestGenome.Fitness > 0)
                 Chess.Find(ga.BestGenome.Genes[0]).ChessPoint_Click(null, null);
             else
@@ -51,77 +51,77 @@ namespace GoBangProject.GeneticAlgorithm
 
                 //适应度度量函数
                 GeneticAlgorithm.fitnessCalculator = delegate(Genome gene)
-                                {
-                                    //打开人工智能探路标记
-                                    Conf.AIRouterState = true;
+                {
+                    //打开人工智能探路标记
+                    Conf.AIRouterState = true;
 
-                                    //当前串中最大的威力
-                                    double maxPower = double.MinValue;
+                    //当前串中最大的威力
+                    double maxPower = double.MinValue;
 
-                                    //当前串中最小的威力
-                                    double minPower = double.MaxValue;
+                    //当前串中最小的威力
+                    double minPower = double.MaxValue;
 
-                                    //当前串中最大的威力棋子的位置
-                                    int maxPowerIndex = 0;
+                    //当前串中最大的威力棋子的位置
+                    int maxPowerIndex = 0;
 
-                                    //当前串中最小的威力棋子的位置
-                                    int minPowerIndex = 0;
+                    //当前串中最小的威力棋子的位置
+                    int minPowerIndex = 0;
 
-                                    //设定当前添加的棋子类型
-                                    ChessType currentType = AIType;
+                    //设定当前添加的棋子类型
+                    ChessType currentType = AIType;
 
-                                    for (int i = 0; i < gene.Genes.Length; i++)
-                                    {
-                                        //模拟更新棋盘中的棋子类型
-                                        Chess.UpdateChessTypeForAI(gene.Genes[i], currentType);
+                    for (int i = 0; i < gene.Genes.Length; i++)
+                    {
+                        //模拟更新棋盘中的棋子类型
+                        Chess.UpdateChessTypeForAI(gene.Genes[i], currentType);
 
-                                        //计算单子威力*位权
-                                        double tempPower = SinglePower(gene.Genes[i], currentType) * 1 * Math.Pow(0.96, i);
+                        //计算单子威力*位权
+                        double tempPower = SinglePower(gene.Genes[i], currentType) * 1 * Math.Pow(0.96, i);
 
-                                        if (tempPower > maxPower)
-                                        {
-                                            maxPowerIndex = i;
-                                            maxPower = tempPower;
-                                        }
+                        if (tempPower > maxPower)
+                        {
+                            maxPowerIndex = i;
+                            maxPower = tempPower;
+                        }
 
-                                        if (tempPower < minPower)
-                                        {
-                                            minPowerIndex = i;
-                                            minPower = tempPower;
-                                        }
+                        if (tempPower < minPower)
+                        {
+                            minPowerIndex = i;
+                            minPower = tempPower;
+                        }
 
-                                        //当前的最大威力值>权值*100  退出循环
-                                        if (maxPower > (100 * Math.Pow(0.96, i)))
-                                            break;
+                        //当前的最大威力值>权值*100  退出循环
+                        if (maxPower > (100 * Math.Pow(0.96, i)))
+                            break;
 
-                                        //转换下棋方,currentTpye变换
-                                        if (currentType == ChessType.BLACK)
-                                            currentType = ChessType.WHITE;
-                                        else
-                                            currentType = ChessType.BLACK;
-                                    }
+                        //转换下棋方,currentTpye变换
+                        if (currentType == ChessType.BLACK)
+                            currentType = ChessType.WHITE;
+                        else
+                            currentType = ChessType.BLACK;
+                    }
 
-                                    //赋值适应度
-                                    if (Math.Abs(minPower) > Math.Abs(maxPower))
-                                    {
-                                        gene.BestGenIndex = minPowerIndex;
-                                        gene.Fitness = minPower;
-                                    }
-                                    else
-                                    {
-                                        gene.Fitness = maxPower;
-                                        gene.BestGenIndex = maxPowerIndex;
-                                    }
+                    //赋值适应度
+                    if (Math.Abs(minPower) > Math.Abs(maxPower))
+                    {
+                        gene.BestGenIndex = minPowerIndex;
+                        gene.Fitness = minPower;
+                    }
+                    else
+                    {
+                        gene.Fitness = maxPower;
+                        gene.BestGenIndex = maxPowerIndex;
+                    }
 
-                                    //恢复对棋盘的改变
-                                    for (int i = 0; i < gene.Genes.Length; i++)
-                                    {
-                                        Chess.UpdateChessTypeForAI(gene.Genes[i], ChessType.NULL);
-                                    }
+                    //恢复对棋盘的改变
+                    for (int i = 0; i < gene.Genes.Length; i++)
+                    {
+                        Chess.UpdateChessTypeForAI(gene.Genes[i], ChessType.NULL);
+                    }
 
-                                    //关闭人工智能探路标记
-                                    Conf.AIRouterState = false;
-                                };
+                    //关闭人工智能探路标记
+                    Conf.AIRouterState = false;
+                };
 
                 //创建随机基因组的函数
                 Genome.genomeCreater = createGensHandle;
