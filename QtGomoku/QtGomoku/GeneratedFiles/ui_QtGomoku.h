@@ -18,7 +18,7 @@
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QListView>
+#include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
@@ -40,7 +40,7 @@ public:
     QGraphicsView *BoardView;
     QGroupBox *groupBox;
     QGridLayout *gridLayout;
-    QListView *listView_History;
+    QListWidget *listWidget_History;
     QGroupBox *groupBox_2;
     QLabel *label_Coordinate;
     QGroupBox *groupBox_3;
@@ -60,7 +60,7 @@ public:
         if (QtGomokuClass->objectName().isEmpty())
             QtGomokuClass->setObjectName(QStringLiteral("QtGomokuClass"));
         QtGomokuClass->setEnabled(true);
-        QtGomokuClass->resize(908, 678);
+        QtGomokuClass->resize(961, 690);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -85,55 +85,57 @@ public:
         BoardView = new QGraphicsView(centralWidget);
         BoardView->setObjectName(QStringLiteral("BoardView"));
         BoardView->setGeometry(QRect(10, 10, 600, 600));
-        BoardView->setStyleSheet(QStringLiteral("background-image: url(:/QtGomoku/Resources/board.png);"));
+        sizePolicy.setHeightForWidth(BoardView->sizePolicy().hasHeightForWidth());
+        BoardView->setSizePolicy(sizePolicy);
+        BoardView->setStyleSheet(QStringLiteral("border-image: url(:/QtGomoku/Resources/board.png);"));
         groupBox = new QGroupBox(centralWidget);
         groupBox->setObjectName(QStringLiteral("groupBox"));
-        groupBox->setGeometry(QRect(620, 10, 271, 351));
+        groupBox->setGeometry(QRect(620, 10, 331, 351));
         gridLayout = new QGridLayout(groupBox);
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        listView_History = new QListView(groupBox);
-        listView_History->setObjectName(QStringLiteral("listView_History"));
+        listWidget_History = new QListWidget(groupBox);
+        listWidget_History->setObjectName(QStringLiteral("listWidget_History"));
 
-        gridLayout->addWidget(listView_History, 0, 0, 1, 1);
+        gridLayout->addWidget(listWidget_History, 0, 0, 1, 1);
 
         groupBox_2 = new QGroupBox(centralWidget);
         groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
-        groupBox_2->setGeometry(QRect(620, 370, 271, 111));
+        groupBox_2->setGeometry(QRect(620, 370, 331, 111));
         label_Coordinate = new QLabel(groupBox_2);
         label_Coordinate->setObjectName(QStringLiteral("label_Coordinate"));
-        label_Coordinate->setGeometry(QRect(40, 40, 201, 31));
+        label_Coordinate->setGeometry(QRect(40, 30, 271, 51));
         QFont font;
         font.setFamily(QStringLiteral("Arial"));
         font.setPointSize(30);
         label_Coordinate->setFont(font);
         groupBox_3 = new QGroupBox(centralWidget);
         groupBox_3->setObjectName(QStringLiteral("groupBox_3"));
-        groupBox_3->setGeometry(QRect(620, 490, 271, 121));
+        groupBox_3->setGeometry(QRect(620, 490, 331, 121));
         label = new QLabel(groupBox_3);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(60, 30, 40, 40));
         label->setStyleSheet(QStringLiteral("background-image: url(:/QtGomoku/Resources/black.png);"));
         label_2 = new QLabel(groupBox_3);
         label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setGeometry(QRect(170, 30, 40, 40));
+        label_2->setGeometry(QRect(230, 30, 40, 40));
         label_2->setStyleSheet(QStringLiteral("background-image: url(:/QtGomoku/Resources/white.png);"));
         label_BlackOwner = new QLabel(groupBox_3);
         label_BlackOwner->setObjectName(QStringLiteral("label_BlackOwner"));
-        label_BlackOwner->setGeometry(QRect(50, 80, 51, 31));
+        label_BlackOwner->setGeometry(QRect(50, 80, 61, 31));
         QFont font1;
         font1.setFamily(QString::fromUtf8("\345\276\256\350\275\257\351\233\205\351\273\221 Light"));
         font1.setPointSize(18);
         label_BlackOwner->setFont(font1);
         label_WhiteOwner = new QLabel(groupBox_3);
         label_WhiteOwner->setObjectName(QStringLiteral("label_WhiteOwner"));
-        label_WhiteOwner->setGeometry(QRect(180, 80, 51, 31));
+        label_WhiteOwner->setGeometry(QRect(220, 80, 71, 31));
         label_WhiteOwner->setFont(font1);
         QtGomokuClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(QtGomokuClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 908, 23));
+        menuBar->setGeometry(QRect(0, 0, 961, 26));
         menu = new QMenu(menuBar);
         menu->setObjectName(QStringLiteral("menu"));
         menu_3 = new QMenu(menu);
@@ -177,7 +179,7 @@ public:
         label->setText(QString());
         label_2->setText(QString());
         label_BlackOwner->setText(QApplication::translate("QtGomokuClass", "\347\216\251\345\256\266", Q_NULLPTR));
-        label_WhiteOwner->setText(QApplication::translate("QtGomokuClass", "AI", Q_NULLPTR));
+        label_WhiteOwner->setText(QApplication::translate("QtGomokuClass", "\347\224\265\350\204\221", Q_NULLPTR));
         menu->setTitle(QApplication::translate("QtGomokuClass", "\350\256\276\347\275\256", Q_NULLPTR));
         menu_3->setTitle(QApplication::translate("QtGomokuClass", "\350\247\204\345\210\231", Q_NULLPTR));
         menu_2->setTitle(QApplication::translate("QtGomokuClass", "\345\270\256\345\212\251", Q_NULLPTR));

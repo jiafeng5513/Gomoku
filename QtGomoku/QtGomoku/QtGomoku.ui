@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>908</width>
-    <height>678</height>
+    <width>961</width>
+    <height>690</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -35,8 +35,14 @@
       <height>600</height>
      </rect>
     </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
     <property name="styleSheet">
-     <string notr="true">background-image: url(:/QtGomoku/Resources/board.png);</string>
+     <string notr="true">border-image: url(:/QtGomoku/Resources/board.png);</string>
     </property>
    </widget>
    <widget class="QGroupBox" name="groupBox">
@@ -44,7 +50,7 @@
      <rect>
       <x>620</x>
       <y>10</y>
-      <width>271</width>
+      <width>331</width>
       <height>351</height>
      </rect>
     </property>
@@ -53,7 +59,7 @@
     </property>
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
-      <widget class="QListView" name="listView_History"/>
+      <widget class="QListWidget" name="listWidget_History"/>
      </item>
     </layout>
    </widget>
@@ -62,7 +68,7 @@
      <rect>
       <x>620</x>
       <y>370</y>
-      <width>271</width>
+      <width>331</width>
       <height>111</height>
      </rect>
     </property>
@@ -73,9 +79,9 @@
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>40</y>
-       <width>201</width>
-       <height>31</height>
+       <y>30</y>
+       <width>271</width>
+       <height>51</height>
       </rect>
      </property>
      <property name="font">
@@ -94,7 +100,7 @@
      <rect>
       <x>620</x>
       <y>490</y>
-      <width>271</width>
+      <width>331</width>
       <height>121</height>
      </rect>
     </property>
@@ -120,7 +126,7 @@
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
-       <x>170</x>
+       <x>230</x>
        <y>30</y>
        <width>40</width>
        <height>40</height>
@@ -138,7 +144,7 @@
       <rect>
        <x>50</x>
        <y>80</y>
-       <width>51</width>
+       <width>61</width>
        <height>31</height>
       </rect>
      </property>
@@ -155,9 +161,9 @@
     <widget class="QLabel" name="label_WhiteOwner">
      <property name="geometry">
       <rect>
-       <x>180</x>
+       <x>220</x>
        <y>80</y>
-       <width>51</width>
+       <width>71</width>
        <height>31</height>
       </rect>
      </property>
@@ -168,7 +174,7 @@
       </font>
      </property>
      <property name="text">
-      <string>AI</string>
+      <string>电脑</string>
      </property>
     </widget>
    </widget>
@@ -178,8 +184,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>908</width>
-     <height>23</height>
+     <width>961</width>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">

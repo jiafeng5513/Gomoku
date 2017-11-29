@@ -1,6 +1,8 @@
 #include "BoardScene.h"
 #include <QGraphicsSceneMouseEvent>
 #include <qDebug>
+#include <QGraphicsScene>
+
 
 BoardScene::BoardScene(QObject *parent)
 	: QGraphicsScene(parent)
@@ -29,6 +31,6 @@ void BoardScene::mousePressEvent(QGraphicsSceneMouseEvent* event)
  */
 void BoardScene::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 {
-	qDebug() << "X:" << event->scenePos().x() << "Y:" << event->scenePos().y()<<"RX:" << event->scenePos().rx() << "RY:" << event->scenePos().ry();
-	//qDebug() << "X:" << event->screenPos().x() << "Y:" << event->screenPos().y()<<"RX:" << event->screenPos().rx() << "RY:" << event->screenPos().ry();
+	//qDebug() << "X:" << event->scenePos().x() << "Y:" << event->scenePos().y();
+	emit BoardSenseMouseRelease(&QPoint(event->scenePos().x(), event->scenePos().y()));
 }

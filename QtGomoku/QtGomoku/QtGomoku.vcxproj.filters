@@ -54,6 +54,12 @@
     <ClCompile Include="BoardScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Alpha-Beta.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TranspositionTable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="QtGomoku.h">
@@ -72,6 +78,15 @@
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_QtGomoku.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticDefinition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Alpha-Beta.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TranspositionTable.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
