@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/QtGomoku">
+        <file>Resources/board.png</file>
+        <file>Resources/black.png</file>
+        <file>Resources/kh.png</file>
+        <file>Resources/white.png</file>
+        <file>Resources/bg.png</file>
+    </qresource>
+</RCC>
