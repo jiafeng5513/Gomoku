@@ -27,7 +27,6 @@ public:
 	Color BoardMap[15][15];		//保存棋局
 
 private:
-	///
 	void UpdateWholeBoardView();//根据当前棋局数组刷新整个画面
 	void PutDownStone(int x,int y);//下棋
 public slots:
