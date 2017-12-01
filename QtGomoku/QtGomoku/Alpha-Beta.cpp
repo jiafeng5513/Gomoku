@@ -6,6 +6,7 @@
 #include"StaticDefinition.h"
 #include"Alpha-Beta.h"
 
+#include <qDebug>
 /*
 * 估值函数
 * 参数1:位置
@@ -863,17 +864,18 @@ AiAgent::AiAgent()
 /*
 * 传入人类的行动,获取AiAgent的行动
 */
-POINT AiAgent::GetAiAction(int PlayerX, int PlayerY)
+void AiAgent::GetAiAction(POINT*PlayerPos)
 {
+	qDebug() << "GetAiAction is running...";
 	int XS;
-	POINT temp;
-	if (XS == 1 && PlayerX == -1 && PlayerY == -1) //如果己方执黑且是第一步，则占据棋盘中心位置 
+	POINT *temp=new POINT;
+	if (XS == 1 && PlayerPos->x == -1 && PlayerPos->y == -1) //如果己方执黑且是第一步，则占据棋盘中心位置 
 	{
 		m_RenjuBoard[GRID_NUM / 2][GRID_NUM / 2] = colour; //更新棋盘信息
 	}
 	else
 	{
-		m_RenjuBoard[PlayerX][PlayerY] = m_nUserStoneColor;
+		m_RenjuBoard[PlayerPos->x][PlayerPos->y] = m_nUserStoneColor;
 		m_nSearchDepth = 4;//AI难度等级设置 
 						   //最大搜索深度        
 		ResetHistoryTable();
@@ -882,10 +884,10 @@ POINT AiAgent::GetAiAction(int PlayerX, int PlayerY)
 		m_RenjuBoard[X][Y] = colour;
 		//输出 
 		
-		temp.x = X;
-		temp.y = Y;
+		temp->x = X;
+		temp->y = Y;
 		std::cout << std::flush; //刷新缓冲区
 		m_pTranspositionTable->_CTranspositionTable();
 	}
-	return temp;
+	emit AIComplete(temp);//带AI的落子点发出
 }

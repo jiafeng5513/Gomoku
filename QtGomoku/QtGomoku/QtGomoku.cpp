@@ -4,6 +4,7 @@
 #include <csignal>
 #include <qDebug>
 #include "Alpha-Beta.h"
+#include <QMessageBox>
 
 /*
  * 构造和初始化
@@ -29,19 +30,26 @@ QtGomoku::QtGomoku(QWidget *parent)
 		}
 	}
 	m_ai = new AiAgent();
+	connect(this, SIGNAL(IsTimeForAiToCalculate(POINT*)), m_ai, SLOT(GetAiAction(POINT*)));
+	connect(m_ai, SIGNAL(AIComplete(POINT*)), this, SLOT(OnAiComplete(POINT*)));
 }
 /*
  * 鼠标在棋盘上空释放
  */
 void QtGomoku::OnMouseReleaseOnBoardSense(QPoint* pos)
 {
-	int qx = pos->x() / 40;
-	int qy = pos->y() / 40;
+	if (CurrentTurn == Human)
+	{
+		int qx = pos->x() / 40;
+		int qy = pos->y() / 40;
 
-	PutDownStone(qx, qy);
-	//函数应该在这里结束,AI的运行用额外的线程进行
-	POINT temp=m_ai->GetAiAction(qx, qy);
-	PutDownStone(temp.x, temp.y);
+		PutDownStone(qx, qy);//人类完成落子
+		POINT * _humanPos = new  POINT;
+		_humanPos->x = qx;
+		_humanPos->y = qy;
+		emit IsTimeForAiToCalculate(_humanPos);
+		ui.statusBar->showMessage(QStringLiteral("AI正在计算..."));
+	}
 }
 /*
  * 根据当前棋局数组刷新整个画面
@@ -99,5 +107,64 @@ void QtGomoku::PutDownStone(int x, int y)
 		}
 		qpi->setPos(QPoint(x * 40, y * 40));
 		m_scene->addItem(qpi);
+		if (isGameOver(x, y) == true)
+		{
+			if(BoardMap[x][y] == AiColor)
+			{
+				//AI胜利
+				QMessageBox::information(this, QStringLiteral("很遗憾"), QStringLiteral("AI已经取胜!"));
+				//游戏结束
+			}
+			else
+			{
+				//玩家胜利
+				QMessageBox::information(this, QStringLiteral("恭喜"), QStringLiteral("您打败了AI!"));
+				//游戏结束 
+			}
+		}
 	}
+}
+/*
+ * 判断游戏是否因为刚刚落下的这个棋子而结束
+ */
+bool QtGomoku::isGameOver(int x, int y)
+{
+	//遍历这个棋子横竖撇捺四个方向,发现连五判赢
+	Color _color= BoardMap[x][y];//当前落子的颜色
+	int vCount = 0, hCount = 0, lCount = 0, rCount = 0;
+	for(int i=0;i<GRID_NUM;i++)//水平和竖直
+	{
+		hCount = (BoardMap[i][y] == _color ? hCount + 1 : 0);
+		vCount = (BoardMap[x][i] == _color ? vCount + 1 : 0);
+	}
+	int m = GRID_NUM - abs(x - y);//主对角线方向元素数量
+	int n = GRID_NUM - abs(GRID_NUM - (x + y + 1));//次对角线方向元素数量
+	for (int i=-std::min(x,y);i<m-std::min(x,y);i++)
+	{
+		rCount = (BoardMap[x + i][y + i] == _color ? rCount + 1 : 0);//主对角线方向
+	}
+	int imax = n + (x - y) - 1 - std::min(x, GRID_NUM - 1 - y);
+	int jmax = n - imax;
+	for (int i = -imax; i<jmax; i++)
+	{
+		lCount = (BoardMap[x - i][y + i] == _color ? lCount + 1 : 0);//次对角线方向
+	}
+	if(vCount >=5||hCount>=5||lCount>=5||rCount>=5)
+	{
+		return true;//游戏已经结束
+	}
+	else
+	{
+		return false;//游戏还没有结束
+	}
+}
+/*
+ * 相应AI计算完毕
+ */
+void QtGomoku::OnAiComplete(POINT * pos)
+{
+	qDebug() << "OnAiComplete is running...";
+	PutDownStone(pos->x, pos->y);
+	ui.statusBar->clearMessage();
+	ui.statusBar->showMessage(QStringLiteral("AI计算完毕!"));
 }

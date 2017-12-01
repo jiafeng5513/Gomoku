@@ -29,6 +29,10 @@ public:
 private:
 	void UpdateWholeBoardView();//根据当前棋局数组刷新整个画面
 	void PutDownStone(int x,int y);//下棋
+	bool isGameOver(int x,int y);//判断游戏是否因为刚刚落下的这个棋子而结束
 public slots:
 	void OnMouseReleaseOnBoardSense(QPoint *pos);//鼠标在棋盘上空释放
+	void OnAiComplete(POINT * pos);
+signals:
+	void IsTimeForAiToCalculate(POINT*);//发出时带人类的落子点
 };

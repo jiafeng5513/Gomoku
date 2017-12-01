@@ -4,11 +4,15 @@
 #pragma once
 #include "StaticDefinition.h"
 #include "TranspositionTable.h"
-class AiAgent
+#include <qobject.h>
+
+class AiAgent:public QObject
 {
+	Q_OBJECT
+
 public:
 	AiAgent();
-	POINT GetAiAction(int PlayerX, int PlayerY);
+	
 private:
 	TranspositionTable *m_pTranspositionTable;
 	int m_HistoryTable[GRID_NUM][GRID_NUM];//历史得分表
@@ -73,4 +77,14 @@ private:
 	int IsGameOver(unsigned char position[][GRID_NUM], int nDepth);
 	void UnMakeMove(STONEMOVE* move);
 	unsigned char MakeMove(STONEMOVE* move, int type);
+public slots:
+	void GetAiAction(POINT*);
+	signals:
+	void AIComplete(POINT*);//带AI的落子点返回,计算完毕
 };
+/*
+ *现在AI的问题:
+ *1.强度不够
+ *2.一旦判断进入必败局面,就会走0.0点
+ *
+ */
