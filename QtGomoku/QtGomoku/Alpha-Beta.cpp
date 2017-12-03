@@ -7,27 +7,35 @@
 #include"Alpha-Beta.h"
 
 #include <qDebug>
+#include <valarray>
+
 /*
 * 估值函数
-* 参数1:位置
-* 参数2:true=白棋,false=黑棋
+* 参数1:要评价的局面(存储整个局面的一个数组)
+* 参数2:我方的颜色
+* 1.估值函数在决策时的叶节点被调用
+* 2.估值函数评价的是叶节点这个局势的好坏
+* 3.评价原理:
+*			如果发现必胜局面,提前停止判断,直接返回一个较大的估值
+*			计算当前局面我方的棋形评分
+*			计算当前局面对方的棋形评分
+*			返回:我方评分-对方评分(策略是选择对我方最有利,对对方最不利的路径)
 */
-int AiAgent::Eveluate(unsigned char position[][GRID_NUM], bool bIsWhiteTurn)
+int AiAgent::Eveluate(unsigned char position[][GRID_NUM], Color color)
 {
-	int i, j, k;
-	unsigned char nStoneType;
 	count++;//计数器累加
-			/*
-			* void *memset(void *s, int ch, size_t n)
-			* 函数解释：将s中当前位置后面的n个字节 （typedef unsigned int size_t ）用 ch 替换并返回 s 。
-			* memset：作用是在一段内存块中填充某个给定的值，它是对较大的结构体或数组进行清零操作的一种最快方法
-			*/
-			//清空棋型分析结果
+	/*
+	* void *memset(void *s, int ch, size_t n)
+	* 函数解释：将s中当前位置后面的n个字节 （typedef unsigned int size_t ）用 ch 替换并返回 s 。
+	* memset：作用是在一段内存块中填充某个给定的值，它是对较大的结构体或数组进行清零操作的一种最快方法
+	*/
+	//清空棋型分析结果
 	memset(TypeRecord, TOBEANALSIS, GRID_COUNT * 4 * 4);
 	memset(TypeCount, 0, 40 * 4);
 
-	for (i = 0; i<GRID_NUM; i++)
-		for (j = 0; j<GRID_NUM; j++)
+	for (int i = 0; i<GRID_NUM; i++)
+	{
+		for (int j = 0; j<GRID_NUM; j++)
 		{
 			if (position[i][j] != space)//当前分析的位置有棋子
 			{
@@ -39,231 +47,194 @@ int AiAgent::Eveluate(unsigned char position[][GRID_NUM], bool bIsWhiteTurn)
 				if (TypeRecord[i][j][1] == TOBEANALSIS)
 					AnalysisVertical(position, i, j);
 
-				//如果左斜方向上没有分析过
+				//如果主对角线方向上没有分析过
 				if (TypeRecord[i][j][2] == TOBEANALSIS)
-					AnalysisLeft(position, i, j);
+					AnalysisMainDiagonal(position, i, j);
 
-				//如果右斜方向上没有分析过
+				//如果次对角线方向上没有分析过
 				if (TypeRecord[i][j][3] == TOBEANALSIS)
-					AnalysisRight(position, i, j);
+					AnalysisSubDiagonal(position, i, j);
 			}
 		}
+	}
+		
 
 	//对分析结果进行统计,得到每种棋型的数量
-	for (i = 0; i<GRID_NUM; i++)
-		for (j = 0; j<GRID_NUM; j++)
-			for (k = 0; k<4; k++)
+	//这种方基于一个假设:对于单一的落子,在同一方向上不可能同时形成两种或两种以上棋形
+	//如果上述假设不成立,整个估值函数失效
+	for (int i = 0; i<GRID_NUM; i++)
+	{
+		for (int j = 0; j<GRID_NUM; j++)
+		{
+			for (int k = 0; k<4; k++)
 			{
-				nStoneType = position[i][j];
-				if (nStoneType != space)
+				if (position[i][j] != space)
 				{
 					switch (TypeRecord[i][j][k])
 					{
-					case FIVE://五连
-						TypeCount[nStoneType][FIVE]++;
+					case Five://五连
+						TypeCount[position[i][j]][Five]++;
 						break;
-					case FOUR://活四
-						TypeCount[nStoneType][FOUR]++;
+					case Alive4://活四
+						TypeCount[position[i][j]][Alive4]++;
 						break;
-					case SFOUR://冲四
-						TypeCount[nStoneType][SFOUR]++;
+					case Sleep4://冲四
+						TypeCount[position[i][j]][Sleep4]++;
 						break;
-					case THREE://活三
-						TypeCount[nStoneType][THREE]++;
+					case Alive3://活三
+						TypeCount[position[i][j]][Alive3]++;
 						break;
-					case STHREE://眠三
-						TypeCount[nStoneType][STHREE]++;
+					case Sleep3://眠三
+						TypeCount[position[i][j]][Sleep3]++;
 						break;
-					case TWO://活二
-						TypeCount[nStoneType][TWO]++;
+					case Alive2://活二
+						TypeCount[position[i][j]][Alive2]++;
 						break;
-					case STWO://眠二
-						TypeCount[nStoneType][STWO]++;
+					case Sleep2://眠二
+						TypeCount[position[i][j]][Sleep2]++;
 						break;
 					default:
 						break;
 					}
 				}
 			}
-
-	//如果已五连,返回极值
-	if (bIsWhiteTurn)
-	{
-		if (TypeCount[black][FIVE])
-		{
-			return -9999;
-		}
-		if (TypeCount[white][FIVE])
-		{
-			return 9999;
 		}
 	}
-	else
+	//========开始评估========
+	int _ourScore = 0, _counterScore = 0;//我方评分,对方评分
+	Color _ourSide = color;//我方颜色
+	Color _counterSide = (color == white ? black : white);//对方颜色
+	/*
+	 *必胜/必败只有两种情况:
+	 * 1.连五
+	 * 2.活四,双冲四,冲四活三
+	 * 同时遇到两种情况的时候,如果是我方,优先选择形成连五
+	 * 如果是对方,我们认为情况二对我们还有一线生机
+	 * 
+	 * 其他的情况计算局势分
+	 */
+	//连五
+	if (TypeCount[_ourSide][Five] >= 1)
 	{
-		if (TypeCount[black][FIVE])
-		{
-			return 9999;
-		}
-		if (TypeCount[white][FIVE])
-		{
-			return -9999;
-		}
+		return 100000;
 	}
-	//两个冲四等于一个活四
-	if (TypeCount[white][SFOUR]>1)
-		TypeCount[white][FOUR]++;
-	if (TypeCount[black][SFOUR]>1)
-		TypeCount[black][FOUR]++;
-	int WValue = 0, BValue = 0;
-
-	if (bIsWhiteTurn)//轮到白棋走
+	if (TypeCount[_counterSide][Five] >= 1)
 	{
-		if (TypeCount[white][FOUR])
-		{
-
-
-			return 9990;//活四,白胜返回极值
-		}
-		if (TypeCount[white][SFOUR])
-		{
-
-
-			return 9980;//冲四,白胜返回极值
-		}
-		if (TypeCount[black][FOUR])
-		{
-
-
-			return -9970;//白无冲四活四,而黑有活四,黑胜返回极值
-		}
-		if (TypeCount[black][SFOUR] && TypeCount[black][THREE])
-		{
-
-
-			return -9960;//而黑有冲四和活三,黑胜返回极值
-		}
-		if (TypeCount[white][THREE] && TypeCount[black][SFOUR] == 0)
-		{
-
-
-			return 9950;//白有活三而黑没有四,白胜返回极值
-		}
-		if (TypeCount[black][THREE]>1 && TypeCount[white][SFOUR] == 0 && TypeCount[white][THREE] == 0 && TypeCount[white][STHREE] == 0)
-		{
-
-
-			return -9940;//黑的活三多于一个,而白无四和三,黑胜返回极值
-		}
-		if (TypeCount[white][THREE]>1)
-			WValue += 2000;//白活三多于一个,白棋价值加2000
-		else
-			//否则白棋价值加200
-			if (TypeCount[white][THREE])
-				WValue += 200;
-		if (TypeCount[black][THREE]>1)
-			BValue += 500;//黑的活三多于一个,黑棋价值加500
-		else
-			//否则黑棋价值加100
-			if (TypeCount[black][THREE])
-				BValue += 100;
-		//每个眠三加10
-		if (TypeCount[white][STHREE])
-			WValue += TypeCount[white][STHREE] * 10;
-		//每个眠三加10
-		if (TypeCount[black][STHREE])
-			BValue += TypeCount[black][STHREE] * 10;
-		//每个活二加4
-		if (TypeCount[white][TWO])
-			WValue += TypeCount[white][TWO] * 4;
-		//每个活二加4
-		if (TypeCount[black][STWO])
-			BValue += TypeCount[black][TWO] * 4;
-		//每个眠二加1
-		if (TypeCount[white][STWO])
-			WValue += TypeCount[white][STWO];
-		//每个眠二加1
-		if (TypeCount[black][STWO])
-			BValue += TypeCount[black][STWO];
+		return -100000;
 	}
-	else//轮到黑棋走
+	//活四,双冲四,冲四活三
+	if (TypeCount[_ourSide][Alive4]>=1||TypeCount[_ourSide][Sleep4]>=2||(TypeCount[_ourSide][Sleep4]>=1&& TypeCount[_ourSide][Alive3>=1]))
 	{
-		if (TypeCount[black][FOUR])
-		{
-
-			return 9990;//活四,黑胜返回极值
-		}
-		if (TypeCount[black][SFOUR])
-		{
-
-			return 9980;//冲四,黑胜返回极值
-		}
-		if (TypeCount[white][FOUR])
-			return -9970;//活四,白胜返回极值
-
-		if (TypeCount[white][SFOUR] && TypeCount[white][THREE])
-			return -9960;//冲四并活三,白胜返回极值
-
-		if (TypeCount[black][THREE] && TypeCount[white][SFOUR] == 0)
-			return 9950;//黑活三,白无四。黑胜返回极值
-
-		if (TypeCount[white][THREE]>1 && TypeCount[black][SFOUR] == 0 && TypeCount[black][THREE] == 0 && TypeCount[black][STHREE] == 0)
-			return -9940;//白的活三多于一个,而黑无四和三,白胜返回极值
-
-						 //黑的活三多于一个,黑棋价值加2000
-		if (TypeCount[black][THREE]>1)
-			BValue += 2000;
-		else
-			//否则黑棋价值加200
-			if (TypeCount[black][THREE])
-				BValue += 200;
-
-		//白的活三多于一个,白棋价值加 500
-		if (TypeCount[white][THREE]>1)
-			WValue += 500;
-		else
-			//否则白棋价值加100
-			if (TypeCount[white][THREE])
-				WValue += 100;
-
-		//每个眠三加10
-		if (TypeCount[white][STHREE])
-			WValue += TypeCount[white][STHREE] * 10;
-		//每个眠三加10
-		if (TypeCount[black][STHREE])
-			BValue += TypeCount[black][STHREE] * 10;
-
-		//每个活二加4
-		if (TypeCount[white][TWO])
-			WValue += TypeCount[white][TWO] * 4;
-		//每个活二加4
-		if (TypeCount[black][STWO])
-			BValue += TypeCount[black][TWO] * 4;
-
-		//每个眠二加1
-		if (TypeCount[white][STWO])
-			WValue += TypeCount[white][STWO];
-		//每个眠二加1
-		if (TypeCount[black][STWO])
-			BValue += TypeCount[black][STWO];
+		return 10000;
 	}
-
+	if (TypeCount[_counterSide][Alive4]>= 1||TypeCount[_counterSide][Sleep4]>= 2||(TypeCount[_counterSide][Sleep4]>=1&&TypeCount[_counterSide][Alive3 >= 1]))
+	{
+		return -10000;
+	}
+	//=====开始打分,注意不打负分====
+	//双活三
+	if (TypeCount[_ourSide][Alive3] >= 2)
+	{
+		_ourScore += 5000;
+	}
+	if (TypeCount[_counterSide][Alive3] >= 2)
+	{
+		_counterScore += 5000;
+	}
+	//活三眠三
+	if (TypeCount[_ourSide][Alive3] >= 1&& TypeCount[_ourSide][Sleep3]>=1)
+	{
+		_ourScore += 1000;
+	}
+	if (TypeCount[_counterSide][Alive3] >= 1 && TypeCount[_counterSide][Sleep3] >= 1)
+	{
+		_counterScore += 1000;
+	}
+	//眠四
+	if (TypeCount[_ourSide][Sleep4] >= 1)
+	{
+		_ourScore += TypeCount[_ourSide][Sleep4]*500;
+	}
+	if (TypeCount[_counterSide][Sleep4] >= 1)
+	{
+		_counterScore += TypeCount[_counterSide][Sleep4]*500;
+	}
+	//活三
+	if (TypeCount[_ourSide][Alive3] >= 1)
+	{
+		_ourScore += TypeCount[_ourSide][Alive3]*200;
+	}
+	if (TypeCount[_counterSide][Alive3] >= 1)
+	{
+		_counterScore += TypeCount[_counterSide][Alive3]*200;
+	}
+	//双活二
+	if (TypeCount[_ourSide][Alive2] >= 2)
+	{
+		_ourScore += 100;
+	}
+	if (TypeCount[_counterSide][Alive2] >= 2)
+	{
+		_counterScore += 100;
+	}
+	//眠三
+	if (TypeCount[_ourSide][Sleep3] >= 1)
+	{
+		_ourScore += TypeCount[_ourSide][Sleep3]*50;
+	}
+	if (TypeCount[_counterSide][Sleep3] >= 1)
+	{
+		_counterScore += TypeCount[_counterSide][Sleep3]*50;
+	}
+	//活二眠二
+	if (TypeCount[_ourSide][Alive2] >= 1&& TypeCount[_ourSide][Sleep2] >= 1)
+	{
+		_ourScore += 10;
+	}
+	if (TypeCount[_counterSide][Alive2] >= 1&& TypeCount[_counterSide][Sleep2] >= 1)
+	{
+		_counterScore += 10;
+	}
+	//活二
+	if (TypeCount[_ourSide][Alive2] >= 1)
+	{
+		_ourScore += TypeCount[_ourSide][Alive2]*5;
+	}
+	if (TypeCount[_counterSide][Alive2] >= 1)
+	{
+		_counterScore += TypeCount[_counterSide][Alive2]*5;
+	}
+	//眠二
+	if (TypeCount[_ourSide][Sleep2] >= 1)
+	{
+		_ourScore += TypeCount[_ourSide][Sleep2]*3;
+	}
+	if (TypeCount[_counterSide][Sleep2] >= 1)
+	{
+		_counterScore += TypeCount[_counterSide][Sleep2]*3;
+	}
+	/*
+	 * 死四,死三,死二,四一
+	 */
+	//======打中央权重分=====
 	//加上所有棋子的位置价值
-	for (i = 0; i<GRID_NUM; i++)
-		for (j = 0; j<GRID_NUM; j++)
+	for (int i = 0; i<GRID_NUM; i++)
+	{
+		for (int j = 0; j<GRID_NUM; j++)
 		{
-			nStoneType = position[i][j];
-			if (nStoneType != space)
-				if (nStoneType == black)
-					BValue += PosValue[i][j];
+			if (position[i][j] != space)
+			{
+				if (position[i][j] == _ourSide)
+					_ourScore += PosValue[i][j];
 				else
-					WValue += PosValue[i][j];
+					_counterScore += PosValue[i][j];
+			}
+				
 		}
-
-	//返回估值
-	if (!bIsWhiteTurn)
-		return BValue - WValue;
-	else
-		return WValue - BValue;
+	}
+		
+//================打分结束=========================
+	return _ourScore - _counterScore;
 }
 /*
  *分析棋盘上某点在水平方向上的棋型
@@ -298,9 +269,9 @@ int AiAgent::AnalysisVertical(unsigned char position[][GRID_NUM], int i, int j)
 	return TypeRecord[i][j][1];
 }
 /*
- *分析棋盘上某点在左斜方向上的棋型
+ *分析棋盘上某点主对角线方向上的棋型
  */
-int AiAgent::AnalysisLeft(unsigned char position[][GRID_NUM], int i, int j)
+int AiAgent::AnalysisMainDiagonal(unsigned char position[][GRID_NUM], int i, int j)
 {
 	unsigned char tempArray[GRID_NUM];
 	int x, y;
@@ -332,9 +303,9 @@ int AiAgent::AnalysisLeft(unsigned char position[][GRID_NUM], int i, int j)
 	return TypeRecord[i][j][2];
 }
 /*
- *分析棋盘上某点在右斜方向上的棋型
+ *分析棋盘上某点在次对角线方向上的棋型
  */
-int AiAgent::AnalysisRight(unsigned char position[][GRID_NUM], int i, int j)
+int AiAgent::AnalysisSubDiagonal(unsigned char position[][GRID_NUM], int i, int j)
 {
 	unsigned char tempArray[GRID_NUM];
 	int x, y, realnum;
@@ -436,8 +407,8 @@ int AiAgent::AnalysisLine(unsigned char* position, int GridNum, int StonePos)
 	if (RightEdge - LeftEdge>3)
 	{
 		//如待分析棋子棋型为五连
-		m_LineRecord[nAnalyPos] = FIVE;
-		return FIVE;
+		m_LineRecord[nAnalyPos] = Five;
+		return Five;
 	}
 
 	if (RightEdge - LeftEdge == 3)
@@ -453,15 +424,15 @@ int AiAgent::AnalysisLine(unsigned char* position, int GridNum, int StonePos)
 			if (AnalyLine[RightEdge + 1] == space)
 				//右边有气
 				if (Leftfour == true)//如左边有气
-					m_LineRecord[nAnalyPos] = FOUR;//活四
+					m_LineRecord[nAnalyPos] = Alive4;//活四
 				else
-					m_LineRecord[nAnalyPos] = SFOUR;//冲四
+					m_LineRecord[nAnalyPos] = Sleep4;//冲四
 			else
 				if (Leftfour == true)//如左边有气
-					m_LineRecord[nAnalyPos] = SFOUR;//冲四
+					m_LineRecord[nAnalyPos] = Sleep4;//冲四
 				else
 					if (Leftfour == true)//如左边有气
-						m_LineRecord[nAnalyPos] = SFOUR;//冲四
+						m_LineRecord[nAnalyPos] = Sleep4;//冲四
 
 		return m_LineRecord[nAnalyPos];
 	}
@@ -477,7 +448,7 @@ int AiAgent::AnalysisLine(unsigned char* position, int GridNum, int StonePos)
 				if (LeftEdge>1 && AnalyLine[LeftEdge - 2] == AnalyLine[LeftEdge])
 				{
 					//左边隔一空白有己方棋子
-					m_LineRecord[LeftEdge] = SFOUR;//冲四
+					m_LineRecord[LeftEdge] = Sleep4;//冲四
 					m_LineRecord[LeftEdge - 2] = ANALSISED;
 				}
 				else
@@ -489,28 +460,28 @@ int AiAgent::AnalysisLine(unsigned char* position, int GridNum, int StonePos)
 				if (RightEdge<GridNum - 1 && AnalyLine[RightEdge + 2] == AnalyLine[RightEdge])
 				{
 					//右边隔1个己方棋子
-					m_LineRecord[RightEdge] = SFOUR;//冲四
+					m_LineRecord[RightEdge] = Sleep4;//冲四
 					m_LineRecord[RightEdge + 2] = ANALSISED;
 				}
 				else
 					if (LeftThree == true)//如左边有气
-						m_LineRecord[RightEdge] = THREE;//活三
+						m_LineRecord[RightEdge] = Alive3;//活三
 					else
-						m_LineRecord[RightEdge] = STHREE; //冲三
+						m_LineRecord[RightEdge] = Sleep3; //冲三
 			else
 			{
-				if (m_LineRecord[LeftEdge] == SFOUR)//如左冲四
+				if (m_LineRecord[LeftEdge] == Sleep4)//如左冲四
 					return m_LineRecord[LeftEdge];//返回
 
 				if (LeftThree == true)//如左边有气
-					m_LineRecord[nAnalyPos] = STHREE;//眠三
+					m_LineRecord[nAnalyPos] = Sleep3;//眠三
 			}
 		else
 		{
-			if (m_LineRecord[LeftEdge] == SFOUR)//如左冲四
+			if (m_LineRecord[LeftEdge] == Sleep4)//如左冲四
 				return m_LineRecord[LeftEdge];//返回
 			if (LeftThree == true)//如左边有气
-				m_LineRecord[nAnalyPos] = STHREE;//眠三
+				m_LineRecord[nAnalyPos] = Sleep3;//眠三
 		}
 
 		return m_LineRecord[nAnalyPos];
@@ -531,14 +502,14 @@ int AiAgent::AnalysisLine(unsigned char* position, int GridNum, int StonePos)
 						//左边隔2个己方棋子
 						m_LineRecord[LeftEdge - 3] = ANALSISED;
 						m_LineRecord[LeftEdge - 2] = ANALSISED;
-						m_LineRecord[LeftEdge] = SFOUR;//冲四
+						m_LineRecord[LeftEdge] = Sleep4;//冲四
 					}
 					else
 						if (AnalyLine[LeftEdge - 3] == space)
 						{
 							//左边隔1个己方棋子
 							m_LineRecord[LeftEdge - 2] = ANALSISED;
-							m_LineRecord[LeftEdge] = STHREE;//眠三
+							m_LineRecord[LeftEdge] = Sleep3;//眠三
 						}
 						else
 							Lefttwo = true;
@@ -552,35 +523,35 @@ int AiAgent::AnalysisLine(unsigned char* position, int GridNum, int StonePos)
 						//右边隔两个己方棋子
 						m_LineRecord[RightEdge + 3] = ANALSISED;
 						m_LineRecord[RightEdge + 2] = ANALSISED;
-						m_LineRecord[RightEdge] = SFOUR;//冲四
+						m_LineRecord[RightEdge] = Sleep4;//冲四
 					}
 					else
 						if (AnalyLine[RightEdge + 3] == space)
 						{
 							//右边隔 1 个己方棋子
 							m_LineRecord[RightEdge + 2] = ANALSISED;
-							m_LineRecord[RightEdge] = STHREE;//眠三
+							m_LineRecord[RightEdge] = Sleep3;//眠三
 						}
 						else
 						{
-							if (m_LineRecord[LeftEdge] == SFOUR)//左边冲四
+							if (m_LineRecord[LeftEdge] == Sleep4)//左边冲四
 								return m_LineRecord[LeftEdge];//返回
 
-							if (m_LineRecord[LeftEdge] == STHREE)//左边眠三        
+							if (m_LineRecord[LeftEdge] == Sleep3)//左边眠三        
 								return m_LineRecord[LeftEdge];
 
 							if (Lefttwo == true)
-								m_LineRecord[nAnalyPos] = TWO;//返回活二
+								m_LineRecord[nAnalyPos] = Alive2;//返回活二
 							else
-								m_LineRecord[nAnalyPos] = STWO;//眠二
+								m_LineRecord[nAnalyPos] = Sleep2;//眠二
 						}
 				else
 				{
-					if (m_LineRecord[LeftEdge] == SFOUR)//冲四返回
+					if (m_LineRecord[LeftEdge] == Sleep4)//冲四返回
 						return m_LineRecord[LeftEdge];
 
 					if (Lefttwo == true)//眠二
-						m_LineRecord[nAnalyPos] = STWO;
+						m_LineRecord[nAnalyPos] = Sleep2;
 				}
 
 		return m_LineRecord[nAnalyPos];
@@ -592,7 +563,7 @@ int AiAgent::AnalysisLine(unsigned char* position, int GridNum, int StonePos)
 //将历史记录表中所有项目全置为初值
 void AiAgent::ResetHistoryTable()
 {
-	memset(m_HistoryTable, 10, GRID_COUNT * sizeof(int));
+	memset(m_HistoryTable, 0, GRID_COUNT * sizeof(int));
 }
 
 //从历史得分表中取给定走法的历史得分
@@ -601,10 +572,13 @@ int AiAgent::GetHistoryScore(STONEMOVE* move)
 	return m_HistoryTable[move->StonePos.x][move->StonePos.y];
 }
 
-//将一最佳走法汇入历史记录
+/*
+ * 将一最佳走法汇入历史记录,走法在历史表中的值是深度的平方
+ */
 void AiAgent::EnterHistoryScore(STONEMOVE* move, int depth)
 {
-	m_HistoryTable[move->StonePos.x][move->StonePos.y] += 2 << depth;
+	m_HistoryTable[move->StonePos.x][move->StonePos.y] += 2 << depth;//右移两位,乘4
+	m_HistoryTable[move->StonePos.x][move->StonePos.y] += std::pow(depth, 2);
 }
 
 //对走法队列从小到大排序
@@ -690,6 +664,7 @@ void AiAgent::MergeSort(STONEMOVE* source, int n, bool direction)
 }
 /*
  * 获取单层可行解
+ * 目前是全局遍历,更好的方法是对有棋子的地方进行邻域搜索
  */
 int AiAgent::CreatePossibleMove(unsigned char position[][GRID_NUM], int nPly, int nSide)
 {
@@ -736,9 +711,11 @@ void AiAgent::SearchAGoodMove(unsigned char position[][GRID_NUM], int Type)
 	m_nMaxDepth = m_nSearchDepth;
 	m_pTranspositionTable->CalculateInitHashKey(CurPosition);
 	ResetHistoryTable();
-	Score = NegaScout(m_nMaxDepth, -20000, 20000);
+	Score = NegaScout(m_nMaxDepth, -100000, 100000);
+	//Score=SearchFull(-MATE_VALUE, MATE_VALUE, Max_Level);
 	X = m_cmBestMove.StonePos.y;
 	Y = m_cmBestMove.StonePos.x;
+	qDebug() << "Ai's Pos: (" << X << "," << Y << ")" << "  Score:" << m_cmBestMove.Score;
 	MakeMove(&m_cmBestMove, Type);
 	memcpy(position, CurPosition, GRID_COUNT);
 }
@@ -747,23 +724,20 @@ void AiAgent::SearchAGoodMove(unsigned char position[][GRID_NUM], int Type)
  */
 int AiAgent::IsGameOver(unsigned char position[][GRID_NUM], int nDepth)
 {
-	int score, i;//计算要下的棋子颜色
-	i = (m_nMaxDepth - nDepth) % 2;
-	score = Eveluate(position, i);//调用估值函数
+	int score = Eveluate(position, ((m_nMaxDepth - nDepth) % 2 == 0 ? black : white));//调用估值函数
 	if (abs(score)>8000)//如果估值函数返回极值，给定局面游戏结束
 		return score;//返回极值
 	return 0;//返回未结束
 }
 /*
  * 副极大值风格的α-β搜索
+ * 参数:depth:向下收搜索的深度
+ *		alpha:α,下界
+ *		beat :β,上界
  */
 int AiAgent::NegaScout(int depth, int alpha, int beta)
 {
-	int Count, i;
-	unsigned char type;
-	int a, b, t;
-	int side;
-	int score;
+	int vlBest = -MATE_VALUE;
 	/*        if(depth>0)
 	{
 	i= IsGameOver(CurPosition,depth);
@@ -771,33 +745,37 @@ int AiAgent::NegaScout(int depth, int alpha, int beta)
 	return i;  //已分胜负，返回极值
 	}
 	*/
-	side = (m_nMaxDepth - depth) % 2;//计算当前节点的类型,极大0/极小1
-	score = m_pTranspositionTable->LookUpHashTable(alpha, beta, depth, side);
+	int side = (m_nMaxDepth - depth) % 2;//计算当前节点的类型,极大0/极小1
+	int score = m_pTranspositionTable->LookUpHashTable(alpha, beta, depth, side);
 	if (score != 66666)
 		return score;
-	if (depth <= 0)//叶子节点取估值
+	//====1=====递归出口:返回局面估值
+	if (depth <= 0)//到达最底层(目前是由于最大深度耗尽)
 	{
-		score = Eveluate(CurPosition, side);
+		score = Eveluate(CurPosition, ((m_nMaxDepth - depth) % 2 == 0 ? black : white));
+		//qDebug() << "Eveluate=" << score;
 		m_pTranspositionTable->EnterHashTable(exact, score, depth, side);//将估值存入置换表
-
 		return score;
 	}
-	Count = CreatePossibleMove(CurPosition, depth, side);
-	for (i = 0; i<Count; i++)
+	//====2=====生成可行解,并按照历史表排序
+	int numOfPossibleMove = CreatePossibleMove(CurPosition, depth, side);//本层可行解数量
+	for (int i = 0; i<numOfPossibleMove; i++)
+	{
 		m_MoveList[depth][i].Score = GetHistoryScore(&m_MoveList[depth][i]);
-
-	MergeSort(m_MoveList[depth], Count, 0);
+		//qDebug() << "HistoryScore=" << m_MoveList[depth][i].Score;
+	}
+	MergeSort(m_MoveList[depth], numOfPossibleMove, 1);
 	int bestmove = -1;
-	a = alpha;
-	b = beta;
+	int a = alpha;
+	int b = beta;
 
 	int eval_is_exact = 0;
-
-	for (i = 0; i<Count; i++)
+	//====3=====逐步尝试可行解,并进行递归
+	for (int i = 0; i<numOfPossibleMove; i++)
 	{
-		type = MakeMove(&m_MoveList[depth][i], side);
+		unsigned char type = MakeMove(&m_MoveList[depth][i], side);
 		m_pTranspositionTable->Hash_MakeMove(&m_MoveList[depth][i], CurPosition);
-		t = -NegaScout(depth - 1, -b, -a);//递归搜索子节点，对第 1 个节点是全窗口，其后是空窗探测
+		int t = -NegaScout(depth - 1, -b, -a);//递归搜索子节点，对第 1 个节点是全窗口，其后是空窗探测
 		if (t>a && t<beta && i>0)
 		{
 			//对于第一个后的节点,如果上面的搜索failhigh
@@ -833,6 +811,98 @@ int AiAgent::NegaScout(int depth, int alpha, int beta)
 
 	return a;
 }
+
+
+
+// 超出边界(Fail-Soft)的Alpha-Beta搜索过程
+int AiAgent::SearchFull(int vlAlpha, int vlBeta, int nDepth) {
+	int i, nGenMoves, pcCaptured;
+	int vl, vlBest;
+	STONEMOVE*mvBest = new STONEMOVE;
+	//int mvs[GRID_COUNT];
+	// 一个Alpha-Beta完全搜索分为以下几个阶段
+
+	// 1. 到达水平线，则返回局面评价值
+	if (nDepth == 0) {
+		return  Eveluate(CurPosition, ((m_nMaxDepth - nDepth) % 2 == 0 ? black : white));
+	}
+
+	// 2. 初始化最佳值和最佳走法
+	vlBest = -MATE_VALUE; // 这样可以知道，是否一个走法都没走过(杀棋)
+	//mvBest = 0;           // 这样可以知道，是否搜索到了Beta走法或PV走法，以便保存到历史表
+
+	// 3. 生成全部走法，并根据历史表排序
+	nGenMoves = CreatePossibleMove(CurPosition, nDepth, ((m_nMaxDepth - nDepth) % 2 == 0 ? black : white));//本层可行解数量
+	//nGenMoves = pos.GenerateMoves(mvs);
+	//按照历史表对CurPosition排序=======================此处需要注意
+	for (int i = 0; i<nGenMoves; i++)
+	{
+		m_MoveList[nDepth][i].Score = GetHistoryScore(&m_MoveList[nDepth][i]);
+		//qDebug() << "HistoryScore=" << m_MoveList[depth][i].Score;
+	}
+	MergeSort(m_MoveList[nDepth], nGenMoves, 0);
+	//qsort(m_MoveList[nDepth], nGenMoves, sizeof(STONEMOVE), CompareHistory);
+	SortByHistory(m_MoveList[nDepth], nGenMoves);
+	// 4. 逐一走这些走法，并进行递归
+	for (i = 0; i < nGenMoves; i++) {
+		unsigned char type = MakeMove(&m_MoveList[nDepth][i], ((m_nMaxDepth - nDepth) % 2 == 0 ? black : white));
+		vl = -SearchFull(-vlBeta, -vlAlpha, nDepth - 1);
+		UnMakeMove(&m_MoveList[nDepth][i]);
+
+		//pos.UndoMakeMove(mvs[i], pcCaptured);
+
+		// 5. 进行Alpha-Beta大小判断和截断
+		if (vl > vlBest) {    // 找到最佳值(但不能确定是Alpha、PV还是Beta走法)
+			vlBest = vl;        // "vlBest"就是目前要返回的最佳值，可能超出Alpha-Beta边界
+			if (vl >= vlBeta) { // 找到一个Beta走法
+				*mvBest = m_MoveList[nDepth][i];  // Beta走法要保存到历史表
+				break;            // Beta截断
+			}
+			if (vl > vlAlpha) { // 找到一个PV走法
+				*mvBest = m_MoveList[nDepth][i];  // PV走法要保存到历史表
+				vlAlpha = vl;     // 缩小Alpha-Beta边界
+			}
+		}
+
+	}
+
+	// 5. 所有走法都搜索完了，把最佳走法(不能是Alpha走法)保存到历史表，返回最佳值
+	if (vlBest == -MATE_VALUE) {
+		// 如果是杀棋，就根据杀棋步数给出评价
+		return (Max_Level-nDepth) - MATE_VALUE;
+	}
+	if (mvBest->StonePos.x == -1&& mvBest->StonePos.y == -1) {
+		// 如果不是Alpha走法，就将最佳走法保存到历史表
+		m_HistoryTable[(int)(mvBest->StonePos.x)][(int)(mvBest->StonePos.y)]+= nDepth * nDepth;
+		if (nDepth == Max_Level) {
+			// 搜索根节点时，总是有一个最佳走法(因为全窗口搜索不会超出边界)，将这个走法保存下来
+			//Search.mvResult = mvBest;
+			m_cmBestMove = *mvBest;
+		}
+	}
+	return vlBest;
+}
+/*
+ * 按照历史表排序
+ */
+void AiAgent::SortByHistory(STONEMOVE*list,int length)
+{	 
+	bool swaped;
+	int n = length;
+	do {
+		swaped = false;
+		for (int i = 1; i < n; i++) {
+			if (m_HistoryTable[(int)(list[i].StonePos.x)][(int)(list[i].StonePos.y)]<m_HistoryTable[(int)(list[i].StonePos.x)][(int)(list[i].StonePos.y)]) {
+				STONEMOVE temp = list[i - 1];
+				list[i - 1] = list[i];
+				list[i] = temp;
+				swaped = true;
+			}
+		}
+		n--;
+	} while (swaped);
+}
+
 /*
  * 执行一个决策
  */
@@ -883,7 +953,6 @@ void AiAgent::GetAiAction(POINT*PlayerPos)
 		SearchAGoodMove(m_RenjuBoard, colour);
 		m_RenjuBoard[X][Y] = colour;
 		//输出 
-		
 		temp->x = X;
 		temp->y = Y;
 		std::cout << std::flush; //刷新缓冲区

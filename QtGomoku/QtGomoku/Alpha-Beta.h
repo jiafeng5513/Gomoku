@@ -12,10 +12,10 @@ class AiAgent:public QObject
 
 public:
 	AiAgent();
-	
+	 int m_HistoryTable[GRID_NUM][GRID_NUM];//历史得分表
 private:
 	TranspositionTable *m_pTranspositionTable;
-	int m_HistoryTable[GRID_NUM][GRID_NUM];//历史得分表
+	
 
 	STONEMOVE m_TargetBuff[225];    //排序用的缓冲队列
 	STONEMOVE m_MoveList[10][225];//用以记录走法的数组
@@ -34,9 +34,9 @@ private:
 	int X, Y;                               //AI输出落子位置 			 
 	int count = 0;//全局变量,用以统计估值函数的执行遍数
 	int colour;
-	int TypeRecord[GRID_NUM][GRID_NUM][4];//存放全部分析结果的数组,有三个维度,用于存放水平、垂直、左斜、右斜 4 个方向上所有棋型分析结果
-	int TypeCount[2][20];          //存放统记过的分析结果的数组
-	//位置重要性价值表,此表从中间向外,越往外价值越低
+	int TypeRecord[GRID_NUM][GRID_NUM][4];//TypeRecord[x][y][i]表示棋子xy在i方向上的棋形分析结果
+										  //i:0=水平,1==垂直,2==主方向,3==次方向
+	int TypeCount[2][20];          //存放统记过的分析结果的数组,TypeCount[i][j]元素表示第i中颜色的棋子的第j种棋形的数量
 	int PosValue[GRID_NUM][GRID_NUM] =
 	{
 		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
@@ -58,11 +58,11 @@ private:
 
 private:
 	int AnalysisLine(unsigned char* position, int GridNum, int StonePos);
-	int AnalysisRight(unsigned char position[][GRID_NUM], int i, int j);
-	int AnalysisLeft(unsigned char position[][GRID_NUM], int i, int j);
+	int AnalysisSubDiagonal(unsigned char position[][GRID_NUM], int i, int j);
+	int AnalysisMainDiagonal(unsigned char position[][GRID_NUM], int i, int j);
 	int AnalysisVertical(unsigned char position[][GRID_NUM], int i, int j);
 	int AnalysisHorizon(unsigned char position[][GRID_NUM], int i, int j);
-	int Eveluate(unsigned char position[][GRID_NUM], bool bIsWhiteTurn);
+	int Eveluate(unsigned char position[][GRID_NUM], Color color);//估值函数
 	int AddMove(int nToX, int nToY, int nPly);
 	int CreatePossibleMove(unsigned char position[][GRID_NUM], int nPly, int nSide);
 	void MergeSort(STONEMOVE* source, int n, bool direction);
@@ -77,6 +77,8 @@ private:
 	int IsGameOver(unsigned char position[][GRID_NUM], int nDepth);
 	void UnMakeMove(STONEMOVE* move);
 	unsigned char MakeMove(STONEMOVE* move, int type);
+	int SearchFull(int vlAlpha, int vlBeta, int nDepth);
+	void SortByHistory(STONEMOVE*,int);
 public slots:
 	void GetAiAction(POINT*);
 	signals:

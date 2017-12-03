@@ -5,6 +5,7 @@
 #include "BoardScene.h"
 #include "StaticDefinition.h"
 #include "Alpha-Beta.h"
+#include "Robot.h"
 
 
 class QtGomoku : public QMainWindow
@@ -19,12 +20,13 @@ private:
 	BoardScene * m_scene;
 	QPixmap * WhiteStone;
 	QPixmap * BlackStone;
-	AiAgent *m_ai;
+	//AiAgent *m_ai;
+	Robot * robot;
 public:
 	Color HumanColor = black;	//人类执何种颜色棋子
 	Color AiColor = white;		//Ai执何种颜色棋子
 	Player CurrentTurn = Human; //当前轮到谁落子
-	Color BoardMap[15][15];		//保存棋局
+	Color BoardMap[15][15];		//保存棋局,这个变量只用来在玩家落子的时候判断是否合法,和判断游戏是否结束
 
 private:
 	void UpdateWholeBoardView();//根据当前棋局数组刷新整个画面

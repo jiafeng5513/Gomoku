@@ -29,9 +29,12 @@ QtGomoku::QtGomoku(QWidget *parent)
 			BoardMap[i][j] = space;
 		}
 	}
-	m_ai = new AiAgent();
-	connect(this, SIGNAL(IsTimeForAiToCalculate(POINT*)), m_ai, SLOT(GetAiAction(POINT*)));
-	connect(m_ai, SIGNAL(AIComplete(POINT*)), this, SLOT(OnAiComplete(POINT*)));
+	//m_ai = new AiAgent();
+	//connect(this, SIGNAL(IsTimeForAiToCalculate(POINT*)), m_ai, SLOT(GetAiAction(POINT*)));
+	//connect(m_ai, SIGNAL(AIComplete(POINT*)), this, SLOT(OnAiComplete(POINT*)));
+	robot = new Robot();
+	connect(this, SIGNAL(IsTimeForAiToCalculate(POINT*)), robot, SLOT(getAiResponse(POINT*)), Qt::QueuedConnection);
+	connect(robot, SIGNAL(AIComplete(POINT*)), this, SLOT(OnAiComplete(POINT*)), Qt::QueuedConnection);
 }
 /*
  * 鼠标在棋盘上空释放
@@ -86,6 +89,16 @@ void QtGomoku::UpdateWholeBoardView()
  */
 void QtGomoku::PutDownStone(int x, int y)
 {
+	if(x<0||y<0||x>14||y>>14)
+	{
+		QMessageBox::information(this, QStringLiteral("错误!"), QStringLiteral("落子坐标非法!"));
+		return;
+	}
+	if (BoardMap[x][y]!=space)
+	{
+		QMessageBox::information(this, QStringLiteral("错误!"), QStringLiteral("落子坐标已经有其他棋子!"));
+		return;
+	}
 	if(BoardMap[x][y]==space)//这个位置是空的
 	{
 		QGraphicsPixmapItem *qpi;
@@ -136,27 +149,33 @@ bool QtGomoku::isGameOver(int x, int y)
 	{
 		hCount = (BoardMap[i][y] == _color ? hCount + 1 : 0);
 		vCount = (BoardMap[x][i] == _color ? vCount + 1 : 0);
+		if(vCount >= 5 || hCount >= 5)
+		{
+			return true;//游戏已经结束
+		}
+
 	}
 	int m = GRID_NUM - abs(x - y);//主对角线方向元素数量
 	int n = GRID_NUM - abs(GRID_NUM - (x + y + 1));//次对角线方向元素数量
 	for (int i=-std::min(x,y);i<m-std::min(x,y);i++)
 	{
-		rCount = (BoardMap[x + i][y + i] == _color ? rCount + 1 : 0);//主对角线方向
+		rCount =(BoardMap[x + i][y + i] == _color ? rCount + 1 : 0);//主对角线方向
+		if(rCount >= 5)
+		{
+			return true;//游戏已经结束
+		}
 	}
 	int imax = n + (x - y) - 1 - std::min(x, GRID_NUM - 1 - y);
 	int jmax = n - imax;
 	for (int i = -imax; i<jmax; i++)
 	{
 		lCount = (BoardMap[x - i][y + i] == _color ? lCount + 1 : 0);//次对角线方向
+		if (lCount >= 5)
+		{
+			return true;//游戏已经结束
+		}
 	}
-	if(vCount >=5||hCount>=5||lCount>=5||rCount>=5)
-	{
-		return true;//游戏已经结束
-	}
-	else
-	{
-		return false;//游戏还没有结束
-	}
+	return false;//游戏还没有结束
 }
 /*
  * 相应AI计算完毕
