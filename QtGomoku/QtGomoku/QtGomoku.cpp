@@ -3,7 +3,6 @@
 #include <QPointF>
 #include <csignal>
 #include <qDebug>
-#include "Alpha-Beta.h"
 #include <QMessageBox>
 #include <QFile>
 
@@ -122,6 +121,7 @@ void QtGomoku::PutDownStone(int x, int y)
 			QString temp = QStringLiteral("AI:  x:"); temp.append(QString::fromStdString(std::to_string(x))); temp.append(",y:"); temp.append(QString::fromStdString(std::to_string(y)));
 			ui.listWidget_History->addItem(temp);
 		}
+		ui.listWidget_History->scrollToBottom();
 		qpi->setPos(QPoint(x * 40, y * 40));
 		m_scene->addItem(qpi);
 		if (isGameOver(x, y) == true)

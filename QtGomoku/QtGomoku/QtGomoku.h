@@ -4,7 +4,6 @@
 #include "ui_QtGomoku.h"
 #include "BoardScene.h"
 #include "StaticDefinition.h"
-#include "Alpha-Beta.h"
 #include "Robot.h"
 
 

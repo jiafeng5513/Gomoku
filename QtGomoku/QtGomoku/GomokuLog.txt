@@ -11952,3 +11952,156 @@ Debug: OnAiComplete is running...
 Warning: libpng warning: iCCP: known incorrect sRGB profile
 Debug: emit IsTimeForAiToCalculate, human pos:( 8 , 8 )
 Debug: ======begin to Search by alpha beta======
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 7 , 7 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 96
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 8 , 6 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 126
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 9 , 7 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 82
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 9 , 5 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 110
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 4 , 8 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 111
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 10 , 4 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 56
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 6 , 5 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 95
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 9 , 6 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 129
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 9 , 3 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 69
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 10 , 6 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 101
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 8 , 8 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 86
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 11 , 4 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 142
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 2 , 2 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 48
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 2 , 3 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 62
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 3 , 3 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 80
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 4 , 3 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 65
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 4 , 4 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 79
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 5 , 5 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 51
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 3 , 6 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 67
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 3 , 3 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 96
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 6 , 4 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 83
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 5 , 2 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 37
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 8 , 1 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 52
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 7 , 5 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 99
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 10 , 7 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 98
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 10 , 6 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 53
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 2 , 2 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 16
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 4 , 2 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 33
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 5 , 3 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 18
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 8 , 4 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 95
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 7 , 6 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 81
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 2 , 3 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 46
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 2 , 1 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 2
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 2 , 4 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 77
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 1 , 5 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 20
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 0 , 6 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 1
+Debug: OnAiComplete is running...
