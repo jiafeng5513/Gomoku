@@ -21,7 +21,6 @@
 
 ### 工程说明
 <br>CsharpGomoku:遗传算法,c#
-<br>FiveStone:C#
 <br>QtGomoku:α-β剪枝,C++,Qt
 <br>XqWizardLight-Win32:象棋小巫师,α-β剪枝,C++
 <br>UnityGomoku:unity3D
