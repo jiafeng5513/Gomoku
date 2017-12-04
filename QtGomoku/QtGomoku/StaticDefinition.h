@@ -80,7 +80,7 @@ typedef struct _stonemove
 
 #define MATE_VALUE 100000/*最大分数*/
 #define Max_Level 4		 /*最大搜索深度*/
-#define LIMIT_DEPTH 4   /*迭代加深最大深度*/
+#define LIMIT_DEPTH 32   /*迭代加深最大深度*/
 #define ADVANCED_VALUE 3 /*执黑先行奖励*/
 //位置重要性价值表,此表从中间向外,越往外价值越低
 const int PosValue[GRID_COUNT] =

@@ -1,5 +1,6 @@
 #include "PositionStruct.h"
 #include <cstring>
+#include <qDebug>
 
 void PositionStruct::Startup(void)
 {
@@ -62,7 +63,7 @@ int PositionStruct::Evaluate()
 	{
 		for (int j=0;j<GRID_NUM;j++)
 		{
-			position[i][j] = ucpcSquares[i*GRID_NUM + j];
+			position[i][j] = ucpcSquares[j*15+i];
 		}
 	}
 	memset(TypeRecord, TOBEANALSIS, GRID_COUNT * 4 * 4);
@@ -139,6 +140,8 @@ int PositionStruct::Evaluate()
 	int _ourScore = 0, _counterScore = 0;//我方评分,对方评分
 	Color _ourSide = sdPlayer==0?black:white;//我方颜色
 	Color _counterSide = (_ourSide == white ? black : white);//对方颜色
+	//Color _ourSide = white;
+	//Color _counterSide = black;
 	/*
 	*必胜/必败只有两种情况:
 	* 1.连五
@@ -267,7 +270,7 @@ int PositionStruct::Evaluate()
 
 		}
 	}
-
+	//qDebug() << "_ourScore - _counterScore" << _ourScore - _counterScore;
 	return _ourScore - _counterScore;
 
 	//=============================================================================
@@ -294,15 +297,22 @@ void PositionStruct::UndoMakeMove(int pos)
 /*
  * 生成所有走法,将所有可行的落子点放在mvs里面,返回可行解个数
  */
-int PositionStruct::GenerateMoves(int* mvs) const
+int PositionStruct::GenerateMoves(int* mvs) 
 {
+	/*
+	 * 只搜索有棋子范围的3格子邻域
+	 */
 	int j = 0;
 	for (int i=0;i<GRID_COUNT;i++)
 	{
-		if (ucpcSquares[i] == -1)
+		if (ucpcSquares[i] == -1)//这是一个空格
 		{
-			mvs[j] = i;
-			j++;
+			if(NeighborSum(i)>-25)//以这个格子为中心的5×5范围内有任何一方的棋子
+			{
+				mvs[j] = i;
+				j++;				
+			}
+
 		}
 	}
 	return j;
@@ -322,11 +332,44 @@ bool PositionStruct::LegalMove(int pos) const
 	}
 	
 }
+/*
+ *求某棋子的5*5邻域和
+ */
+int PositionStruct::NeighborSum(int pos)
+{
+	int sum = 0;
+	int y = pos / GRID_NUM;
+	int x = pos - y*GRID_NUM;
+
+	int X[5];
+	int Y[5];
+	int n = 0;
+	for (int i=-2;i<3;i++)
+	{
+		X[n] = x + i;
+		Y[n] = y + i;
+		n++;
+	}
+	for (int i=0;i<5;i++)
+	{
+		for(int j=0;j<5;j++)
+		{
+			if(X[i]>=0&&Y[j]>=0 && X[i] <= 14 && Y[j] <= 14)
+			{
+				sum += ucpcSquares[Y[j] * 15 + X[i]];
+			}else
+			{
+				sum += -1;
+			}
+		}
+	}
+	return sum;
+}
 
 int PositionStruct::AnalysisLine(int * position, int GridNum, int StonePos)
 {
-	unsigned char StoneType;
-	unsigned char AnalyLine[30];
+	int StoneType;
+	int AnalyLine[30];
 	int nAnalyPos;
 	int LeftEdge, RightEdge;
 	int LeftRange, RightRange;
@@ -334,14 +377,14 @@ int PositionStruct::AnalysisLine(int * position, int GridNum, int StonePos)
 	if (GridNum<5)
 	{
 		//数组长度小于5没有意义
-		memset(m_LineRecord, ANALSISED, GridNum);
+		memset(m_LineRecord, ANALSISED, sizeof(int)*GridNum);
 		return 0;
 	}
 	nAnalyPos = StonePos;
-	memset(m_LineRecord, TOBEANALSIS, 30);
-	memset(AnalyLine, 0x0F, 30);
+	memset(m_LineRecord, TOBEANALSIS, sizeof(int) * 30);
+	memset(AnalyLine, 0, sizeof(int) * 30);
 	//将传入数组装入AnalyLine;
-	memcpy(&AnalyLine, position, GridNum);
+	memcpy(&AnalyLine, position, GridNum*sizeof(int));
 	GridNum--;
 	StoneType = AnalyLine[nAnalyPos];
 	LeftEdge = nAnalyPos;

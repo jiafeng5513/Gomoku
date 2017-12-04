@@ -5,6 +5,8 @@
 #include <qDebug>
 #include "Alpha-Beta.h"
 #include <QMessageBox>
+#include <QFile>
+
 
 /*
  * 构造和初始化
@@ -35,6 +37,7 @@ QtGomoku::QtGomoku(QWidget *parent)
 	robot = new Robot();
 	connect(this, SIGNAL(IsTimeForAiToCalculate(POINT*)), robot, SLOT(getAiResponse(POINT*)), Qt::QueuedConnection);
 	connect(robot, SIGNAL(AIComplete(POINT*)), this, SLOT(OnAiComplete(POINT*)), Qt::QueuedConnection);
+	
 }
 /*
  * 鼠标在棋盘上空释放
@@ -51,6 +54,7 @@ void QtGomoku::OnMouseReleaseOnBoardSense(QPoint* pos)
 		_humanPos->x = qx;
 		_humanPos->y = qy;
 		emit IsTimeForAiToCalculate(_humanPos);
+		qDebug() << "emit IsTimeForAiToCalculate, human pos:("<< qx << ","<<qy<<")";
 		ui.statusBar->showMessage(QStringLiteral("AI正在计算..."));
 	}
 }

@@ -18,10 +18,10 @@ struct PositionStruct {
 	int Evaluate(void);		            // 估值函数
 	void MakeMove(int mv);						// 走一步棋
 	void UndoMakeMove(int mv);					// 撤销走一步棋
-	int GenerateMoves(int *mvs) const;          // 生成所有走法
+	int GenerateMoves(int *mvs) ;          // 生成所有走法
 	bool LegalMove(int mv) const;               // 判断走法是否合理
 
-
+	int NeighborSum(int pos);					//求某棋子的7*7邻域和
 	int AnalysisLine(int* position, int GridNum, int StonePos);
 	int AnalysisSubDiagonal(int position[][GRID_NUM], int i, int j);
 	int AnalysisMainDiagonal(int position[][GRID_NUM], int i, int j);
