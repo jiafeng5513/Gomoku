@@ -9,7 +9,7 @@
 
 ### AI算法
 <br>α-β剪枝
-<br>置换表,历史值启发,迭代增量
+<br>置换表,历史值启发,迭代增量,空步裁剪,VCT/VCF联合攻击
 
 ### 参考
 1.[基于α-β剪枝算法的智能五子棋](http://blog.csdn.net/cjianwyr/article/details/54911444)<br /> 
