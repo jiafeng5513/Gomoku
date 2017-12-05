@@ -1,8 +1,8 @@
-#include "Robot.h"
+#include "AlphaBetaRobot.h"
 #include <qDebug>
 
 
-Robot::Robot()
+AlphaBetaRobot::AlphaBetaRobot()
 {
 	situation.Startup();
 	for (int i=0;i<GRID_COUNT;i++)
@@ -12,13 +12,13 @@ Robot::Robot()
 }
 
 
-Robot::~Robot()
+AlphaBetaRobot::~AlphaBetaRobot()
 {
 }
 
 
 // 超出边界(Fail-Soft)的Alpha-Beta搜索过程
-int Robot::SearchFull(int vlAlpha, int vlBeta, int nDepth) {
+int AlphaBetaRobot::SearchFull(int vlAlpha, int vlBeta, int nDepth) {
 	//qDebug() << "---------->(" << vlAlpha << "," << vlBeta << "," << nDepth << ")<----------" << "call SearchFull";
 	int pcCaptured;
 	int vl, vlBest, mvBest;
@@ -86,14 +86,14 @@ int Robot::SearchFull(int vlAlpha, int vlBeta, int nDepth) {
 }
 
 // 迭代加深搜索过程
-void Robot::SearchMain(void) {
+void AlphaBetaRobot::SearchMain(void) {
 	int i, t, vl;
 
 	// 初始化
 	memset(Search.nHistoryTable, 0, 225 * sizeof(int)); // 清空历史表
 	t = clock();       // 初始化定时器
 	situation.nDistance = 0; // 初始步数
-	qDebug() << "======begin to Search by alpha beta======";
+	//qDebug() << "======begin to Search by alpha beta======";
 	//SearchFull(-100000, 100000, 4);
 							 // 迭代加深过程
 	for (i = 1; i <= LIMIT_DEPTH; i++) {
@@ -109,7 +109,7 @@ void Robot::SearchMain(void) {
 	}   // 深度耗尽终止
 }
 
-void Robot::getAiResponse(POINT * playerPos)
+void AlphaBetaRobot::getAiResponse(POINT * playerPos)
 {
 	situation.MakeMove(playerPos->y*GRID_NUM + playerPos->x);
 	//situation.ucpcSquares[playerPos->x*GRID_NUM + playerPos->y] = 0;//玩家默认落黑子

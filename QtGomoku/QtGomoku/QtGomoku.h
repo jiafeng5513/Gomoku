@@ -4,7 +4,7 @@
 #include "ui_QtGomoku.h"
 #include "BoardScene.h"
 #include "StaticDefinition.h"
-#include "Robot.h"
+#include "AlphaBetaRobot.h"
 
 
 class QtGomoku : public QMainWindow
@@ -19,8 +19,11 @@ private:
 	BoardScene * m_scene;
 	QPixmap * WhiteStone;
 	QPixmap * BlackStone;
+	QPixmap * MarkForLastStep;
+	QGraphicsItem * Mark;
+	QGraphicsTextItem *txtitem;
 	//AiAgent *m_ai;
-	Robot * robot;
+	AlphaBetaRobot * robot;
 	int Count;					//即将落下的棋子是第几个
 public:
 	Color HumanColor = black;	//人类执何种颜色棋子
@@ -45,8 +48,6 @@ public slots:
 	void OnCheckedHumanWhite();				     //单选:玩家执白
 	void OnCheckedEnableForbidden();			 //单选:启动禁手
 	void OnCheckedUnableForbidden();			 //单选:关闭禁手
-	void OnCheckedSoundOn();					 //单选:开启声音
-	void OnCheckedSoundOff();					 //单选:关闭声音
 	void OnCheckedPVE();						 //单选:人机对战
 	void OnCheckedPVP();						 //单选:人人对战
 };

@@ -15,7 +15,7 @@ QtGomoku::QtGomoku(QWidget *parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
-	setFixedSize(this->width(), this->height());  //这种最好。
+	setFixedSize(this->width(), this->height());  //禁止调整大小
 	m_scene = new BoardScene(ui.BoardView);
 	connect(m_scene, SIGNAL(BoardSenseMouseRelease(QPoint*)), this, SLOT(OnMouseReleaseOnBoardSense(QPoint*)));
 	m_scene->setSceneRect(0, 0
@@ -25,6 +25,8 @@ QtGomoku::QtGomoku(QWidget *parent)
 
 	WhiteStone = new QPixmap(":/QtGomoku/Resources/white.png");
 	BlackStone = new QPixmap(":/QtGomoku/Resources/black.png");
+	MarkForLastStep = new QPixmap(":/QtGomoku/Resources/kh.png");
+	Mark= new QGraphicsPixmapItem(*MarkForLastStep);
 	for(int i=0;i<GRID_NUM;i++)
 	{
 		for (int j=0;j<GRID_NUM;j++)
@@ -32,10 +34,7 @@ QtGomoku::QtGomoku(QWidget *parent)
 			BoardMap[i][j] = space;
 		}
 	}
-	//m_ai = new AiAgent();
-	//connect(this, SIGNAL(IsTimeForAiToCalculate(POINT*)), m_ai, SLOT(GetAiAction(POINT*)));
-	//connect(m_ai, SIGNAL(AIComplete(POINT*)), this, SLOT(OnAiComplete(POINT*)));
-	robot = new Robot();
+	robot = new AlphaBetaRobot();
 	connect(this, SIGNAL(IsTimeForAiToCalculate(POINT*)), robot, SLOT(getAiResponse(POINT*)), Qt::QueuedConnection);
 	connect(robot, SIGNAL(AIComplete(POINT*)), this, SLOT(OnAiComplete(POINT*)), Qt::QueuedConnection);
 	Count = 1;
@@ -56,7 +55,7 @@ void QtGomoku::OnMouseReleaseOnBoardSense(QPoint* pos)
 		_humanPos->y = qy;
 		if(isGameOver()==true)//游戏不能继续,不通知AI,禁用该函数禁止玩家继续落子
 		{
-			CurrentTurn == GameOver;//禁用该函数
+			CurrentTurn = GameOver;//禁用该函数
 			//玩家胜利
 			QMessageBox::information(this, QStringLiteral("恭喜"), QStringLiteral("您打败了AI!"));
 		}
@@ -114,8 +113,11 @@ void QtGomoku::PutDownStone(int x, int y)
 		return;
 	}
 	//这个位置是空的
+	m_scene->removeItem(Mark);
 	QGraphicsPixmapItem *qpi;
-	QGraphicsTextItem *txtitem = new QGraphicsTextItem(QString::fromStdString(std::to_string(Count)));
+	QString temp = QString::number(Count, 10);  
+	/*QGraphicsTextItem **/txtitem = new QGraphicsTextItem(temp);
+	
 	txtitem->setFont(QFont("Microsoft YaHei", 12, QFont::Normal));
 	if(CurrentTurn == Human)//人类玩家下棋
 	{
@@ -135,12 +137,17 @@ void QtGomoku::PutDownStone(int x, int y)
 		ui.listWidget_History->addItem(temp);
 		txtitem->setDefaultTextColor((HumanColor == black ?  QColor(0, 0, 0): QColor(255, 255, 255)));
 	}
+	//放棋子
 	ui.listWidget_History->scrollToBottom();
 	qpi->setPos(QPoint(x * 40, y * 40));
 	m_scene->addItem(qpi);
+	//写字
 	int xaddin = (Count <= 9 && Count >= 0 ? 11 : (Count >= 10 && Count <= 99 ? 7.2 : 3.4));
 	txtitem->setPos(QPoint(x * 40+ xaddin, y * 40+5.5));//设置要放置的的位置//x轴偏置量需要按照位数计算
 	m_scene->addItem(txtitem);//添加item到scene上
+	//上一步标记
+	Mark->setPos(QPoint(x * 40, y * 40));
+	m_scene->addItem(Mark);
 	Count++;
 }
 /*
@@ -197,7 +204,7 @@ bool QtGomoku::isGameOver()
 	return false;//游戏还没有结束
 }
 /*
- * 相应AI计算完毕
+ * 响应AI计算完毕
  */
 void QtGomoku::OnAiComplete(POINT * pos)
 {
@@ -217,18 +224,43 @@ void QtGomoku::OnAiComplete(POINT * pos)
  */
 void QtGomoku::OnNewGame()
 {
+	//初始化
+	//清空棋盘数组
+	for (int i = 0; i<GRID_NUM; i++)
+	{
+		for (int j = 0; j<GRID_NUM; j++)
+		{
+			BoardMap[i][j] = space;
+		}
+	}
+	//清空棋盘
+	m_scene = new BoardScene(ui.BoardView);
+	connect(m_scene, SIGNAL(BoardSenseMouseRelease(QPoint*)), this, SLOT(OnMouseReleaseOnBoardSense(QPoint*)));
+	m_scene->setSceneRect(0, 0
+		, static_cast<QWidget *>(m_scene->parent())->size().width()
+		, static_cast<QWidget *>(m_scene->parent())->size().height());
+	ui.BoardView->setScene(m_scene);
+	//AI初始化
+	robot = new AlphaBetaRobot();
+	//从第一步开始
+	Count = 1;
+	ui.listWidget_History->clear();
+	//测试:人类开始下棋
+	CurrentTurn = Human;
 }
 /*
  * 按键:悔棋
  */
 void QtGomoku::OnUndo()
 {
+
 }
 /*
  * 按键:结束游戏
  */
 void QtGomoku::OnStopGame()
 {
+
 }
 /*
  * 按键:帮助
@@ -258,18 +290,6 @@ void QtGomoku::OnCheckedEnableForbidden()
  * 单选:关闭禁手
  */
 void QtGomoku::OnCheckedUnableForbidden()
-{
-}
-/*
- * 单选:开启声音
- */
-void QtGomoku::OnCheckedSoundOn()
-{
-}
-/*
- * 单选:关闭声音
- */
-void QtGomoku::OnCheckedSoundOff()
 {
 }
 /*

@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>959</width>
-    <height>674</height>
+    <width>858</width>
+    <height>676</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -20,7 +20,14 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>QtGomoku</string>
+   <string>五子棋</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="QtGomoku.qrc">
+    <normaloff>:/QtGomoku/Resources/Window.ico</normaloff>:/QtGomoku/Resources/Window.ico</iconset>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
   </property>
   <property name="styleSheet">
    <string notr="true">background-image: url(:/QtGomoku/Resources/bg.png);</string>
@@ -50,8 +57,8 @@
      <rect>
       <x>620</x>
       <y>10</y>
-      <width>331</width>
-      <height>351</height>
+      <width>231</width>
+      <height>321</height>
      </rect>
     </property>
     <property name="title">
@@ -67,23 +74,16 @@
     <property name="geometry">
      <rect>
       <x>620</x>
-      <y>370</y>
-      <width>331</width>
-      <height>161</height>
+      <y>340</y>
+      <width>231</width>
+      <height>181</height>
      </rect>
     </property>
     <property name="title">
      <string>设置</string>
     </property>
     <layout class="QGridLayout" name="gridLayout_2">
-     <item row="0" column="0">
-      <widget class="QRadioButton" name="radioButton_HumanBlack">
-       <property name="text">
-        <string>玩家执黑</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0">
+     <item row="5" column="0">
       <widget class="QLabel" name="label_4">
        <property name="text">
         <string>AI等级:</string>
@@ -91,98 +91,77 @@
       </widget>
      </item>
      <item row="3" column="0">
-      <widget class="QLabel" name="label_3">
-       <property name="text">
-        <string>AI算法:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1" colspan="3">
-      <widget class="QComboBox" name="comboBox_AiAlgorithm"/>
-     </item>
-     <item row="4" column="1" colspan="3">
-      <widget class="QSlider" name="horizontalSlider_AiLevel">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QRadioButton" name="radioButton_HumanWhite">
-       <property name="text">
-        <string>玩家执白</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2">
-      <widget class="QRadioButton" name="radioButton_PVE">
-       <property name="text">
-        <string>人机对战</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="2">
-      <widget class="QRadioButton" name="radioButton_EnableForbidden">
-       <property name="text">
-        <string>有禁手</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="3">
-      <widget class="QRadioButton" name="radioButton_UnableForbidden">
-       <property name="text">
-        <string>无禁手</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QRadioButton" name="radioButton_SoundOn">
-       <property name="text">
-        <string>有声音</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QRadioButton" name="radioButton_SoundOff">
-       <property name="text">
-        <string>无声音</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
       <widget class="QPushButton" name="pushButton_NewGame">
        <property name="text">
         <string>新游戏</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="3">
-      <widget class="QRadioButton" name="radioButton_PVP">
+     <item row="1" column="1">
+      <widget class="QRadioButton" name="radioButton_HumanWhite">
        <property name="text">
-        <string>人人对战</string>
+        <string>玩家执白</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
+     <item row="1" column="0">
+      <widget class="QRadioButton" name="radioButton_HumanBlack">
+       <property name="text">
+        <string>玩家执黑</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
       <widget class="QPushButton" name="pushButton_Undo">
        <property name="text">
         <string>悔棋</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="2">
+     <item row="4" column="1">
+      <widget class="QPushButton" name="pushButton_Help">
+       <property name="text">
+        <string>帮助</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QRadioButton" name="radioButton_UnableForbidden">
+       <property name="text">
+        <string>无禁手</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QRadioButton" name="radioButton_PVE">
+       <property name="text">
+        <string>人机对战</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
       <widget class="QPushButton" name="pushButton_StopGame">
        <property name="text">
         <string>结束游戏</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="3">
-      <widget class="QPushButton" name="pushButton_Help">
+     <item row="0" column="1">
+      <widget class="QRadioButton" name="radioButton_PVP">
        <property name="text">
-        <string>帮助</string>
+        <string>人人对战</string>
        </property>
       </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QRadioButton" name="radioButton_EnableForbidden">
+       <property name="text">
+        <string>有禁手</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QSpinBox" name="spinBox"/>
      </item>
     </layout>
    </widget>
@@ -190,84 +169,62 @@
     <property name="geometry">
      <rect>
       <x>620</x>
-      <y>540</y>
-      <width>331</width>
-      <height>71</height>
+      <y>530</y>
+      <width>231</width>
+      <height>81</height>
      </rect>
     </property>
     <property name="title">
      <string>玩家信息</string>
     </property>
-    <widget class="QLabel" name="label">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>20</y>
-       <width>41</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-image: url(:/QtGomoku/Resources/black.png);</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_2">
-     <property name="geometry">
-      <rect>
-       <x>210</x>
-       <y>20</y>
-       <width>41</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-image: url(:/QtGomoku/Resources/white.png);</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_BlackOwner">
-     <property name="geometry">
-      <rect>
-       <x>70</x>
-       <y>20</y>
-       <width>48</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>微软雅黑 Light</family>
-       <pointsize>18</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>玩家</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_WhiteOwner">
-     <property name="geometry">
-      <rect>
-       <x>260</x>
-       <y>20</y>
-       <width>48</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>微软雅黑 Light</family>
-       <pointsize>18</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>电脑</string>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="styleSheet">
+        <string notr="true">border-image: url(:/QtGomoku/Resources/black.png);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_BlackOwner">
+       <property name="font">
+        <font>
+         <family>微软雅黑 Light</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>玩家</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="styleSheet">
+        <string notr="true">border-image: url(:/QtGomoku/Resources/white.png);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_WhiteOwner">
+       <property name="font">
+        <font>
+         <family>微软雅黑 Light</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>电脑</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -275,7 +232,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>959</width>
+     <width>858</width>
      <height>23</height>
     </rect>
    </property>
@@ -335,5 +292,25 @@
  <resources>
   <include location="QtGomoku.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton_NewGame</sender>
+   <signal>clicked()</signal>
+   <receiver>QtGomokuClass</receiver>
+   <slot>OnNewGame()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>661</x>
+     <y>483</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>855</x>
+     <y>466</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>OnNewGame()</slot>
+ </slots>
 </ui>

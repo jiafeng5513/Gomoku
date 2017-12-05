@@ -24,13 +24,13 @@ static int CompareHistory(const void *lpmv1, const void *lpmv2) {
 
 
 
-class Robot:public QObject
+class AlphaBetaRobot:public QObject
 {
 	Q_OBJECT
 
 public:
-	Robot();
-	~Robot();
+	AlphaBetaRobot();
+	~AlphaBetaRobot();
 	
 	void SearchMain(void);
 	int SearchFull(int vlAlpha, int vlBeta, int nDepth);

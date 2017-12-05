@@ -7,7 +7,7 @@
 /*
  * 实现日志功能
  * 
- * 注释掉的部分能记录更多的信息单数更耗时
+ * 注释掉的部分能记录更多的信息但是更耗时
  */
 void customMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {

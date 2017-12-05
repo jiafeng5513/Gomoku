@@ -54,17 +54,17 @@
     <ClCompile Include="BoardScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Robot.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="PositionStruct.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_Robot.cpp">
+    <ClCompile Include="GeneratedFiles\Debug\moc_AlphaBetaRobot.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_Robot.cpp">
+    <ClCompile Include="GeneratedFiles\Release\moc_AlphaBetaRobot.cpp">
       <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AlphaBetaRobot.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -80,7 +80,7 @@
     <CustomBuild Include="BoardScene.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="Robot.h">
+    <CustomBuild Include="AlphaBetaRobot.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
