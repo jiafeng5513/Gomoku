@@ -12105,3 +12105,371 @@ Debug: emit IsTimeForAiToCalculate, human pos:( 0 , 6 )
 Debug: ======begin to Search by alpha beta======
 Debug: ai respone in : 1
 Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 7 , 7 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 96
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 0 , 0 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 98
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 7 , 7 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 96
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 7 , 7 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 96
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 7 , 7 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 96
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 7 , 7 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 96
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 7 , 7 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 96
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 7 , 7 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 96
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 7 , 7 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 96
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 8 , 7 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 112
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 8 , 7 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 112
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 7 , 7 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 96
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 7 , 6 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 113
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 7 , 7 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 96
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 7 , 7 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 96
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 8 , 7 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 112
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 7 , 7 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 96
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 7 , 7 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 96
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 8 , 6 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 112
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 8 , 6 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 112
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 8 , 7 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 112
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 8 , 7 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 112
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 8 , 7 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 112
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 8 , 7 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 112
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 7 , 7 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 96
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 8 , 7 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 112
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 8 , 7 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 112
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 8 , 7 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 112
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 8 , 6 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 128
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 7 , 8 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 96
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 9 , 9 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 82
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 9 , 6 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 141
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 9 , 8 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 114
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 10 , 5 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 71
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 10 , 6 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 101
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 10 , 7 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 130
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 10 , 4 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 55
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 8 , 5 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 67
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 8 , 4 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 53
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 11 , 8 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 147
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 8 , 9 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 52
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 7 , 6 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 81
+Debug: OnAiComplete is running...
+Debug: emit IsTimeForAiToCalculate, human pos:( 9 , 2 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 54
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 11 , 3 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 51
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: emit IsTimeForAiToCalculate, human pos:( 7 , 7 )
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 96
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 96
+Debug: OnAiComplete is running...
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 98
+Debug: OnAiComplete is running...
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 82
+Debug: OnAiComplete is running...
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 68
+Debug: OnAiComplete is running...
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 113
+Debug: OnAiComplete is running...
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 66
+Debug: OnAiComplete is running...
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 50
+Debug: OnAiComplete is running...
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 80
+Debug: OnAiComplete is running...
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 65
+Debug: OnAiComplete is running...
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 95
+Debug: OnAiComplete is running...
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 51
+Debug: OnAiComplete is running...
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 110
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 97
+Debug: OnAiComplete is running...
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 111
+Debug: OnAiComplete is running...
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 98
+Debug: OnAiComplete is running...
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 127
+Debug: OnAiComplete is running...
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 67
+Debug: OnAiComplete is running...
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 147
+Debug: OnAiComplete is running...
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 95
+Debug: OnAiComplete is running...
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 96
+Debug: OnAiComplete is running...
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 81
+Debug: OnAiComplete is running...
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 109
+Debug: OnAiComplete is running...
+Debug: ======begin to Search by alpha beta======
+Debug: ai respone in : 123
+Debug: OnAiComplete is running...

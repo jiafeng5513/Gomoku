@@ -11,7 +11,7 @@
 
 #include "MyFiveDoc.h"
 #include "MyFiveView.h"
-#include "RView.h"
+#include "AboutDlg.h"
 
 class CMainFrame : public CFrameWnd
 {
@@ -26,7 +26,7 @@ public:
 	CSplitterWnd m_splitter; //
 	//保存这两个类的对象指针，用来通信
 	CMyFiveView *m_MyFiveView;
-	RView *m_RView;
+	AboutDlg * m_About;
 
 // Operations
 public:

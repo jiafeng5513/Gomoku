@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>961</width>
-    <height>690</height>
+    <width>959</width>
+    <height>674</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -69,39 +69,130 @@
       <x>620</x>
       <y>370</y>
       <width>331</width>
-      <height>111</height>
+      <height>161</height>
      </rect>
     </property>
     <property name="title">
-     <string>坐标</string>
+     <string>设置</string>
     </property>
-    <widget class="QLabel" name="label_Coordinate">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>30</y>
-       <width>271</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Arial</family>
-       <pointsize>30</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>X:15   Y:15</string>
-     </property>
-    </widget>
+    <layout class="QGridLayout" name="gridLayout_2">
+     <item row="0" column="0">
+      <widget class="QRadioButton" name="radioButton_HumanBlack">
+       <property name="text">
+        <string>玩家执黑</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>AI等级:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>AI算法:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1" colspan="3">
+      <widget class="QComboBox" name="comboBox_AiAlgorithm"/>
+     </item>
+     <item row="4" column="1" colspan="3">
+      <widget class="QSlider" name="horizontalSlider_AiLevel">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QRadioButton" name="radioButton_HumanWhite">
+       <property name="text">
+        <string>玩家执白</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QRadioButton" name="radioButton_PVE">
+       <property name="text">
+        <string>人机对战</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QRadioButton" name="radioButton_EnableForbidden">
+       <property name="text">
+        <string>有禁手</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="3">
+      <widget class="QRadioButton" name="radioButton_UnableForbidden">
+       <property name="text">
+        <string>无禁手</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QRadioButton" name="radioButton_SoundOn">
+       <property name="text">
+        <string>有声音</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QRadioButton" name="radioButton_SoundOff">
+       <property name="text">
+        <string>无声音</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QPushButton" name="pushButton_NewGame">
+       <property name="text">
+        <string>新游戏</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="3">
+      <widget class="QRadioButton" name="radioButton_PVP">
+       <property name="text">
+        <string>人人对战</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QPushButton" name="pushButton_Undo">
+       <property name="text">
+        <string>悔棋</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="QPushButton" name="pushButton_StopGame">
+       <property name="text">
+        <string>结束游戏</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="3">
+      <widget class="QPushButton" name="pushButton_Help">
+       <property name="text">
+        <string>帮助</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
    <widget class="QGroupBox" name="groupBox_3">
     <property name="geometry">
      <rect>
       <x>620</x>
-      <y>490</y>
+      <y>540</y>
       <width>331</width>
-      <height>121</height>
+      <height>71</height>
      </rect>
     </property>
     <property name="title">
@@ -110,10 +201,10 @@
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>60</x>
-       <y>30</y>
-       <width>40</width>
-       <height>40</height>
+       <x>20</x>
+       <y>20</y>
+       <width>41</width>
+       <height>41</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -126,10 +217,10 @@
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
-       <x>230</x>
-       <y>30</y>
-       <width>40</width>
-       <height>40</height>
+       <x>210</x>
+       <y>20</y>
+       <width>41</width>
+       <height>41</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -142,9 +233,9 @@
     <widget class="QLabel" name="label_BlackOwner">
      <property name="geometry">
       <rect>
-       <x>50</x>
-       <y>80</y>
-       <width>61</width>
+       <x>70</x>
+       <y>20</y>
+       <width>48</width>
        <height>31</height>
       </rect>
      </property>
@@ -161,9 +252,9 @@
     <widget class="QLabel" name="label_WhiteOwner">
      <property name="geometry">
       <rect>
-       <x>220</x>
-       <y>80</y>
-       <width>71</width>
+       <x>260</x>
+       <y>20</y>
+       <width>48</width>
        <height>31</height>
       </rect>
      </property>
@@ -184,32 +275,16 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>961</width>
-     <height>26</height>
+     <width>959</width>
+     <height>23</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menu">
-    <property name="title">
-     <string>设置</string>
-    </property>
-    <widget class="QMenu" name="menu_3">
-     <property name="title">
-      <string>规则</string>
-     </property>
-     <addaction name="action_4"/>
-     <addaction name="action_5"/>
-    </widget>
-    <addaction name="actionAI"/>
-    <addaction name="action_2"/>
-    <addaction name="menu_3"/>
-   </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
      <string>帮助</string>
     </property>
     <addaction name="action"/>
    </widget>
-   <addaction name="menu"/>
    <addaction name="menu_2"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">

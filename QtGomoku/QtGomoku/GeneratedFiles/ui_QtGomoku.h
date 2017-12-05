@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
@@ -22,6 +23,9 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QRadioButton>
+#include <QtWidgets/QSlider>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
@@ -42,15 +46,29 @@ public:
     QGridLayout *gridLayout;
     QListWidget *listWidget_History;
     QGroupBox *groupBox_2;
-    QLabel *label_Coordinate;
+    QGridLayout *gridLayout_2;
+    QRadioButton *radioButton_HumanBlack;
+    QLabel *label_4;
+    QLabel *label_3;
+    QComboBox *comboBox_AiAlgorithm;
+    QSlider *horizontalSlider_AiLevel;
+    QRadioButton *radioButton_HumanWhite;
+    QRadioButton *radioButton_PVE;
+    QRadioButton *radioButton_EnableForbidden;
+    QRadioButton *radioButton_UnableForbidden;
+    QRadioButton *radioButton_SoundOn;
+    QRadioButton *radioButton_SoundOff;
+    QPushButton *pushButton_NewGame;
+    QRadioButton *radioButton_PVP;
+    QPushButton *pushButton_Undo;
+    QPushButton *pushButton_StopGame;
+    QPushButton *pushButton_Help;
     QGroupBox *groupBox_3;
     QLabel *label;
     QLabel *label_2;
     QLabel *label_BlackOwner;
     QLabel *label_WhiteOwner;
     QMenuBar *menuBar;
-    QMenu *menu;
-    QMenu *menu_3;
     QMenu *menu_2;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -60,7 +78,7 @@ public:
         if (QtGomokuClass->objectName().isEmpty())
             QtGomokuClass->setObjectName(QStringLiteral("QtGomokuClass"));
         QtGomokuClass->setEnabled(true);
-        QtGomokuClass->resize(961, 690);
+        QtGomokuClass->resize(959, 674);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -102,44 +120,118 @@ public:
 
         groupBox_2 = new QGroupBox(centralWidget);
         groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
-        groupBox_2->setGeometry(QRect(620, 370, 331, 111));
-        label_Coordinate = new QLabel(groupBox_2);
-        label_Coordinate->setObjectName(QStringLiteral("label_Coordinate"));
-        label_Coordinate->setGeometry(QRect(40, 30, 271, 51));
-        QFont font;
-        font.setFamily(QStringLiteral("Arial"));
-        font.setPointSize(30);
-        label_Coordinate->setFont(font);
+        groupBox_2->setGeometry(QRect(620, 370, 331, 161));
+        gridLayout_2 = new QGridLayout(groupBox_2);
+        gridLayout_2->setSpacing(6);
+        gridLayout_2->setContentsMargins(11, 11, 11, 11);
+        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
+        radioButton_HumanBlack = new QRadioButton(groupBox_2);
+        radioButton_HumanBlack->setObjectName(QStringLiteral("radioButton_HumanBlack"));
+
+        gridLayout_2->addWidget(radioButton_HumanBlack, 0, 0, 1, 1);
+
+        label_4 = new QLabel(groupBox_2);
+        label_4->setObjectName(QStringLiteral("label_4"));
+
+        gridLayout_2->addWidget(label_4, 4, 0, 1, 1);
+
+        label_3 = new QLabel(groupBox_2);
+        label_3->setObjectName(QStringLiteral("label_3"));
+
+        gridLayout_2->addWidget(label_3, 3, 0, 1, 1);
+
+        comboBox_AiAlgorithm = new QComboBox(groupBox_2);
+        comboBox_AiAlgorithm->setObjectName(QStringLiteral("comboBox_AiAlgorithm"));
+
+        gridLayout_2->addWidget(comboBox_AiAlgorithm, 3, 1, 1, 3);
+
+        horizontalSlider_AiLevel = new QSlider(groupBox_2);
+        horizontalSlider_AiLevel->setObjectName(QStringLiteral("horizontalSlider_AiLevel"));
+        horizontalSlider_AiLevel->setOrientation(Qt::Horizontal);
+
+        gridLayout_2->addWidget(horizontalSlider_AiLevel, 4, 1, 1, 3);
+
+        radioButton_HumanWhite = new QRadioButton(groupBox_2);
+        radioButton_HumanWhite->setObjectName(QStringLiteral("radioButton_HumanWhite"));
+
+        gridLayout_2->addWidget(radioButton_HumanWhite, 0, 1, 1, 1);
+
+        radioButton_PVE = new QRadioButton(groupBox_2);
+        radioButton_PVE->setObjectName(QStringLiteral("radioButton_PVE"));
+
+        gridLayout_2->addWidget(radioButton_PVE, 1, 2, 1, 1);
+
+        radioButton_EnableForbidden = new QRadioButton(groupBox_2);
+        radioButton_EnableForbidden->setObjectName(QStringLiteral("radioButton_EnableForbidden"));
+
+        gridLayout_2->addWidget(radioButton_EnableForbidden, 0, 2, 1, 1);
+
+        radioButton_UnableForbidden = new QRadioButton(groupBox_2);
+        radioButton_UnableForbidden->setObjectName(QStringLiteral("radioButton_UnableForbidden"));
+
+        gridLayout_2->addWidget(radioButton_UnableForbidden, 0, 3, 1, 1);
+
+        radioButton_SoundOn = new QRadioButton(groupBox_2);
+        radioButton_SoundOn->setObjectName(QStringLiteral("radioButton_SoundOn"));
+
+        gridLayout_2->addWidget(radioButton_SoundOn, 1, 0, 1, 1);
+
+        radioButton_SoundOff = new QRadioButton(groupBox_2);
+        radioButton_SoundOff->setObjectName(QStringLiteral("radioButton_SoundOff"));
+
+        gridLayout_2->addWidget(radioButton_SoundOff, 1, 1, 1, 1);
+
+        pushButton_NewGame = new QPushButton(groupBox_2);
+        pushButton_NewGame->setObjectName(QStringLiteral("pushButton_NewGame"));
+
+        gridLayout_2->addWidget(pushButton_NewGame, 2, 0, 1, 1);
+
+        radioButton_PVP = new QRadioButton(groupBox_2);
+        radioButton_PVP->setObjectName(QStringLiteral("radioButton_PVP"));
+
+        gridLayout_2->addWidget(radioButton_PVP, 1, 3, 1, 1);
+
+        pushButton_Undo = new QPushButton(groupBox_2);
+        pushButton_Undo->setObjectName(QStringLiteral("pushButton_Undo"));
+
+        gridLayout_2->addWidget(pushButton_Undo, 2, 1, 1, 1);
+
+        pushButton_StopGame = new QPushButton(groupBox_2);
+        pushButton_StopGame->setObjectName(QStringLiteral("pushButton_StopGame"));
+
+        gridLayout_2->addWidget(pushButton_StopGame, 2, 2, 1, 1);
+
+        pushButton_Help = new QPushButton(groupBox_2);
+        pushButton_Help->setObjectName(QStringLiteral("pushButton_Help"));
+
+        gridLayout_2->addWidget(pushButton_Help, 2, 3, 1, 1);
+
         groupBox_3 = new QGroupBox(centralWidget);
         groupBox_3->setObjectName(QStringLiteral("groupBox_3"));
-        groupBox_3->setGeometry(QRect(620, 490, 331, 121));
+        groupBox_3->setGeometry(QRect(620, 540, 331, 71));
         label = new QLabel(groupBox_3);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(60, 30, 40, 40));
+        label->setGeometry(QRect(20, 20, 41, 41));
         label->setStyleSheet(QStringLiteral("background-image: url(:/QtGomoku/Resources/black.png);"));
         label_2 = new QLabel(groupBox_3);
         label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setGeometry(QRect(230, 30, 40, 40));
+        label_2->setGeometry(QRect(210, 20, 41, 41));
         label_2->setStyleSheet(QStringLiteral("background-image: url(:/QtGomoku/Resources/white.png);"));
         label_BlackOwner = new QLabel(groupBox_3);
         label_BlackOwner->setObjectName(QStringLiteral("label_BlackOwner"));
-        label_BlackOwner->setGeometry(QRect(50, 80, 61, 31));
-        QFont font1;
-        font1.setFamily(QString::fromUtf8("\345\276\256\350\275\257\351\233\205\351\273\221 Light"));
-        font1.setPointSize(18);
-        label_BlackOwner->setFont(font1);
+        label_BlackOwner->setGeometry(QRect(70, 20, 48, 31));
+        QFont font;
+        font.setFamily(QString::fromUtf8("\345\276\256\350\275\257\351\233\205\351\273\221 Light"));
+        font.setPointSize(18);
+        label_BlackOwner->setFont(font);
         label_WhiteOwner = new QLabel(groupBox_3);
         label_WhiteOwner->setObjectName(QStringLiteral("label_WhiteOwner"));
-        label_WhiteOwner->setGeometry(QRect(220, 80, 71, 31));
-        label_WhiteOwner->setFont(font1);
+        label_WhiteOwner->setGeometry(QRect(260, 20, 48, 31));
+        label_WhiteOwner->setFont(font);
         QtGomokuClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(QtGomokuClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 961, 26));
-        menu = new QMenu(menuBar);
-        menu->setObjectName(QStringLiteral("menu"));
-        menu_3 = new QMenu(menu);
-        menu_3->setObjectName(QStringLiteral("menu_3"));
+        menuBar->setGeometry(QRect(0, 0, 959, 23));
         menu_2 = new QMenu(menuBar);
         menu_2->setObjectName(QStringLiteral("menu_2"));
         QtGomokuClass->setMenuBar(menuBar);
@@ -150,13 +242,7 @@ public:
         statusBar->setObjectName(QStringLiteral("statusBar"));
         QtGomokuClass->setStatusBar(statusBar);
 
-        menuBar->addAction(menu->menuAction());
         menuBar->addAction(menu_2->menuAction());
-        menu->addAction(actionAI);
-        menu->addAction(action_2);
-        menu->addAction(menu_3->menuAction());
-        menu_3->addAction(action_4);
-        menu_3->addAction(action_5);
         menu_2->addAction(action);
 
         retranslateUi(QtGomokuClass);
@@ -173,15 +259,26 @@ public:
         action_4->setText(QApplication::translate("QtGomokuClass", "\350\277\236\347\217\240", Q_NULLPTR));
         action_5->setText(QApplication::translate("QtGomokuClass", "\344\270\211\345\244\247\347\246\201\346\211\213", Q_NULLPTR));
         groupBox->setTitle(QApplication::translate("QtGomokuClass", "\350\220\275\345\255\220\350\256\260\345\275\225", Q_NULLPTR));
-        groupBox_2->setTitle(QApplication::translate("QtGomokuClass", "\345\235\220\346\240\207", Q_NULLPTR));
-        label_Coordinate->setText(QApplication::translate("QtGomokuClass", "X:15   Y:15", Q_NULLPTR));
+        groupBox_2->setTitle(QApplication::translate("QtGomokuClass", "\350\256\276\347\275\256", Q_NULLPTR));
+        radioButton_HumanBlack->setText(QApplication::translate("QtGomokuClass", "\347\216\251\345\256\266\346\211\247\351\273\221", Q_NULLPTR));
+        label_4->setText(QApplication::translate("QtGomokuClass", "AI\347\255\211\347\272\247:", Q_NULLPTR));
+        label_3->setText(QApplication::translate("QtGomokuClass", "AI\347\256\227\346\263\225:", Q_NULLPTR));
+        radioButton_HumanWhite->setText(QApplication::translate("QtGomokuClass", "\347\216\251\345\256\266\346\211\247\347\231\275", Q_NULLPTR));
+        radioButton_PVE->setText(QApplication::translate("QtGomokuClass", "\344\272\272\346\234\272\345\257\271\346\210\230", Q_NULLPTR));
+        radioButton_EnableForbidden->setText(QApplication::translate("QtGomokuClass", "\346\234\211\347\246\201\346\211\213", Q_NULLPTR));
+        radioButton_UnableForbidden->setText(QApplication::translate("QtGomokuClass", "\346\227\240\347\246\201\346\211\213", Q_NULLPTR));
+        radioButton_SoundOn->setText(QApplication::translate("QtGomokuClass", "\346\234\211\345\243\260\351\237\263", Q_NULLPTR));
+        radioButton_SoundOff->setText(QApplication::translate("QtGomokuClass", "\346\227\240\345\243\260\351\237\263", Q_NULLPTR));
+        pushButton_NewGame->setText(QApplication::translate("QtGomokuClass", "\346\226\260\346\270\270\346\210\217", Q_NULLPTR));
+        radioButton_PVP->setText(QApplication::translate("QtGomokuClass", "\344\272\272\344\272\272\345\257\271\346\210\230", Q_NULLPTR));
+        pushButton_Undo->setText(QApplication::translate("QtGomokuClass", "\346\202\224\346\243\213", Q_NULLPTR));
+        pushButton_StopGame->setText(QApplication::translate("QtGomokuClass", "\347\273\223\346\235\237\346\270\270\346\210\217", Q_NULLPTR));
+        pushButton_Help->setText(QApplication::translate("QtGomokuClass", "\345\270\256\345\212\251", Q_NULLPTR));
         groupBox_3->setTitle(QApplication::translate("QtGomokuClass", "\347\216\251\345\256\266\344\277\241\346\201\257", Q_NULLPTR));
         label->setText(QString());
         label_2->setText(QString());
         label_BlackOwner->setText(QApplication::translate("QtGomokuClass", "\347\216\251\345\256\266", Q_NULLPTR));
         label_WhiteOwner->setText(QApplication::translate("QtGomokuClass", "\347\224\265\350\204\221", Q_NULLPTR));
-        menu->setTitle(QApplication::translate("QtGomokuClass", "\350\256\276\347\275\256", Q_NULLPTR));
-        menu_3->setTitle(QApplication::translate("QtGomokuClass", "\350\247\204\345\210\231", Q_NULLPTR));
         menu_2->setTitle(QApplication::translate("QtGomokuClass", "\345\270\256\345\212\251", Q_NULLPTR));
     } // retranslateUi
 

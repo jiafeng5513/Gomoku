@@ -8,7 +8,6 @@
 
 #include "MyFiveDoc.h"
 #include "MyFiveView.h"
-#include "RView.h"
 #include "Splash.h"  //启动画面
 
 #ifdef _DEBUG
@@ -129,8 +128,8 @@ BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
 
 
 	//将 RView 连接到0行1列窗格
-	m_splitter.CreateView(0,1,RUNTIME_CLASS(RView),CSize(322,610),pContext);
-	m_RView = (RView*)m_splitter.GetPane(0,1);
+	m_splitter.CreateView(0, 1, RUNTIME_CLASS(CMyFiveView), CSize(533, 610), pContext);
+	//m_MyFiveView = (CMyFiveView*)m_splitter.GetPane(0, 1);
 	
 	return TRUE; //必须
 

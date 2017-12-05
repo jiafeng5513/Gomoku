@@ -1,11 +1,10 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
-// Used by MyFive.rc
+// Microsoft Visual C++ 生成的包含文件。
+// 供 MyFive.rc 使用
 //
 #define IDD_ABOUTBOX                    100
 #define IDR_MAINFRAME                   128
 #define IDR_MYFIVETYPE                  129
-#define IDD_RVIEW                       130
 #define IDB_board                       131
 #define IDB_black                       132
 #define IDB_white                       133
@@ -16,15 +15,6 @@
 #define IDB_SPLASH                      141
 #define IDD_Grade                       142
 #define IDC_hand                        145
-#define IDC_ChatContent                 1000
-#define IDC_LocalPort                   1001
-#define IDC_StartServer                 1002
-#define IDC_SrvPort                     1006
-#define IDC_NAME                        1007
-#define IDC_LINK                        1008
-#define IDC_SendMsg                     1009
-#define IDC_SEND                        1010
-#define IDC_IP                          1011
 #define IDC_black                       1013
 #define IDC_white                       1014
 #define IDC_haveForbid                  1015

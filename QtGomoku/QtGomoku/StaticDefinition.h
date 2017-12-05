@@ -15,7 +15,8 @@ enum Color
 enum Player
 {
 	Human = 0,
-	Ai = 1
+	Ai = 1,
+	GameOver = 2
 };
 
 enum ENTRY_TYPE

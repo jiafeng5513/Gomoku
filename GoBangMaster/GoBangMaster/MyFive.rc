@@ -1,4 +1,4 @@
-//Microsoft Developer Studio generated resource script.
+// Microsoft Visual C++ generated resource script.
 //
 #include "resource.h"
 
@@ -13,13 +13,11 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// Chinese (中国) resources
+// 中文(简体，中国) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
-#ifdef _WIN32
 LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
 #pragma code_page(936)
-#endif //_WIN32
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -27,18 +25,18 @@ LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
 // TEXTINCLUDE
 //
 
-1 TEXTINCLUDE DISCARDABLE 
+1 TEXTINCLUDE 
 BEGIN
     "resource.h\0"
 END
 
-2 TEXTINCLUDE DISCARDABLE 
+2 TEXTINCLUDE 
 BEGIN
     "#include ""afxres.h""\r\n"
     "\0"
 END
 
-3 TEXTINCLUDE DISCARDABLE 
+3 TEXTINCLUDE 
 BEGIN
     "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
     "#define _AFX_NO_OLE_RESOURCES\r\n"
@@ -67,26 +65,33 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDR_MAINFRAME           ICON    DISCARDABLE     "res\\MyFive.ico"
-IDR_MYFIVETYPE          ICON    DISCARDABLE     "res\\MyFiveDoc.ico"
+IDR_MAINFRAME           ICON                    "res\\MyFive.ico"
+
+IDR_MYFIVETYPE          ICON                    "res\\MyFiveDoc.ico"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // Bitmap
 //
 
-IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\Toolbar.bmp"
-IDB_board               BITMAP  DISCARDABLE     "res\\board.bmp"
-IDB_black               BITMAP  DISCARDABLE     "res\\black.bmp"
-IDB_white               BITMAP  DISCARDABLE     "res\\white.bmp"
-IDB_SPLASH              BITMAP  DISCARDABLE     "res\\Splsh16.bmp"
+IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+
+IDB_board               BITMAP                  "res\\board.bmp"
+
+IDB_black               BITMAP                  "res\\black.bmp"
+
+IDB_white               BITMAP                  "res\\white.bmp"
+
+IDB_SPLASH              BITMAP                  "res\\Splsh16.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // Toolbar
 //
 
-IDR_MAINFRAME TOOLBAR DISCARDABLE  16, 15
+IDR_MAINFRAME TOOLBAR 16, 15
 BEGIN
     BUTTON      ID_FILE_NEW
     BUTTON      ID_FILE_OPEN
@@ -107,22 +112,18 @@ END
 // Menu
 //
 
-IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+IDR_MAINFRAME MENU
 BEGIN
-    MENUITEM "开始游戏",                    ID_START
-    MENUITEM "设置",                        IDC_SET
+    MENUITEM "开始游戏",                        ID_START
+    MENUITEM "设置",                          IDC_SET
     POPUP "对战模式"
     BEGIN
-        MENUITEM "网络模式",                    ID_NetBattle
-        POPUP "单机模式"
-        BEGIN
-            MENUITEM "人人对战",                    ID_P2P, CHECKED
-            MENUITEM "人机对战",                    ID_P2C
-        END
+        MENUITEM "人机对战",                        ID_P2C
+        MENUITEM "人人对战",                        ID_P2P, CHECKED
     END
-    MENUITEM "悔棋",                        ID_Regret
-    MENUITEM "AI测试",                      ID_ComputerPlayChess
-    MENUITEM "关于",                        ID_About
+    MENUITEM "悔棋",                          ID_Regret
+    MENUITEM "AI测试",                        ID_ComputerPlayChess
+    MENUITEM "关于",                          ID_About
 END
 
 
@@ -131,7 +132,7 @@ END
 // Accelerator
 //
 
-IDR_MAINFRAME ACCELERATORS PRELOAD MOVEABLE PURE 
+IDR_MAINFRAME ACCELERATORS
 BEGIN
     "N",            ID_FILE_NEW,            VIRTKEY, CONTROL
     "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL
@@ -155,8 +156,8 @@ END
 // Dialog
 //
 
-IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 235, 55
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_ABOUTBOX DIALOG 0, 0, 235, 55
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "关于 MyFive"
 FONT 9, "宋体"
 BEGIN
@@ -166,72 +167,40 @@ BEGIN
     DEFPUSHBUTTON   "确定",IDOK,178,7,50,14,WS_GROUP
 END
 
-IDD_RVIEW DIALOGEX 0, 0, 171, 327
-STYLE DS_CENTER | WS_CHILD
-FONT 10, "宋体", 0, 0, 0x1
-BEGIN
-    EDITTEXT        IDC_LocalPort,26,221,34,14,ES_AUTOHSCROLL
-    PUSHBUTTON      "启动服务",IDC_StartServer,71,221,79,14
-    EDITTEXT        IDC_IP,51,241,99,14,ES_AUTOHSCROLL | WS_DISABLED
-    EDITTEXT        IDC_SrvPort,51,262,33,14,ES_AUTOHSCROLL | WS_DISABLED
-    EDITTEXT        IDC_NAME,117,262,33,14,ES_AUTOHSCROLL | WS_DISABLED
-    PUSHBUTTON      "连接",IDC_LINK,71,282,79,14,WS_DISABLED
-    EDITTEXT        IDC_SendMsg,0,306,112,14,ES_AUTOHSCROLL
-    DEFPUSHBUTTON   "发送",IDC_SEND,116,306,34,14
-    LTEXT           "端口：",IDC_STATIC,0,223,24,12
-    EDITTEXT        IDC_ChatContent,0,7,163,200,ES_MULTILINE | 
-                    ES_AUTOVSCROLL | ES_READONLY | WS_VSCROLL,
-                    WS_EX_ACCEPTFILES | WS_EX_STATICEDGE
-    LTEXT           "服务器IP：",IDC_STATIC,0,247,40,8
-    LTEXT           "服务器端口：",IDC_STATIC,0,265,49,8
-    LTEXT           "昵称：",IDC_STATIC,88,265,25,8
-END
-
-IDD_GameInfo DIALOG DISCARDABLE  0, 0, 173, 99
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_GameInfo DIALOG 0, 0, 173, 99
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "设置"
 FONT 10, "System"
 BEGIN
-    CONTROL         "执黑",IDC_black,"Button",BS_AUTORADIOBUTTON | WS_GROUP,
-                    35,7,32,10
+    CONTROL         "执黑",IDC_black,"Button",BS_AUTORADIOBUTTON | WS_GROUP,35,7,32,10
     CONTROL         "执白",IDC_white,"Button",BS_AUTORADIOBUTTON,88,7,32,10
-    CONTROL         "有禁手",IDC_haveForbid,"Button",BS_AUTORADIOBUTTON | 
-                    WS_GROUP,35,28,40,10
-    CONTROL         "无禁手",IDC_noForbid,"Button",BS_AUTORADIOBUTTON,88,28,
-                    40,10
-    CONTROL         "有声音",IDC_haveVoice,"Button",BS_AUTORADIOBUTTON | 
-                    WS_GROUP,35,51,40,10
-    CONTROL         "无声音",IDC_noVoice,"Button",BS_AUTORADIOBUTTON,88,51,
-                    40,10
+    CONTROL         "有禁手",IDC_haveForbid,"Button",BS_AUTORADIOBUTTON | WS_GROUP,35,28,40,10
+    CONTROL         "无禁手",IDC_noForbid,"Button",BS_AUTORADIOBUTTON,88,28,40,10
+    CONTROL         "有声音",IDC_haveVoice,"Button",BS_AUTORADIOBUTTON | WS_GROUP,35,51,40,10
+    CONTROL         "无声音",IDC_noVoice,"Button",BS_AUTORADIOBUTTON,88,51,40,10
     DEFPUSHBUTTON   "确定",IDOK,107,78,50,14
     PUSHBUTTON      "AI 等级设置",IDC_AIGrade,26,78,50,14
 END
 
 IDD_ABOUTDLG DIALOGEX 0, 0, 253, 189
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "关于 超级五子棋"
-FONT 10, "System"
+FONT 10, "System", 0, 0, 0x1
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,9,11,20,20
-    LTEXT           "超级五子棋 1.3 版  \n(C) 2013  李芥 ",IDC_STATIC,37,11,
-                    86,18
-    EDITTEXT        IDC_Content,3,33,247,139,ES_MULTILINE | ES_AUTOVSCROLL | 
-                    ES_READONLY | WS_VSCROLL,WS_EX_DLGMODALFRAME | 
-                    WS_EX_STATICEDGE
-    LTEXT           "blog:  www.darkswordzone.com",IDC_BOKE,3,175,103,8,
-                    SS_NOTIFY
+    LTEXT           "超级五子棋 1.3 版  \n(C) 2013  李芥 ",IDC_STATIC,37,11,86,18
+    EDITTEXT        IDC_Content,3,33,247,139,ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | WS_VSCROLL,WS_EX_DLGMODALFRAME | WS_EX_STATICEDGE
+    LTEXT           "blog:  www.darkswordzone.com",IDC_BOKE,3,175,103,8,SS_NOTIFY
     PUSHBUTTON      "确定",IDC_OK,210,11,40,14
 END
 
-IDD_Grade DIALOG DISCARDABLE  0, 0, 334, 328
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_Grade DIALOG 0, 0, 334, 328
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "等级设置"
 FONT 10, "System"
 BEGIN
-    CONTROL         "新手级",IDC_Grade1,"Button",BS_AUTORADIOBUTTON | 
-                    WS_GROUP,89,190,40,10
-    CONTROL         "专家级",IDC_Grade2,"Button",BS_AUTORADIOBUTTON,189,190,
-                    40,10
+    CONTROL         "新手级",IDC_Grade1,"Button",BS_AUTORADIOBUTTON | WS_GROUP,89,190,40,10
+    CONTROL         "专家级",IDC_Grade2,"Button",BS_AUTORADIOBUTTON,189,190,40,10
     EDITTEXT        IDC_DEPTH,118,240,22,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_DEPTH_END,118,260,22,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_DEPTH_DIS,118,280,22,14,ES_AUTOHSCROLL
@@ -239,26 +208,21 @@ BEGIN
     EDITTEXT        IDC_DeDEPTH_END,219,260,22,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_DeDEPTH_DIS,219,280,22,14,ES_AUTOHSCROLL
     DEFPUSHBUTTON   "确定",IDOK,277,307,50,14
-    LTEXT           "提示：\n\n 新手级：计算机落子的速度较快，棋力一般。\n\n 专家级：计算机落子的速度相对慢些，当然棋力更高些。",
-                    IDC_STATIC,7,7,320,43
-    LTEXT           "专家级的 AI 算法根据棋面战况进行一定程度的预测，然后形成攻击点，再 VCF 和 VCT 联合攻击。\r\n玩家可以根据自己的水平调整攻击深度(回合)，这个深度是 AI 进行VC攻击时搜索的深度，一般而言，深度值越大，预测能力越强，但深度值越小，赢的把握越大。同样还有个防御深度，相当于模拟人进行VC攻击，深度值越大，防御力越强，但攻击能力会减弱 。建议深度值在4到30之间。\r\n(为了方便测试棋力，每下一步都允许人为的调整该深度值，这里玩家可以根据电脑的配置适当调整。)",
-                    IDC_STATIC,7,60,320,67
-    LTEXT           "建议： 如果发现 AI 的棋力不行，可以尝试着在下面设置更改攻击深度，最好是根据棋势不断的调整攻击深度。",
-                    IDC_STATIC,7,135,320,20
+    LTEXT           "提示：\n\n 新手级：计算机落子的速度较快，棋力一般。\n\n 专家级：计算机落子的速度相对慢些，当然棋力更高些。",IDC_STATIC,7,7,320,43
+    LTEXT           "专家级的 AI 算法根据棋面战况进行一定程度的预测，然后形成攻击点，再 VCF 和 VCT 联合攻击。\r\n玩家可以根据自己的水平调整攻击深度(回合)，这个深度是 AI 进行VC攻击时搜索的深度，一般而言，深度值越大，预测能力越强，但深度值越小，赢的把握越大。同样还有个防御深度，相当于模拟人进行VC攻击，深度值越大，防御力越强，但攻击能力会减弱 。建议深度值在4到30之间。\r\n(为了方便测试棋力，每下一步都允许人为的调整该深度值，这里玩家可以根据电脑的配置适当调整。)",IDC_STATIC,7,60,320,67
+    LTEXT           "建议： 如果发现 AI 的棋力不行，可以尝试着在下面设置更改攻击深度，最好是根据棋势不断的调整攻击深度。",IDC_STATIC,7,135,320,20
     LTEXT           "最低深度：",IDC_STATIC,70,242,41,8
     LTEXT           "最高深度：",IDC_STATIC,70,263,41,8
     LTEXT           "间隔：",IDC_STATIC,70,284,25,8
     LTEXT           "最低深度：",IDC_STATIC,169,242,41,8
     LTEXT           "最高深度：",IDC_STATIC,169,263,41,8
     LTEXT           "间隔：",IDC_STATIC,169,284,25,8
-    LTEXT           "例如：攻击深度的最低深度为4，最高深度为14，间隔为2，那么 AI 会首先以4为最大深度搜索，然后依次尝试最高深度6,8,10,12,14，直到其中能够产生必赢点。",
-                    IDC_STATIC,7,161,312,18
+    LTEXT           "例如：攻击深度的最低深度为4，最高深度为14，间隔为2，那么 AI 会首先以4为最大深度搜索，然后依次尝试最高深度6,8,10,12,14，直到其中能够产生必赢点。",IDC_STATIC,7,161,312,18
     GROUPBOX        "防御深度(1---100)",IDC_STATIC,164,219,83,85
     GROUPBOX        "攻击深度(1---100)",IDC_STATIC,65,219,83,85
 END
 
 
-#ifndef _MAC
 /////////////////////////////////////////////////////////////////////////////
 //
 // Version
@@ -281,18 +245,14 @@ BEGIN
     BEGIN
         BLOCK "080404b0"
         BEGIN
-            VALUE "Comments", "\0"
-            VALUE "CompanyName", "Email:darksword@foxmail.com\0"
-            VALUE "FileDescription", "超级五子棋1.3\0"
-            VALUE "FileVersion", "1, 3, 0, 1\0"
-            VALUE "InternalName", "MyFive\0"
-            VALUE "LegalCopyright", "版权所有 (C) 2013\0"
-            VALUE "LegalTrademarks", "\0"
-            VALUE "OriginalFilename", "MyFive.EXE\0"
-            VALUE "PrivateBuild", "\0"
-            VALUE "ProductName", "MyFive 应用程序\0"
-            VALUE "ProductVersion", "1, 3, 0, 1\0"
-            VALUE "SpecialBuild", "\0"
+            VALUE "CompanyName", "Email:darksword@foxmail.com"
+            VALUE "FileDescription", "超级五子棋1.3"
+            VALUE "FileVersion", "1, 3, 0, 1"
+            VALUE "InternalName", "MyFive"
+            VALUE "LegalCopyright", "版权所有 (C) 2013"
+            VALUE "OriginalFilename", "MyFive.EXE"
+            VALUE "ProductName", "MyFive 应用程序"
+            VALUE "ProductVersion", "1, 3, 0, 1"
         END
     END
     BLOCK "VarFileInfo"
@@ -301,8 +261,6 @@ BEGIN
     END
 END
 
-#endif    // !_MAC
-
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -310,7 +268,7 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO DISCARDABLE 
+GUIDELINES DESIGNINFO
 BEGIN
     IDD_ABOUTBOX, DIALOG
     BEGIN
@@ -318,13 +276,6 @@ BEGIN
         RIGHTMARGIN, 228
         TOPMARGIN, 7
         BOTTOMMARGIN, 48
-    END
-
-    IDD_RVIEW, DIALOG
-    BEGIN
-        RIGHTMARGIN, 163
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 320
     END
 
     IDD_GameInfo, DIALOG
@@ -359,32 +310,34 @@ END
 // WAVE
 //
 
-IDR_PUTSTONE            WAVE    DISCARDABLE     "res\\putstone.wav"
+IDR_PUTSTONE            WAVE                    "res\\putstone.wav"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // Cursor
 //
 
-IDC_hand                CURSOR  DISCARDABLE     "res\\hand.cur"
+IDC_hand                CURSOR                  "res\\hand.cur"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // String Table
 //
 
-STRINGTABLE PRELOAD DISCARDABLE 
+STRINGTABLE
 BEGIN
     IDR_MAINFRAME           "MyFive\n\nMyFive\n\n\nMyFive.Document\nMyFive Document"
 END
 
-STRINGTABLE PRELOAD DISCARDABLE 
+STRINGTABLE
 BEGIN
     AFX_IDS_APP_TITLE       "MyFive"
     AFX_IDS_IDLEMESSAGE     "就绪"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE
 BEGIN
     ID_INDICATOR_EXT        "扩展名"
     ID_INDICATOR_CAPS       "大写"
@@ -394,7 +347,7 @@ BEGIN
     ID_INDICATOR_REC        "记录"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE
 BEGIN
     ID_FILE_NEW             "建立新文档\n新建"
     ID_FILE_OPEN            "打开一个现有文档\n打开"
@@ -407,13 +360,13 @@ BEGIN
     ID_FILE_PRINT_PREVIEW   "显示整页\n打印预览"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE
 BEGIN
     ID_APP_ABOUT            "显示程序信息，版本号和版权\n关于"
     ID_APP_EXIT             "退出应用程序；提示保存文档\n退出"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE
 BEGIN
     ID_FILE_MRU_FILE1       "打开该文档"
     ID_FILE_MRU_FILE2       "打开该文档"
@@ -433,18 +386,18 @@ BEGIN
     ID_FILE_MRU_FILE16      "打开该文档"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE
 BEGIN
     ID_NEXT_PANE            "切换到下一个窗格\n下一窗格"
     ID_PREV_PANE            "切换回前一个窗格\n前一窗格"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE
 BEGIN
     ID_WINDOW_SPLIT         "将活动的窗口分隔成窗格\n分隔"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE
 BEGIN
     ID_EDIT_CLEAR           "删除被选对象\n删除"
     ID_EDIT_CLEAR_ALL       "全部删除\n全部删除"
@@ -459,13 +412,13 @@ BEGIN
     ID_EDIT_REDO            "重新执行先前已撤消的操作\n重新执行"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE
 BEGIN
     ID_VIEW_TOOLBAR         "显示或隐藏工具栏\n显隐工具栏"
     ID_VIEW_STATUS_BAR      "显示或隐藏状态栏\n显隐状态栏"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE
 BEGIN
     AFX_IDS_SCSIZE          "改变窗口大小"
     AFX_IDS_SCMOVE          "改变窗口位置"
@@ -476,18 +429,18 @@ BEGIN
     AFX_IDS_SCCLOSE         "关闭活动的窗口并提示保存所有文档"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE
 BEGIN
     AFX_IDS_SCRESTORE       "把窗口恢复到正常大小"
     AFX_IDS_SCTASKLIST      "激活任务表"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE
 BEGIN
     AFX_IDS_PREVIEW_CLOSE   "关闭打印预览模式\n取消预阅"
 END
 
-#endif    // Chinese (中国) resources
+#endif    // 中文(简体，中国) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

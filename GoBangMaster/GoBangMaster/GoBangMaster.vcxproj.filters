@@ -45,9 +45,6 @@
     <ClInclude Include="resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="RView.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Splash.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -83,9 +80,6 @@
     <ClCompile Include="MyFiveView.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="RView.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Splash.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -97,5 +91,38 @@
     <ResourceCompile Include="MyFive.rc">
       <Filter>资源文件</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\MyFive.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\MyFiveDoc.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\Toolbar.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\board.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\black.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\white.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\Splsh16.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="res\putstone.wav">
+      <Filter>资源文件</Filter>
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\hand.cur">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>

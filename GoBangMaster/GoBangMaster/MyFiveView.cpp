@@ -36,7 +36,7 @@ BEGIN_MESSAGE_MAP(CMyFiveView, CView)
 	ON_COMMAND(ID_START, OnStart)
 	ON_COMMAND(ID_Regret, OnRegret)
 	ON_COMMAND(IDC_SET, OnSet)
-	ON_COMMAND(ID_NetBattle, OnNetBattle)
+	//ON_COMMAND(ID_NetBattle, OnNetBattle)
 	ON_UPDATE_COMMAND_UI(ID_NetBattle, OnUpdateNetBattle)
 	ON_COMMAND(ID_About, OnAbout)
 	ON_WM_TIMER()
@@ -358,22 +358,22 @@ void CMyFiveView::OnLButtonDown(UINT nFlags, CPoint point)
 		}
 	}
 
-	//网络模式的人人对战
-	else if(isNetBattle)
-	{
-		if(gameInfo.isBlack && blackFall) //我执黑并且该黑棋落子
-		{
-			blackFall = false;
-			cChess = BLACK_CHESS;
-		}
-		else if(!gameInfo.isBlack && !blackFall)   //我执白并且该白棋落子
-		{
-			blackFall = true;
-			cChess = WHITE_CHESS;
-		}
-		else  //否则就该对方下棋
-			return ;
-	}
+	////网络模式的人人对战
+	//else if(isNetBattle)
+	//{
+	//	if(gameInfo.isBlack && blackFall) //我执黑并且该黑棋落子
+	//	{
+	//		blackFall = false;
+	//		cChess = BLACK_CHESS;
+	//	}
+	//	else if(!gameInfo.isBlack && !blackFall)   //我执白并且该白棋落子
+	//	{
+	//		blackFall = true;
+	//		cChess = WHITE_CHESS;
+	//	}
+	//	else  //否则就该对方下棋
+	//		return ;
+	//}
 	//////////////////////////////////////////////////////////////////////////
 	UpdateRect(); //更新上一次落子位置所画的框
 
@@ -381,11 +381,11 @@ void CMyFiveView::OnLButtonDown(UINT nFlags, CPoint point)
 	char ch; 
 	fiveChess.SetChess(nY,nX,cChess);
 	
-	if(isNetBattle) //若是网络模式还需向对方发送我的落子消息
-	{
-		CMainFrame *pFrm = (CMainFrame*)AfxGetMainWnd();
-		pFrm->m_RView->SendMsg(2);
-	}
+	//if(isNetBattle) //若是网络模式还需向对方发送我的落子消息
+	//{
+	//	CMainFrame *pFrm = (CMainFrame*)AfxGetMainWnd();
+	//	//pFrm->m_RView->SendMsg(2);
+	//}
 
 	ch = fiveChess.JudgeWin(cChess); //判断是否赢棋
 
@@ -516,11 +516,11 @@ void CMyFiveView::OnMouseMove(UINT nFlags, CPoint point)
 }
 
 //网络模式的设置
-void CMyFiveView::OnNetBattle() 
-{
-	isNetBattle = true;
-	isP2C = isP2P = false;
-}
+//void CMyFiveView::OnNetBattle() 
+//{
+//	isNetBattle = true;
+//	isP2C = isP2P = false;
+//}
 
 void CMyFiveView::OnUpdateNetBattle(CCmdUI* pCmdUI) 
 {
@@ -585,31 +585,31 @@ void CMyFiveView::OnStart()
 			// DealP2C(); //放到后面执行
 		}
 	}
-	else if(isNetBattle)
-	{
-		CMainFrame *pFrm = (CMainFrame*)AfxGetMainWnd();
-		if(!pFrm->m_RView->haveLink)
-		{
-			AfxMessageBox(TEXT("还未和对方连接!\r\n\n请到右边连接网络"));
-			return ;
-		}
-		
-		//再次向对方发送我的登录消息（在连接的时候就已经发送过一次登录消息）
-		pFrm->m_RView->SendMsg(1);
+	//else if(isNetBattle)
+	//{
+	//	CMainFrame *pFrm = (CMainFrame*)AfxGetMainWnd();
+	//	if(!pFrm->m_RView->haveLink)
+	//	{
+	//		AfxMessageBox(TEXT("还未和对方连接!\r\n\n请到右边连接网络"));
+	//		return ;
+	//	}
+	//	
+	//	//再次向对方发送我的登录消息（在连接的时候就已经发送过一次登录消息）
+	//	//pFrm->m_RView->SendMsg(1);
 
-		//若已经连接，必然已经收到对方发送的第一个消息过来
-		if(gameInfo.isBlack == pFrm->m_RView->recvNetMsg.is_black)
-		{
-			AfxMessageBox(TEXT("双方不能执同种颜色的棋子！\r\n 请重新设置"));
-			return ;
-		}
-		if(gameInfo.isForbid != pFrm->m_RView->recvNetMsg.is_forbid)
-		{
-			AfxMessageBox(TEXT("双方对于禁手的设置不一致! \r\n 请重新设置"));
-			return ;
-		}
+	//	//若已经连接，必然已经收到对方发送的第一个消息过来
+	//	if(gameInfo.isBlack == pFrm->m_RView->recvNetMsg.is_black)
+	//	{
+	//		AfxMessageBox(TEXT("双方不能执同种颜色的棋子！\r\n 请重新设置"));
+	//		return ;
+	//	}
+	//	if(gameInfo.isForbid != pFrm->m_RView->recvNetMsg.is_forbid)
+	//	{
+	//		AfxMessageBox(TEXT("双方对于禁手的设置不一致! \r\n 请重新设置"));
+	//		return ;
+	//	}
 
-	}
+	//}
 
 	InitGame();
 	startGame = true;
@@ -661,61 +661,61 @@ void CMyFiveView::DealP2C()
 
 //处理网络模式人人对战，只在void RView::DealMsg()中调用该函数
 // 对方落子
-void CMyFiveView::DealNetBattle()
-{
-	CMainFrame *pFrm = (CMainFrame*)AfxGetMainWnd();
-
-	char cChess = pFrm->m_RView->recvNetMsg.is_black ? BLACK_CHESS : WHITE_CHESS;
-	int row = pFrm->m_RView->recvNetMsg.row;
-	int col = pFrm->m_RView->recvNetMsg.col;
-
-	nowX = col*WIDTH + OFFSETX;
-	nowY = row*WIDTH + OFFSETY;
-
-
-	fiveChess.SetChess(row,col,cChess);
-	char ch = fiveChess.JudgeWin(cChess); //判断是否赢棋
-	UpdateRect(); //更新框
-
-	ch = fiveChess.JudgeWin(cChess); //判断是否赢棋
-	
-	//有禁手并且当前落子为黑棋，就需要判断这点是否是禁手
-	if(gameInfo.isForbid && BLACK_CHESS == cChess) //
-	{
-		int res = fiveChess.IsKinjite(row,col);
-		
-		if( res ) // 禁手
-		{
-			startGame = false;
-
-			gameResult = res;
-			PrintResult(); //
-		}
-	}
-	if(startGame)  
-	{
-		if(ch == cChess || ch == PEACE_CHESS) //赢棋或和棋
-		{
-			startGame = false;
-		}
-		//赢棋
-		if(!startGame) 
-		{
-			int res;
-			if( BLACK_CHESS == ch )
-				res = 4;
-			else if( WHITE_CHESS == ch )
-				res = 5;
-			else if( PEACE_CHESS == ch )
-				res = 6;
-
-			gameResult = res;
-			PrintResult(); //
-		}
-	}
-
-	blackFall = gameInfo.isBlack; //现在我可以落子
-}
+//void CMyFiveView::DealNetBattle()
+//{
+//	CMainFrame *pFrm = (CMainFrame*)AfxGetMainWnd();
+//
+//	char cChess = pFrm->m_RView->recvNetMsg.is_black ? BLACK_CHESS : WHITE_CHESS;
+//	int row = pFrm->m_RView->recvNetMsg.row;
+//	int col = pFrm->m_RView->recvNetMsg.col;
+//
+//	nowX = col*WIDTH + OFFSETX;
+//	nowY = row*WIDTH + OFFSETY;
+//
+//
+//	fiveChess.SetChess(row,col,cChess);
+//	char ch = fiveChess.JudgeWin(cChess); //判断是否赢棋
+//	UpdateRect(); //更新框
+//
+//	ch = fiveChess.JudgeWin(cChess); //判断是否赢棋
+//	
+//	//有禁手并且当前落子为黑棋，就需要判断这点是否是禁手
+//	if(gameInfo.isForbid && BLACK_CHESS == cChess) //
+//	{
+//		int res = fiveChess.IsKinjite(row,col);
+//		
+//		if( res ) // 禁手
+//		{
+//			startGame = false;
+//
+//			gameResult = res;
+//			PrintResult(); //
+//		}
+//	}
+//	if(startGame)  
+//	{
+//		if(ch == cChess || ch == PEACE_CHESS) //赢棋或和棋
+//		{
+//			startGame = false;
+//		}
+//		//赢棋
+//		if(!startGame) 
+//		{
+//			int res;
+//			if( BLACK_CHESS == ch )
+//				res = 4;
+//			else if( WHITE_CHESS == ch )
+//				res = 5;
+//			else if( PEACE_CHESS == ch )
+//				res = 6;
+//
+//			gameResult = res;
+//			PrintResult(); //
+//		}
+//	}
+//
+//	blackFall = gameInfo.isBlack; //现在我可以落子
+//}
 
 //更新上一次落子位置所画的框
 void CMyFiveView::UpdateRect()
@@ -759,7 +759,7 @@ void CMyFiveView::OnRegret()
 
 	//像对方发送悔棋消息
 	CMainFrame *pFrm = (CMainFrame*)AfxGetMainWnd();
-	pFrm->m_RView->SendMsg(4);
+	//pFrm->m_RView->SendMsg(4);
 }
 
 

@@ -158,7 +158,7 @@ int PositionStruct::Evaluate()
 	}
 	if (TypeCount[_counterSide][Five] >= 1)
 	{
-		return -100000;
+		return -99990;
 	}
 	//活四,双冲四,冲四活三
 	if (TypeCount[_ourSide][Alive4] >= 1 || TypeCount[_ourSide][Sleep4] >= 2 || (TypeCount[_ourSide][Sleep4] >= 1 && TypeCount[_ourSide][Alive3 >= 1]))
@@ -167,7 +167,7 @@ int PositionStruct::Evaluate()
 	}
 	if (TypeCount[_counterSide][Alive4] >= 1 || TypeCount[_counterSide][Sleep4] >= 2 || (TypeCount[_counterSide][Sleep4] >= 1 && TypeCount[_counterSide][Alive3 >= 1]))
 	{
-		return -10000;
+		return -9990;
 	}
 	//=====开始打分,注意不打负分====
 	//双活三
@@ -177,7 +177,7 @@ int PositionStruct::Evaluate()
 	}
 	if (TypeCount[_counterSide][Alive3] >= 2)
 	{
-		_counterScore += 5000;
+		_counterScore += 4990;
 	}
 	//活三眠三
 	if (TypeCount[_ourSide][Alive3] >= 1 && TypeCount[_ourSide][Sleep3] >= 1)
@@ -186,7 +186,7 @@ int PositionStruct::Evaluate()
 	}
 	if (TypeCount[_counterSide][Alive3] >= 1 && TypeCount[_counterSide][Sleep3] >= 1)
 	{
-		_counterScore += 1000;
+		_counterScore += 990;
 	}
 	//眠四
 	if (TypeCount[_ourSide][Sleep4] >= 1)
@@ -195,7 +195,7 @@ int PositionStruct::Evaluate()
 	}
 	if (TypeCount[_counterSide][Sleep4] >= 1)
 	{
-		_counterScore += TypeCount[_counterSide][Sleep4] * 500;
+		_counterScore += TypeCount[_counterSide][Sleep4] * 490;
 	}
 	//活三
 	if (TypeCount[_ourSide][Alive3] >= 1)
@@ -204,7 +204,7 @@ int PositionStruct::Evaluate()
 	}
 	if (TypeCount[_counterSide][Alive3] >= 1)
 	{
-		_counterScore += TypeCount[_counterSide][Alive3] * 200;
+		_counterScore += TypeCount[_counterSide][Alive3] * 190;
 	}
 	//双活二
 	if (TypeCount[_ourSide][Alive2] >= 2)
@@ -213,7 +213,7 @@ int PositionStruct::Evaluate()
 	}
 	if (TypeCount[_counterSide][Alive2] >= 2)
 	{
-		_counterScore += 100;
+		_counterScore += 90;
 	}
 	//眠三
 	if (TypeCount[_ourSide][Sleep3] >= 1)
@@ -222,7 +222,7 @@ int PositionStruct::Evaluate()
 	}
 	if (TypeCount[_counterSide][Sleep3] >= 1)
 	{
-		_counterScore += TypeCount[_counterSide][Sleep3] * 50;
+		_counterScore += TypeCount[_counterSide][Sleep3] * 40;
 	}
 	//活二眠二
 	if (TypeCount[_ourSide][Alive2] >= 1 && TypeCount[_ourSide][Sleep2] >= 1)

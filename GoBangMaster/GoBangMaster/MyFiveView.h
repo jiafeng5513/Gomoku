@@ -135,7 +135,7 @@ private:
 	void StopAIThread();
 
 public:
-	void DealNetBattle();
+	//void DealNetBattle();
 
 };
 

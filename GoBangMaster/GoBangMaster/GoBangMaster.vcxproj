@@ -149,7 +149,6 @@
     <ClInclude Include="MyFiveDoc.h" />
     <ClInclude Include="MyFiveView.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="RView.h" />
     <ClInclude Include="Splash.h" />
     <ClInclude Include="StdAfx.h" />
   </ItemGroup>
@@ -163,12 +162,26 @@
     <ClCompile Include="MyFive.cpp" />
     <ClCompile Include="MyFiveDoc.cpp" />
     <ClCompile Include="MyFiveView.cpp" />
-    <ClCompile Include="RView.cpp" />
     <ClCompile Include="Splash.cpp" />
     <ClCompile Include="StdAfx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MyFive.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\black.bmp" />
+    <Image Include="res\board.bmp" />
+    <Image Include="res\MyFive.ico" />
+    <Image Include="res\MyFiveDoc.ico" />
+    <Image Include="res\Splsh16.bmp" />
+    <Image Include="res\Toolbar.bmp" />
+    <Image Include="res\white.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="res\putstone.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\hand.cur" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
