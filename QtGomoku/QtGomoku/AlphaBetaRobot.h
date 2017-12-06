@@ -34,6 +34,7 @@ public:
 	
 	void SearchMain(void);
 	int SearchFull(int vlAlpha, int vlBeta, int nDepth);
+	int LIMIT_DEPTH = 32;/*迭代加深最大深度*/
 public slots:
 	void getAiResponse(POINT*);
 signals:

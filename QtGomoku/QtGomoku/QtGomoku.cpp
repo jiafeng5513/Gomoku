@@ -38,34 +38,62 @@ QtGomoku::QtGomoku(QWidget *parent)
 	connect(this, SIGNAL(IsTimeForAiToCalculate(POINT*)), robot, SLOT(getAiResponse(POINT*)), Qt::QueuedConnection);
 	connect(robot, SIGNAL(AIComplete(POINT*)), this, SLOT(OnAiComplete(POINT*)), Qt::QueuedConnection);
 	Count = 1;
+	ui.radioButton_PVE->setChecked(true);
+	ui.radioButton_HumanBlack->setChecked(true);
+	ui.radioButton_UnableForbidden->setChecked(true);
+
+	ui.radioButton_PVP->setChecked(false);
+	ui.radioButton_HumanWhite->setChecked(false);
+	ui.radioButton_EnableForbidden->setChecked(false);
 }
 /*
  * 鼠标在棋盘上空释放(玩家下棋)
  */
 void QtGomoku::OnMouseReleaseOnBoardSense(QPoint* pos)
 {
-	if (CurrentTurn == Human)
+	if (m_isGameOver==true)//游戏已经结束,不能继续落子
+	{
+		return;
+	}
+	if (isPVE == true)//目前是人机对战模式
+	{
+		if (CurrentTurn == Human)
+		{
+			int qx = pos->x() / 40;
+			int qy = pos->y() / 40;
+
+			PutDownStone(qx, qy);//人类完成落子
+			POINT * _humanPos = new  POINT;
+			_humanPos->x = qx;
+			_humanPos->y = qy;
+			if (isGameOver() == true)//游戏不能继续,不通知AI,禁用该函数禁止玩家继续落子
+			{
+				//禁用该函数
+				m_isGameOver = true;
+				//玩家胜利
+				QMessageBox::information(this, QStringLiteral("恭喜"), QStringLiteral("您打败了AI!"));
+			}
+			else//如果游戏还能继续,则通知AI进行计算
+			{
+				emit IsTimeForAiToCalculate(_humanPos);
+				ui.statusBar->showMessage(QStringLiteral("AI正在计算..."));
+			}
+			//qDebug() << "emit IsTimeForAiToCalculate, human pos:("<< qx << ","<<qy<<")";
+		}
+	}
+	else//目前是人人对战模式
 	{
 		int qx = pos->x() / 40;
 		int qy = pos->y() / 40;
 
-		PutDownStone(qx, qy);//人类完成落子
-		POINT * _humanPos = new  POINT;
-		_humanPos->x = qx;
-		_humanPos->y = qy;
-		if(isGameOver()==true)//游戏不能继续,不通知AI,禁用该函数禁止玩家继续落子
+		PutDownStone(qx, qy);//交替落子
+		if (isGameOver() == true)//游戏不能继续,不通知AI,禁用该函数禁止玩家继续落子
 		{
-			CurrentTurn = GameOver;//禁用该函数
-			//玩家胜利
-			QMessageBox::information(this, QStringLiteral("恭喜"), QStringLiteral("您打败了AI!"));
+			m_isGameOver = true;
+			QMessageBox::information(this, QStringLiteral("游戏结束"), QStringLiteral("请自行判断输赢>_<"));
 		}
-		else//如果游戏还能继续,则通知AI进行计算
-		{
-			emit IsTimeForAiToCalculate(_humanPos);
-			ui.statusBar->showMessage(QStringLiteral("AI正在计算..."));
-		}
-		//qDebug() << "emit IsTimeForAiToCalculate, human pos:("<< qx << ","<<qy<<")";
 	}
+	
 }
 /*
  * 根据当前棋局数组刷新整个画面
@@ -119,24 +147,49 @@ void QtGomoku::PutDownStone(int x, int y)
 	/*QGraphicsTextItem **/txtitem = new QGraphicsTextItem(temp);
 	
 	txtitem->setFont(QFont("Microsoft YaHei", 12, QFont::Normal));
-	if(CurrentTurn == Human)//人类玩家下棋
+	if (isPVE == true)//人机模式
 	{
-		BoardMap[x][y] = HumanColor;
-		qpi = new QGraphicsPixmapItem((HumanColor == black ? *BlackStone : *WhiteStone));
-		CurrentTurn = Ai;
-		QString temp = QStringLiteral("玩家:  x:");temp.append(QString::fromStdString(std::to_string(x))); temp.append(",y:"); temp.append(QString::fromStdString(std::to_string(y)));
-		ui.listWidget_History->addItem(temp);
-		txtitem->setDefaultTextColor((HumanColor == black ? QColor(255, 255, 255) : QColor(0, 0, 0)));
+		if (CurrentTurn == Human)//人类玩家下棋
+		{
+			BoardMap[x][y] = HumanColor;
+			qpi = new QGraphicsPixmapItem((HumanColor == black ? *BlackStone : *WhiteStone));
+			CurrentTurn = Ai;
+			QString temp = QStringLiteral("玩家:  x:"); temp.append(QString::fromStdString(std::to_string(x))); temp.append(",y:"); temp.append(QString::fromStdString(std::to_string(y)));
+			ui.listWidget_History->addItem(temp);
+			txtitem->setDefaultTextColor((HumanColor == black ? QColor(255, 255, 255) : QColor(0, 0, 0)));
+		}
+		else
+		{
+			BoardMap[x][y] = AiColor;
+			qpi = new QGraphicsPixmapItem((AiColor == black ? *BlackStone : *WhiteStone));
+			CurrentTurn = Human;
+			QString temp = QStringLiteral("AI:  x:"); temp.append(QString::fromStdString(std::to_string(x))); temp.append(",y:"); temp.append(QString::fromStdString(std::to_string(y)));
+			ui.listWidget_History->addItem(temp);
+			txtitem->setDefaultTextColor((HumanColor == black ? QColor(0, 0, 0) : QColor(255, 255, 255)));
+		}
 	}
-	else
+	else//人人模式
 	{
-		BoardMap[x][y] = AiColor;
-		qpi = new QGraphicsPixmapItem((AiColor == black ? *BlackStone : *WhiteStone));
-		CurrentTurn = Human;
-		QString temp = QStringLiteral("AI:  x:"); temp.append(QString::fromStdString(std::to_string(x))); temp.append(",y:"); temp.append(QString::fromStdString(std::to_string(y)));
-		ui.listWidget_History->addItem(temp);
-		txtitem->setDefaultTextColor((HumanColor == black ?  QColor(0, 0, 0): QColor(255, 255, 255)));
+		if (CurrentColor == black)//黑棋
+		{
+			BoardMap[x][y] = black;
+			qpi = new QGraphicsPixmapItem( *BlackStone );
+			CurrentColor = white;
+			QString temp = QStringLiteral("黑棋:  x:"); temp.append(QString::fromStdString(std::to_string(x))); temp.append(",y:"); temp.append(QString::fromStdString(std::to_string(y)));
+			ui.listWidget_History->addItem(temp);
+			txtitem->setDefaultTextColor(QColor(255, 255, 255));
+		}
+		else//白棋
+		{
+			BoardMap[x][y] = white;
+			qpi = new QGraphicsPixmapItem( *WhiteStone);
+			CurrentColor = black;
+			QString temp = QStringLiteral("白棋:  x:"); temp.append(QString::fromStdString(std::to_string(x))); temp.append(",y:"); temp.append(QString::fromStdString(std::to_string(y)));
+			ui.listWidget_History->addItem(temp);
+			txtitem->setDefaultTextColor( QColor(0, 0, 0));
+		}
 	}
+	
 	//放棋子
 	ui.listWidget_History->scrollToBottom();
 	qpi->setPos(QPoint(x * 40, y * 40));
@@ -151,7 +204,7 @@ void QtGomoku::PutDownStone(int x, int y)
 	Count++;
 }
 /*
- * 判断游戏是否结束
+ * 判断游戏是否结束(存在bug,某些情况下会误判)
  */
 bool QtGomoku::isGameOver()
 {
@@ -208,11 +261,12 @@ bool QtGomoku::isGameOver()
  */
 void QtGomoku::OnAiComplete(POINT * pos)
 {
-	qDebug() << "OnAiComplete is running...";
+	//qDebug() << "OnAiComplete is running...";
 	PutDownStone(pos->x, pos->y);
 	if (isGameOver() == true)//游戏不能继续,禁止玩家落子
 	{
-		CurrentTurn = GameOver;//游戏终止
+		//游戏终止
+		m_isGameOver = true;
 		//AI胜利
 		QMessageBox::information(this, QStringLiteral("很遗憾"), QStringLiteral("AI已经取胜!"));
 	}		
@@ -224,6 +278,14 @@ void QtGomoku::OnAiComplete(POINT * pos)
  */
 void QtGomoku::OnNewGame()
 {
+	//禁用所有调整:游戏过程中不能调整参数
+	ui.radioButton_PVE->setEnabled(false);
+	ui.radioButton_PVP->setEnabled(false);
+	ui.radioButton_EnableForbidden->setEnabled(false);
+	ui.radioButton_UnableForbidden->setEnabled(false);
+	ui.radioButton_HumanBlack->setEnabled(false);
+	ui.radioButton_HumanWhite->setEnabled(false);
+	ui.spinBox->setEnabled(false);
 	//初始化
 	//清空棋盘数组
 	for (int i = 0; i<GRID_NUM; i++)
@@ -245,22 +307,49 @@ void QtGomoku::OnNewGame()
 	//从第一步开始
 	Count = 1;
 	ui.listWidget_History->clear();
-	//测试:人类开始下棋
-	CurrentTurn = Human;
+	//
+	CurrentTurn = (isHumanGetBlack == true ? Human : Ai);
+	CurrentColor = black;
+	m_isGameOver = false;
+	POINT * _SignalforAiFirst = new POINT();
+	if (isPVE==true&&isHumanGetBlack==false)//人机对战且人类玩家选择执白后手
+	{
+		_SignalforAiFirst->x = -1;
+		_SignalforAiFirst->y = -1;
+		emit IsTimeForAiToCalculate(_SignalforAiFirst);
+	}
 }
 /*
  * 按键:悔棋
  */
 void QtGomoku::OnUndo()
 {
-
+	//人机模式下,只有轮到玩家下棋而玩家尚未落子的时候才能悔棋
+	//1.通知AI撤销上一步自己的落子和上一步玩家的落子
+	//2.棋盘数组中消除上一步的落子
+	//3.在putdown函数中维护一个序列数组,大小为225,记录双方的落子顺序.
+	//4.上述工作结束后,调用刷新函数,根据序列数组将双方的棋子按顺序画上
+	//5.通知AI开始计算,通知参数为人类玩家最后一次落子的位置
+	//人人模式下,随时都可以悔棋
+	//1.若白棋刚落子,按悔棋,此时视为黑方按的悔棋,撤销白棋的上一手和黑棋的上一手
+	//2.若黑棋刚落子,按悔棋,此时视为白方按的悔棋,撤销黑棋的上一手和白棋的上一手
+	//3.然后调用刷新函数按照序列数组刷新
+	//可以加一个功能把序列数组存成文件,然后加入复盘功能,便于记录一些信息以供调试
 }
 /*
  * 按键:结束游戏
  */
 void QtGomoku::OnStopGame()
 {
-
+	m_isGameOver = true;
+	//禁用所有调整:游戏过程中不能调整参数
+	ui.radioButton_PVE->setEnabled(true);
+	ui.radioButton_PVP->setEnabled(true);
+	ui.radioButton_EnableForbidden->setEnabled(true);
+	ui.radioButton_UnableForbidden->setEnabled(true);
+	ui.radioButton_HumanBlack->setEnabled(true);
+	ui.radioButton_HumanWhite->setEnabled(true);
+	ui.spinBox->setEnabled(true);
 }
 /*
  * 按键:帮助
@@ -273,34 +362,163 @@ void QtGomoku::OnHelp()
  */
 void QtGomoku::OnCheckedHumanBlack()
 {
+	if(ui.radioButton_HumanBlack->isChecked()==false)
+	{
+		ui.radioButton_HumanBlack->setChecked(false);
+		ui.radioButton_HumanWhite->setChecked(true);
+		ui.label_BlackOwner->setText((ui.radioButton_PVE->isChecked() ? QStringLiteral("电脑") : QStringLiteral("玩家1")));
+		ui.label_WhiteOwner->setText((ui.radioButton_PVE->isChecked() ? QStringLiteral("玩家") : QStringLiteral("玩家2")));
+		isHumanGetBlack = false;
+		HumanColor = white;
+		AiColor = black;
+	}
+	else
+	{
+		ui.radioButton_HumanBlack->setChecked(true);
+		ui.radioButton_HumanWhite->setChecked(false);
+		ui.label_BlackOwner->setText((ui.radioButton_PVE->isChecked() ? QStringLiteral("玩家") : QStringLiteral("玩家1")));
+		ui.label_WhiteOwner->setText((ui.radioButton_PVE->isChecked() ? QStringLiteral("电脑") : QStringLiteral("玩家2")));
+		isHumanGetBlack = true;
+		HumanColor = black;
+		AiColor = white;
+	}
 }
 /*
  * 单选:玩家执白
  */
 void QtGomoku::OnCheckedHumanWhite()
 {
+	if (ui.radioButton_HumanWhite->isChecked()==false)
+	{
+		ui.radioButton_HumanBlack->setChecked(true);
+		ui.radioButton_HumanWhite->setChecked(false);
+		ui.label_BlackOwner->setText((ui.radioButton_PVE->isChecked() ? QStringLiteral("玩家") : QStringLiteral("玩家1")));
+		ui.label_WhiteOwner->setText((ui.radioButton_PVE->isChecked() ? QStringLiteral("电脑") : QStringLiteral("玩家2")));
+		isHumanGetBlack = true;
+		HumanColor = black;
+		AiColor = white;
+	}
+	else
+	{
+		ui.radioButton_HumanBlack->setChecked(false);
+		ui.radioButton_HumanWhite->setChecked(true);
+		ui.label_BlackOwner->setText((ui.radioButton_PVE->isChecked() ? QStringLiteral("电脑") : QStringLiteral("玩家1")));
+		ui.label_WhiteOwner->setText((ui.radioButton_PVE->isChecked() ? QStringLiteral("玩家") : QStringLiteral("玩家2")));
+		isHumanGetBlack = false;
+		HumanColor = white;
+		AiColor = black;
+	}
 }
 /*
  * 单选:启动禁手
  */
 void QtGomoku::OnCheckedEnableForbidden()
 {
+	if (ui.radioButton_EnableForbidden->isChecked()==false)
+	{
+		ui.radioButton_EnableForbidden->setChecked(false);
+		ui.radioButton_UnableForbidden->setChecked(true);
+	}
+	else
+	{
+		ui.radioButton_EnableForbidden->setChecked(true);
+		ui.radioButton_UnableForbidden->setChecked(false);
+	}
 }
 /*
  * 单选:关闭禁手
  */
 void QtGomoku::OnCheckedUnableForbidden()
 {
+	if (ui.radioButton_UnableForbidden->isChecked()==false)
+	{
+		ui.radioButton_EnableForbidden->setChecked(true);
+		ui.radioButton_UnableForbidden->setChecked(false);
+	}
+	else
+	{
+		ui.radioButton_EnableForbidden->setChecked(false);
+		ui.radioButton_UnableForbidden->setChecked(true);
+	}
 }
 /*
  * 单选:人机对战
  */
 void QtGomoku::OnCheckedPVE()
 {
+	if (ui.radioButton_PVE->isChecked()== false)
+	{
+		ui.radioButton_PVE->setChecked(false);//互斥选项
+		ui.radioButton_PVP->setChecked(true);
+		isPVE = false;
+		ui.label_BlackOwner->setText(QStringLiteral("玩家1"));
+		ui.label_WhiteOwner->setText(QStringLiteral("玩家2"));
+		ui.radioButton_HumanBlack->setEnabled(false);
+		ui.radioButton_HumanWhite->setEnabled(false);
+	}else
+	{
+		ui.radioButton_PVE->setChecked(true);//互斥选项
+		ui.radioButton_PVP->setChecked(false);
+		isPVE = true;
+		ui.label_BlackOwner->setText((ui.radioButton_HumanBlack->isChecked()? QStringLiteral("玩家"): QStringLiteral("电脑")));
+		ui.label_WhiteOwner->setText((ui.radioButton_HumanWhite->isChecked()? QStringLiteral("玩家") : QStringLiteral("电脑")));
+		ui.radioButton_HumanBlack->setEnabled(true);
+		ui.radioButton_HumanWhite->setEnabled(true);
+	}
+	
 }
 /*
  * 单选:人人对战
  */
 void QtGomoku::OnCheckedPVP()
 {
+	if (ui.radioButton_PVP->isChecked() == false)
+	{
+		ui.radioButton_PVP->setChecked(false);
+		ui.radioButton_PVE->setChecked(true);//互斥选项
+		
+		isPVE = true;
+		ui.label_BlackOwner->setText((ui.radioButton_HumanBlack->isChecked() ? QStringLiteral("玩家") : QStringLiteral("电脑")));
+		ui.label_WhiteOwner->setText((ui.radioButton_HumanWhite->isChecked() ? QStringLiteral("玩家") : QStringLiteral("电脑")));
+		ui.radioButton_HumanBlack->setEnabled(true);
+		ui.radioButton_HumanWhite->setEnabled(true);
+	}
+	else
+	{
+		ui.radioButton_PVP->setChecked(true);
+		ui.radioButton_PVE->setChecked(false);//互斥选项
+		isPVE = false;
+		ui.label_BlackOwner->setText(QStringLiteral("玩家1"));
+		ui.label_WhiteOwner->setText(QStringLiteral("玩家2"));
+		ui.radioButton_HumanBlack->setEnabled(false);
+		ui.radioButton_HumanWhite->setEnabled(false);
+	}
+}
+/*
+ * Ai等级变动
+ */
+void QtGomoku::OnAiLevelChanged(int newValue)
+{
+	switch (newValue)
+	{
+	case 1:
+		robot->LIMIT_DEPTH = 4;
+		break;
+	case 2:
+		robot->LIMIT_DEPTH = 8;
+		break;
+	case 3:
+		robot->LIMIT_DEPTH = 16;
+		break;
+	case 4:
+		robot->LIMIT_DEPTH = 32;
+		break;
+	case 5:
+		robot->LIMIT_DEPTH = 64;
+		break;
+	default:
+		robot->LIMIT_DEPTH = 32;
+		ui.spinBox->setValue(4);
+		break;
+	}
 }

@@ -12775,3 +12775,360 @@ Debug: OnAiComplete is running...
 Debug: ai respone in : 49
 Debug: OnAiComplete is running...
 Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: QGraphicsScene::removeItem: item 0x22ae27b96a0's scene (0x0) is different from this scene (0x22ae27ba230)
+Debug: ai respone in : 96
+Debug: OnAiComplete is running...
+Debug: ai respone in : 98
+Debug: OnAiComplete is running...
+Debug: ai respone in : 82
+Debug: OnAiComplete is running...
+Debug: ai respone in : 66
+Debug: OnAiComplete is running...
+Debug: ai respone in : 68
+Debug: OnAiComplete is running...
+Debug: ai respone in : 69
+Debug: OnAiComplete is running...
+Debug: ai respone in : 54
+Debug: OnAiComplete is running...
+Debug: ai respone in : 39
+Debug: OnAiComplete is running...
+Debug: ai respone in : 24
+Debug: OnAiComplete is running...
+Debug: ai respone in : 113
+Debug: OnAiComplete is running...
+Debug: ai respone in : 108
+Debug: OnAiComplete is running...
+Debug: ai respone in : 139
+Debug: OnAiComplete is running...
+Debug: ai respone in : 94
+Debug: OnAiComplete is running...
+Debug: ai respone in : 9
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: QGraphicsScene::removeItem: item 0x28677ac0370's scene (0x0) is different from this scene (0x28677ac02d0)
+Debug: ai respone in : 162
+Debug: OnAiComplete is running...
+Debug: ai respone in : 192
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: QGraphicsScene::removeItem: item 0x17aa1294490's scene (0x0) is different from this scene (0x17aa12944e0)
+Debug: ai respone in : 96
+Debug: OnAiComplete is running...
+Debug: ai respone in : 82
+Debug: OnAiComplete is running...
+Debug: ai respone in : 111
+Debug: OnAiComplete is running...
+Debug: ai respone in : 98
+Debug: OnAiComplete is running...
+Debug: ai respone in : 81
+Debug: OnAiComplete is running...
+Debug: ai respone in : 83
+Debug: OnAiComplete is running...
+Debug: ai respone in : 53
+Debug: OnAiComplete is running...
+Debug: ai respone in : 79
+Debug: OnAiComplete is running...
+Debug: ai respone in : 95
+Debug: OnAiComplete is running...
+Debug: ai respone in : 63
+Debug: OnAiComplete is running...
+Debug: ai respone in : 47
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: QGraphicsScene::removeItem: item 0x17aa1294490's scene (0x17aa12944e0) is different from this scene (0x17aa55a5f10)
+Debug: ai respone in : 96
+Debug: OnAiComplete is running...
+Debug: ai respone in : 126
+Debug: OnAiComplete is running...
+Debug: ai respone in : 110
+Debug: OnAiComplete is running...
+Debug: ai respone in : 83
+Debug: OnAiComplete is running...
+Debug: ai respone in : 81
+Debug: OnAiComplete is running...
+Debug: ai respone in : 142
+Debug: OnAiComplete is running...
+Debug: ai respone in : 111
+Debug: OnAiComplete is running...
+Debug: ai respone in : 158
+Debug: OnAiComplete is running...
+Debug: ai respone in : 99
+Debug: OnAiComplete is running...
+Debug: ai respone in : 66
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: QGraphicsScene::removeItem: item 0x22fe3c04100's scene (0x0) is different from this scene (0x22fe3c03d90)
+Debug: ai respone in : 96
+Debug: OnAiComplete is running...
+Debug: ai respone in : 126
+Debug: OnAiComplete is running...
+Debug: ai respone in : 110
+Debug: OnAiComplete is running...
+Debug: ai respone in : 82
+Debug: OnAiComplete is running...
+Debug: ai respone in : 125
+Debug: OnAiComplete is running...
+Debug: ai respone in : 113
+Debug: OnAiComplete is running...
+Debug: ai respone in : 124
+Debug: OnAiComplete is running...
+Debug: ai respone in : 123
+Debug: OnAiComplete is running...
+Debug: ai respone in : 38
+Debug: OnAiComplete is running...
+Debug: ai respone in : 122
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: QGraphicsScene::removeItem: item 0x22fe3c04100's scene (0x22fe3c03d90) is different from this scene (0x22fed990d20)
+Debug: ai respone in : 112
+Debug: OnAiComplete is running...
+Debug: ai respone in : 127
+Debug: OnAiComplete is running...
+Debug: ai respone in : 111
+Debug: OnAiComplete is running...
+Debug: ai respone in : 95
+Debug: OnAiComplete is running...
+Debug: ai respone in : 97
+Debug: OnAiComplete is running...
+Debug: ai respone in : 68
+Debug: OnAiComplete is running...
+Debug: ai respone in : 94
+Debug: OnAiComplete is running...
+Debug: ai respone in : 174
+Debug: OnAiComplete is running...
+Debug: ai respone in : 66
+Debug: OnAiComplete is running...
+Debug: ai respone in : 113
+Debug: OnAiComplete is running...
+Debug: ai respone in : 156
+Debug: OnAiComplete is running...
+Debug: ai respone in : 188
+Debug: OnAiComplete is running...
+Debug: ai respone in : 146
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: QGraphicsScene::removeItem: item 0x22fe3c04100's scene (0x22fed990d20) is different from this scene (0x22feda5a630)
+Warning: QGraphicsScene::removeItem: item 0x22fe3c04100's scene (0x22feda5a630) is different from this scene (0x22feda5b2b0)
+Warning: QGraphicsScene::removeItem: item 0x22fe3c04100's scene (0x22feda5b2b0) is different from this scene (0x22feda58d80)
+Debug: ai respone in : 96
+Debug: OnAiComplete is running...
+Debug: ai respone in : 98
+Debug: OnAiComplete is running...
+Debug: ai respone in : 82
+Debug: OnAiComplete is running...
+Debug: ai respone in : 68
+Debug: OnAiComplete is running...
+Debug: ai respone in : 66
+Debug: OnAiComplete is running...
+Debug: ai respone in : 54
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: QGraphicsScene::removeItem: item 0x22fe3c04100's scene (0x22feda58d80) is different from this scene (0x22fedb02bd0)
+Debug: ai respone in : 96
+Debug: OnAiComplete is running...
+Debug: ai respone in : 98
+Debug: OnAiComplete is running...
+Debug: ai respone in : 82
+Debug: OnAiComplete is running...
+Debug: ai respone in : 97
+Debug: OnAiComplete is running...
+Debug: ai respone in : 66
+Debug: OnAiComplete is running...
+Debug: ai respone in : 81
+Debug: OnAiComplete is running...
+Debug: ai respone in : 111
+Debug: OnAiComplete is running...
+Debug: ai respone in : 83
+Debug: OnAiComplete is running...
+Debug: ai respone in : 174
+Debug: OnAiComplete is running...
+Debug: ai respone in : 94
+Debug: OnAiComplete is running...
+Debug: ai respone in : 100
+Debug: OnAiComplete is running...
+Debug: ai respone in : 99
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: QGraphicsScene::removeItem: item 0x288a8b46c80's scene (0x0) is different from this scene (0x288a8b463c0)
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: QGraphicsScene::removeItem: item 0x23ab6aa8be0's scene (0x0) is different from this scene (0x23ab6aa8a00)
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: QGraphicsScene::removeItem: item 0x1a90aed3d60's scene (0x0) is different from this scene (0x1a90aed3ef0)
+Debug: ai respone in : 96
+Debug: OnAiComplete is running...
+Debug: ai respone in : 98
+Debug: OnAiComplete is running...
+Debug: ai respone in : 82
+Debug: OnAiComplete is running...
+Debug: ai respone in : 110
+Debug: OnAiComplete is running...
+Debug: ai respone in : 125
+Debug: OnAiComplete is running...
+Debug: ai respone in : 68
+Debug: OnAiComplete is running...
+Warning: QGraphicsScene::removeItem: item 0x1a90aed3d60's scene (0x1a90aed3ef0) is different from this scene (0x1a913582180)
+Warning: QGraphicsScene::removeItem: item 0x1a90aed3d60's scene (0x1a913582180) is different from this scene (0x1a913600770)
+Warning: QGraphicsScene::removeItem: item 0x1a90aed3d60's scene (0x1a913600770) is different from this scene (0x1a913600d60)
+Debug: ai respone in : 96
+Debug: OnAiComplete is running...
+Debug: ai respone in : 98
+Debug: OnAiComplete is running...
+Debug: ai respone in : 82
+Debug: OnAiComplete is running...
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: QGraphicsScene::removeItem: item 0x2c65b2b9d50's scene (0x0) is different from this scene (0x2c65b38e190)
+Debug: ai respone in : 96
+Debug: ai respone in : 126
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: QGraphicsScene::removeItem: item 0x1870676a100's scene (0x0) is different from this scene (0x1870676aa10)
+Debug: ai respone in : 96
+Debug: ai respone in : 126
+Debug: ai respone in : 110
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: QGraphicsScene::removeItem: item 0x2c2b8b69960's scene (0x0) is different from this scene (0x2c2b8c31840)
+Debug: ai respone in : 96
+Debug: ai respone in : 126
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: QGraphicsScene::removeItem: item 0x202c5a9ade0's scene (0x0) is different from this scene (0x202c5b8a550)
+Debug: ai respone in : 96
+Debug: ai respone in : 98
+Debug: ai respone in : 82
+Debug: ai respone in : 68
+Debug: ai respone in : 113
+Debug: ai respone in : 66
+Debug: ai respone in : 69
+Debug: ai respone in : 99
+Debug: ai respone in : 142
+Debug: ai respone in : 53
+Debug: ai respone in : 65
+Debug: ai respone in : 62
+Debug: ai respone in : 123
+Debug: ai respone in : 40
+Debug: ai respone in : 63
+Debug: ai respone in : 114
+Debug: ai respone in : 84
+Debug: ai respone in : 22
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: QGraphicsScene::removeItem: item 0x202c5a9ade0's scene (0x202c5b8a550) is different from this scene (0x202ce20ce60)
+Debug: ai respone in : 96
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: QGraphicsScene::removeItem: item 0x1c9f79d1ef0's scene (0x0) is different from this scene (0x1c9f7a9cf80)
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: QGraphicsScene::removeItem: item 0x1fa71adfe90's scene (0x0) is different from this scene (0x1fa71b9aeb0)
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: QGraphicsScene::removeItem: item 0x217791f9610's scene (0x0) is different from this scene (0x217792f5340)
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: QGraphicsScene::removeItem: item 0x18ee1ce5be0's scene (0x0) is different from this scene (0x18eea467a50)
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile
+Warning: libpng warning: iCCP: known incorrect sRGB profile

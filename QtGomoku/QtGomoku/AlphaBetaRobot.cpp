@@ -111,14 +111,22 @@ void AlphaBetaRobot::SearchMain(void) {
 
 void AlphaBetaRobot::getAiResponse(POINT * playerPos)
 {
-	situation.MakeMove(playerPos->y*GRID_NUM + playerPos->x);
-	//situation.ucpcSquares[playerPos->x*GRID_NUM + playerPos->y] = 0;//玩家默认落黑子
-	//situation.ChangeSide();
-	SearchMain();
-	situation.MakeMove(Search.mvResult);
-	qDebug() << "ai respone in :" << Search.mvResult;
 	POINT *pos = new POINT;
-	pos->y = Search.mvResult / GRID_NUM;
-	pos->x = Search.mvResult - pos->y*GRID_NUM;
-	emit AIComplete(pos);
+	if (playerPos->y==-1&& playerPos->x==-1)//这种情况意味着Ai先行
+	{
+		situation.MakeMove(7*GRID_NUM + 7);//AI先行占据天元
+		pos->y = 7;
+		pos->x = 7;
+		emit AIComplete(pos);
+	}
+	else//这种情况意味着正常走棋
+	{
+		situation.MakeMove(playerPos->y*GRID_NUM + playerPos->x);
+		SearchMain();
+		situation.MakeMove(Search.mvResult);
+		//qDebug() << "ai respone in :" << Search.mvResult;
+		pos->y = Search.mvResult / GRID_NUM;
+		pos->x = Search.mvResult - pos->y*GRID_NUM;
+		emit AIComplete(pos);
+	}
 }

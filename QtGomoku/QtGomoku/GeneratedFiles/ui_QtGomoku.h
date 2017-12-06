@@ -35,7 +35,7 @@ QT_BEGIN_NAMESPACE
 class Ui_QtGomokuClass
 {
 public:
-    QAction *action;
+    QAction *action_about;
     QAction *actionAI;
     QAction *action_2;
     QAction *action_4;
@@ -75,7 +75,7 @@ public:
         if (QtGomokuClass->objectName().isEmpty())
             QtGomokuClass->setObjectName(QStringLiteral("QtGomokuClass"));
         QtGomokuClass->setEnabled(true);
-        QtGomokuClass->resize(858, 676);
+        QtGomokuClass->resize(859, 676);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -86,8 +86,8 @@ public:
         QtGomokuClass->setWindowIcon(icon);
         QtGomokuClass->setAutoFillBackground(false);
         QtGomokuClass->setStyleSheet(QStringLiteral("background-image: url(:/QtGomoku/Resources/bg.png);"));
-        action = new QAction(QtGomokuClass);
-        action->setObjectName(QStringLiteral("action"));
+        action_about = new QAction(QtGomokuClass);
+        action_about->setObjectName(QStringLiteral("action_about"));
         actionAI = new QAction(QtGomokuClass);
         actionAI->setObjectName(QStringLiteral("actionAI"));
         actionAI->setCheckable(true);
@@ -138,11 +138,13 @@ public:
 
         radioButton_HumanWhite = new QRadioButton(groupBox_2);
         radioButton_HumanWhite->setObjectName(QStringLiteral("radioButton_HumanWhite"));
+        radioButton_HumanWhite->setAutoExclusive(false);
 
         gridLayout_2->addWidget(radioButton_HumanWhite, 1, 1, 1, 1);
 
         radioButton_HumanBlack = new QRadioButton(groupBox_2);
         radioButton_HumanBlack->setObjectName(QStringLiteral("radioButton_HumanBlack"));
+        radioButton_HumanBlack->setAutoExclusive(false);
 
         gridLayout_2->addWidget(radioButton_HumanBlack, 1, 0, 1, 1);
 
@@ -158,11 +160,13 @@ public:
 
         radioButton_UnableForbidden = new QRadioButton(groupBox_2);
         radioButton_UnableForbidden->setObjectName(QStringLiteral("radioButton_UnableForbidden"));
+        radioButton_UnableForbidden->setAutoExclusive(false);
 
         gridLayout_2->addWidget(radioButton_UnableForbidden, 2, 1, 1, 1);
 
         radioButton_PVE = new QRadioButton(groupBox_2);
         radioButton_PVE->setObjectName(QStringLiteral("radioButton_PVE"));
+        radioButton_PVE->setAutoExclusive(false);
 
         gridLayout_2->addWidget(radioButton_PVE, 0, 0, 1, 1);
 
@@ -173,16 +177,26 @@ public:
 
         radioButton_PVP = new QRadioButton(groupBox_2);
         radioButton_PVP->setObjectName(QStringLiteral("radioButton_PVP"));
+        radioButton_PVP->setAutoExclusive(false);
 
         gridLayout_2->addWidget(radioButton_PVP, 0, 1, 1, 1);
 
         radioButton_EnableForbidden = new QRadioButton(groupBox_2);
         radioButton_EnableForbidden->setObjectName(QStringLiteral("radioButton_EnableForbidden"));
+        radioButton_EnableForbidden->setAutoExclusive(false);
 
         gridLayout_2->addWidget(radioButton_EnableForbidden, 2, 0, 1, 1);
 
         spinBox = new QSpinBox(groupBox_2);
         spinBox->setObjectName(QStringLiteral("spinBox"));
+        spinBox->setLayoutDirection(Qt::LeftToRight);
+        spinBox->setWrapping(false);
+        spinBox->setReadOnly(false);
+        spinBox->setButtonSymbols(QAbstractSpinBox::UpDownArrows);
+        spinBox->setMinimum(1);
+        spinBox->setMaximum(5);
+        spinBox->setValue(4);
+        spinBox->setDisplayIntegerBase(10);
 
         gridLayout_2->addWidget(spinBox, 5, 1, 1, 1);
 
@@ -223,7 +237,7 @@ public:
         QtGomokuClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(QtGomokuClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 858, 23));
+        menuBar->setGeometry(QRect(0, 0, 859, 23));
         menu_2 = new QMenu(menuBar);
         menu_2->setObjectName(QStringLiteral("menu_2"));
         QtGomokuClass->setMenuBar(menuBar);
@@ -235,10 +249,20 @@ public:
         QtGomokuClass->setStatusBar(statusBar);
 
         menuBar->addAction(menu_2->menuAction());
-        menu_2->addAction(action);
+        menu_2->addAction(action_about);
 
         retranslateUi(QtGomokuClass);
         QObject::connect(pushButton_NewGame, SIGNAL(clicked()), QtGomokuClass, SLOT(OnNewGame()));
+        QObject::connect(radioButton_PVE, SIGNAL(clicked()), QtGomokuClass, SLOT(OnCheckedPVE()));
+        QObject::connect(radioButton_PVP, SIGNAL(clicked()), QtGomokuClass, SLOT(OnCheckedPVP()));
+        QObject::connect(pushButton_StopGame, SIGNAL(clicked()), QtGomokuClass, SLOT(OnStopGame()));
+        QObject::connect(pushButton_Help, SIGNAL(clicked()), QtGomokuClass, SLOT(OnHelp()));
+        QObject::connect(radioButton_HumanBlack, SIGNAL(clicked()), QtGomokuClass, SLOT(OnCheckedHumanBlack()));
+        QObject::connect(radioButton_HumanWhite, SIGNAL(clicked()), QtGomokuClass, SLOT(OnCheckedHumanWhite()));
+        QObject::connect(radioButton_EnableForbidden, SIGNAL(clicked()), QtGomokuClass, SLOT(OnCheckedEnableForbidden()));
+        QObject::connect(radioButton_UnableForbidden, SIGNAL(clicked()), QtGomokuClass, SLOT(OnCheckedUnableForbidden()));
+        QObject::connect(spinBox, SIGNAL(valueChanged(int)), QtGomokuClass, SLOT(OnAiLevelChanged(int)));
+        QObject::connect(action_about, SIGNAL(triggered()), QtGomokuClass, SLOT(OnHelp()));
 
         QMetaObject::connectSlotsByName(QtGomokuClass);
     } // setupUi
@@ -246,7 +270,7 @@ public:
     void retranslateUi(QMainWindow *QtGomokuClass)
     {
         QtGomokuClass->setWindowTitle(QApplication::translate("QtGomokuClass", "\344\272\224\345\255\220\346\243\213", Q_NULLPTR));
-        action->setText(QApplication::translate("QtGomokuClass", "\345\205\263\344\272\216", Q_NULLPTR));
+        action_about->setText(QApplication::translate("QtGomokuClass", "\345\205\263\344\272\216", Q_NULLPTR));
         actionAI->setText(QApplication::translate("QtGomokuClass", "AI\346\211\247\351\273\221\345\205\210\350\241\214", Q_NULLPTR));
         action_2->setText(QApplication::translate("QtGomokuClass", "\347\216\251\345\256\266\346\211\247\351\273\221\345\205\210\350\241\214", Q_NULLPTR));
         action_4->setText(QApplication::translate("QtGomokuClass", "\350\277\236\347\217\240", Q_NULLPTR));

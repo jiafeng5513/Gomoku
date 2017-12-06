@@ -6,7 +6,9 @@
 #include "StaticDefinition.h"
 #include "AlphaBetaRobot.h"
 
-
+/*
+ *
+ */
 class QtGomoku : public QMainWindow
 {
 	Q_OBJECT
@@ -24,11 +26,16 @@ private:
 	QGraphicsTextItem *txtitem;
 	//AiAgent *m_ai;
 	AlphaBetaRobot * robot;
-	int Count;					//即将落下的棋子是第几个
+	int Count;					   //即将落下的棋子是第几个
+	bool isPVE = true;			   //游戏模式是否为人机
+	bool isHumanGetBlack = true;   //玩家是否选择执黑先行
+	bool isEnableForbidden = false;//是否启动禁手
+	bool m_isGameOver = true;	   //游戏是否结束
 public:
 	Color HumanColor = black;	//人类执何种颜色棋子
 	Color AiColor = white;		//Ai执何种颜色棋子
-	Player CurrentTurn = Human; //当前轮到谁落子
+	Player CurrentTurn = Human; //人机模式下当前轮到谁落子
+	Color CurrentColor = black; //人人模式下当前轮到哪种颜色落子
 	Color BoardMap[15][15];		//保存棋局,这个变量只用来在玩家落子的时候判断是否合法,和判断游戏是否结束
 
 private:
@@ -50,4 +57,5 @@ public slots:
 	void OnCheckedUnableForbidden();			 //单选:关闭禁手
 	void OnCheckedPVE();						 //单选:人机对战
 	void OnCheckedPVP();						 //单选:人人对战
+	void OnAiLevelChanged(int);					 //编辑:Ai等级变动
 };
